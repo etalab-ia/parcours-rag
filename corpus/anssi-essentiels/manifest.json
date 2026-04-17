@@ -1,0 +1,172 @@
+[
+  {
+    "guide_id": "migration",
+    "guide_nom": "Sécuriser une migration numérique",
+    "date": "2026-01-23",
+    "thematique": "Migration",
+    "document_libelle": "Les Essentiels de l'ANSSI - Sécuriser une migration numérique - v1.0",
+    "filename": "anssi_essentiels_migration_1.0.pdf",
+    "url": "https://messervices.cyber.gouv.fr/documents-guides/anssi_essentiels_migration_1.0.pdf",
+    "size_bytes": 155311
+  },
+  {
+    "guide_id": "mise-en-oeuvre-securisee-dun-serveur-windows",
+    "guide_nom": "Mise en œuvre sécurisée d'un serveur Windows",
+    "date": "2025-10-03",
+    "thematique": "Les essentiels",
+    "document_libelle": "Les Essentiels de l'ANSSI - Sécurisation initiale d'un serveur membre - v1.0",
+    "filename": "anssi_essentiels_serveur_Windows_membre_AD_DS_v1.0.pdf",
+    "url": "https://messervices.cyber.gouv.fr/documents-guides/anssi_essentiels_serveur_Windows_membre_AD_DS_v1.0.pdf",
+    "size_bytes": 222897
+  },
+  {
+    "guide_id": "mise-en-oeuvre-securisee-dun-serveur-windows",
+    "guide_nom": "Mise en œuvre sécurisée d'un serveur Windows",
+    "date": "2025-10-03",
+    "thematique": "Les essentiels",
+    "document_libelle": "Les Essentiels de l'ANSSI - Sécurisation initiale d'un serveur autonome - v1.0",
+    "filename": "anssi_essentiels_serveur_Windows_autonome_v1.0.pdf",
+    "url": "https://messervices.cyber.gouv.fr/documents-guides/anssi_essentiels_serveur_Windows_autonome_v1.0.pdf",
+    "size_bytes": 211416
+  },
+  {
+    "guide_id": "mise-en-oeuvre-securisee-dun-serveur-windows",
+    "guide_nom": "Mise en œuvre sécurisée d'un serveur Windows",
+    "date": "2025-10-03",
+    "thematique": "Les essentiels",
+    "document_libelle": "Les Essentiels de l'ANSSI - Sécurisation initiale d'un contrôleur de domaine - v1.0",
+    "filename": "anssi_essentiels_serveur_Windows_controleur_domaine_v1.0.pdf",
+    "url": "https://messervices.cyber.gouv.fr/documents-guides/anssi_essentiels_serveur_Windows_controleur_domaine_v1.0.pdf",
+    "size_bytes": 217624
+  },
+  {
+    "guide_id": "architecture-securisee-de-si",
+    "guide_nom": "Architecture sécurisée de SI",
+    "date": "2025-08-08",
+    "thematique": "Les essentiels",
+    "document_libelle": "Les Essentiels de l'ANSSI - Architecture sécurisée de SI - v1.0",
+    "filename": "anssi_essentiels_architecture_securisee_v1.0.pdf",
+    "url": "https://messervices.cyber.gouv.fr/documents-guides/anssi_essentiels_architecture_securisee_v1.0.pdf",
+    "size_bytes": 170166
+  },
+  {
+    "guide_id": "infrastructure-de-gestion-de-cles-igc",
+    "guide_nom": "Infrastructure de gestion de clés (IGC)",
+    "date": "2025-08-01",
+    "thematique": "Les essentiels",
+    "document_libelle": "Les Essentiels de l'ANSSI - Infrastructure de gestion de clés (IGC)",
+    "filename": "anssi_essentiels_igc_1.0.pdf",
+    "url": "https://messervices.cyber.gouv.fr/documents-guides/anssi_essentiels_igc_1.0.pdf",
+    "size_bytes": 206450
+  },
+  {
+    "guide_id": "modele-zero-trust",
+    "guide_nom": "Modèle Zero Trust",
+    "date": "2025-06-20",
+    "thematique": "Les essentiels",
+    "document_libelle": "Les Essentiels de l'ANSSI - Modèle Zero Trust - v1.0",
+    "filename": "anssi_essentiels_zero_trust_1.0.pdf",
+    "url": "https://messervices.cyber.gouv.fr/documents-guides/anssi_essentiels_zero_trust_1.0.pdf",
+    "size_bytes": 188966
+  },
+  {
+    "guide_id": "selection-dun-logiciel-libre",
+    "guide_nom": "Sélection d'un logiciel libre",
+    "date": "2025-05-02",
+    "thematique": "Les essentiels",
+    "document_libelle": "Les Essentiels de l'ANSSI - Sélection d'un logiciel libre",
+    "filename": "anssi_essentiels_selection_logiciel_libre_1.0.pdf",
+    "url": "https://messervices.cyber.gouv.fr/documents-guides/anssi_essentiels_selection_logiciel_libre_1.0.pdf",
+    "size_bytes": 178678
+  },
+  {
+    "guide_id": "hygiene-numerique-des-telephones-mobiles",
+    "guide_nom": "Hygiène numérique des téléphones mobiles",
+    "date": "2025-04-10",
+    "thematique": "Les essentiels",
+    "document_libelle": "Les Essentiels de l'ANSSI - Hygiène numérique des téléphones mobiles - v1.1",
+    "filename": "anssi_essentiels_hygiene_telephones_mobiles_1.1.pdf",
+    "url": "https://messervices.cyber.gouv.fr/documents-guides/anssi_essentiels_hygiene_telephones_mobiles_1.1.pdf",
+    "size_bytes": 113693
+  },
+  {
+    "guide_id": "donnees-traitements-sensibles",
+    "guide_nom": "Données et traitements sensibles",
+    "date": "2025-03-28",
+    "thematique": "Les essentiels",
+    "document_libelle": "Les Essentiels de l'ANSSI - Données et traitements sensibles - v1.0",
+    "filename": "anssi_essentiels_données_traitements_sensibles_1.0.pdf",
+    "url": "https://messervices.cyber.gouv.fr/documents-guides/anssi_essentiels_données_traitements_sensibles_1.0.pdf",
+    "size_bytes": 188274
+  },
+  {
+    "guide_id": "bases-de-donnees-relationnelles",
+    "guide_nom": "Bases de données relationnelles",
+    "date": "2025-01-31",
+    "thematique": "Les essentiels",
+    "document_libelle": "Les Essentiels de l'ANSSI - Bases de données relationnelles - v1.0",
+    "filename": "anssi_essentiels_bdd_relationnelles_1.0.pdf",
+    "url": "https://messervices.cyber.gouv.fr/documents-guides/anssi_essentiels_bdd_relationnelles_1.0.pdf",
+    "size_bytes": 165362
+  },
+  {
+    "guide_id": "se-proteger-des-fuites-de-donnees",
+    "guide_nom": "Se protéger des fuites de données",
+    "date": "2025-01-28",
+    "thematique": "Les essentiels",
+    "document_libelle": "Les Essentiels de l'ANSSI - Se protéger des fuites de données - v1.0",
+    "filename": "anssi_essentiels_fuites_données_1.0.pdf",
+    "url": "https://messervices.cyber.gouv.fr/documents-guides/anssi_essentiels_fuites_données_1.0.pdf",
+    "size_bytes": 169128
+  },
+  {
+    "guide_id": "denis-de-service-distribues-ddos",
+    "guide_nom": "Dénis de service distribués (DDoS)",
+    "date": "2024-04-26",
+    "thematique": "Les essentiels",
+    "document_libelle": "Les Essentiels de l'ANSSI - Dénis de service distribués (DDoS) - v2.0",
+    "filename": "anssi_essentiels_denis-de-service-distribues_v2.0.pdf",
+    "url": "https://messervices.cyber.gouv.fr/documents-guides/anssi_essentiels_denis-de-service-distribues_v2.0.pdf",
+    "size_bytes": 208085
+  },
+  {
+    "guide_id": "devsecops",
+    "guide_nom": "DevSecOps",
+    "date": "2024-03-13",
+    "thematique": "Les essentiels",
+    "document_libelle": "Les Essentiels de l'ANSSI - DevSecOps - v1.0",
+    "filename": "anssi_essentiels_devsecops_v1.0.pdf",
+    "url": "https://messervices.cyber.gouv.fr/documents-guides/anssi_essentiels_devsecops_v1.0.pdf",
+    "size_bytes": 93321
+  },
+  {
+    "guide_id": "virtualisation",
+    "guide_nom": "Virtualisation",
+    "date": "2024-02-20",
+    "thematique": "Les essentiels",
+    "document_libelle": "Les Essentiels de l'ANSSI - Virtualisation - v1.0",
+    "filename": "anssi_essentiels_virtualisation_v1.0.pdf",
+    "url": "https://messervices.cyber.gouv.fr/documents-guides/anssi_essentiels_virtualisation_v1.0.pdf",
+    "size_bytes": 91666
+  },
+  {
+    "guide_id": "mise-en-oeuvre-securisee-dun-cms",
+    "guide_nom": "Mise en œuvre sécurisée d'un CMS",
+    "date": "2023-12-15",
+    "thematique": "Les essentiels",
+    "document_libelle": "Les Essentiels de l'ANSSI - Mise en œuvre sécurisée d'un CMS - v1.1",
+    "filename": "anssi_essentiels_mise-en-oeuvre-securisee-cms_v1.1.pdf",
+    "url": "https://messervices.cyber.gouv.fr/documents-guides/anssi_essentiels_mise-en-oeuvre-securisee-cms_v1.1 (1).pdf",
+    "size_bytes": 148356
+  },
+  {
+    "guide_id": "sauvegarde-des-systemes-dinformation",
+    "guide_nom": "Sauvegarde des systèmes d'information",
+    "date": "2023-12-06",
+    "thematique": "Les essentiels",
+    "document_libelle": "Les Essentiels de l'ANSSI - Sauvegarde des systèmes d'information - v1.1",
+    "filename": "anssi_essentiels_sauvegarde-si_v1.1.pdf",
+    "url": "https://messervices.cyber.gouv.fr/documents-guides/anssi_essentiels_sauvegarde-si_v1.1.pdf",
+    "size_bytes": 94457
+  }
+]

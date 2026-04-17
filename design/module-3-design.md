@@ -11,7 +11,7 @@
 |---|---|
 | Durée | 3h en présentiel |
 | Audience | 20 participants, profils techniques, prérequis modules 1-2, TS, pnpm, agent de codage, clés API |
-| Corpus | ANSSI « Les Essentiels » (30 guides PDF publics) |
+| Corpus | ANSSI « Les Essentiels » (15 guides FR, 17 PDFs — le filtre UI « 30 » compte FR+EN) |
 | Cible finale | Un RAG local fonctionnel **sur corpus partagé** (pour comparabilité en module 4) |
 | Foundation | Mastra (TypeScript) |
 | Pilotage | Skill « checkpoint-gated linear » exécuté par l'agent de codage de chaque participant |
@@ -127,7 +127,7 @@ Pour chaque checkpoint, le skill fournit à l'agent du participant :
 | 1 | **Store vectoriel** | **LibSQL** — built-in Mastra, zéro setup Docker |
 | 2 | **Modèle d'embedding** | **Albert API** (`openweight-embeddings` = BAAI/bge-m3, 1024d). Nécessite extension de `AlbertAPIGateway` pour la voie embeddings (voir §9). |
 | 3 | **LLM génération** | **Albert API** `openweight-large` (gpt-oss-120b) — souverain, gratuit, déjà intégré côté chat |
-| 4 | **Corpus** | **Pré-shippé** dans le repo (`corpus/anssi-essentiels/*.pdf`). Participants ne téléchargent rien → démarrage garanti. |
+| 4 | **Corpus** | **Pré-shippé** dans le repo (`corpus/anssi-essentiels/*.pdf`, 17 PDFs, 2.7 MB total, manifest dans `manifest.json`). Participants ne téléchargent rien → démarrage garanti. |
 | 5 | **Template CP1** | Starter Mastra avec **un simple agent de chat sans mémoire**. Point de départ minimal, permet de valider « ça marche » avant d'attaquer le RAG. |
 | 6 | **Hint ladder** | **1 hint socratique, puis solution complète**. On ajustera après retours participants. |
 | 7 | **Questions d'éval** | À rédiger interactivement une fois le corpus en place. |
