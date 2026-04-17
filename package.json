@@ -1,0 +1,24 @@
+{
+  "name": "parcours-rag",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Parcours RAG — atelier ALLiaNCE. Starter Mastra + Albert API pour construire un RAG sur le corpus ANSSI « Les Essentiels ».",
+  "scripts": {
+    "dev": "mastra dev",
+    "build": "mastra build"
+  },
+  "dependencies": {
+    "@ai-sdk/openai-compatible": "^1.0.0",
+    "@ai-sdk/provider": "^2.0.0",
+    "@mastra/core": "latest",
+    "@mastra/libsql": "latest",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "mastra": "latest",
+    "typescript": "^5.6.0"
+  },
+  "packageManager": "pnpm@9.0.0"
+}
