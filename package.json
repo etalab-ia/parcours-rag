@@ -6,7 +6,12 @@
   "description": "Parcours RAG — atelier ALLiaNCE. Starter Mastra + Albert API pour construire un RAG sur le corpus ANSSI « Les Essentiels ».",
   "scripts": {
     "dev": "mastra dev",
-    "build": "mastra build"
+    "build": "mastra build",
+    "format": "biome format --write .",
+    "lint": "biome lint .",
+    "check": "biome check .",
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky"
   },
   "dependencies": {
     "@ai-sdk/openai-compatible": "^1.0.0",
@@ -16,7 +21,9 @@
     "zod": "^4.0.0"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.9.0",
     "@types/node": "^22.0.0",
+    "husky": "^9.0.0",
     "mastra": "latest",
     "typescript": "^5.6.0"
   },

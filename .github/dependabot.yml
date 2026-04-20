@@ -1,0 +1,42 @@
+version: 2
+
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/Paris"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "deps"
+      include: "scope"
+    labels:
+      - "dependencies"
+    groups:
+      mastra:
+        patterns:
+          - "@mastra/*"
+          - "mastra"
+      ai-sdk:
+        patterns:
+          - "@ai-sdk/*"
+      dev-dependencies:
+        patterns:
+          - "@types/*"
+          - "@biomejs/*"
+          - "simple-git-hooks"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Europe/Paris"
+    commit-message:
+      prefix: "ci"
+    labels:
+      - "github-actions"
+      - "dependencies"

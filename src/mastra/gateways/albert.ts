@@ -1,6 +1,6 @@
-import { MastraModelGateway, type ProviderConfig } from "@mastra/core/llm";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
-import type { LanguageModelV2, EmbeddingModelV2 } from "@ai-sdk/provider";
+import type { EmbeddingModelV2, LanguageModelV2 } from "@ai-sdk/provider";
+import { MastraModelGateway, type ProviderConfig } from "@mastra/core/llm";
 
 const DEFAULT_BASE_URL = "https://albert.api.etalab.gouv.fr/v1";
 
@@ -54,10 +54,7 @@ export class AlbertAPIGateway extends MastraModelGateway {
     };
   }
 
-  buildUrl(
-    _modelId: string,
-    envVars?: Record<string, string>,
-  ): string {
+  buildUrl(_modelId: string, envVars?: Record<string, string>): string {
     return envVars?.ALBERT_BASE_URL || this.getBaseUrl();
   }
 
@@ -66,7 +63,7 @@ export class AlbertAPIGateway extends MastraModelGateway {
     if (!apiKey) {
       throw new Error(
         "Missing ALBERT_API_KEY environment variable. " +
-          "Get your key at https://albert.api.etalab.gouv.fr",
+          "Get your key at https://albert.api.etalab.gouv.fr"
       );
     }
     return apiKey;
