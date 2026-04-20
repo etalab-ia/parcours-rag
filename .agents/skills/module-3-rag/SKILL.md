@@ -1,6 +1,7 @@
 ---
 name: module-3-rag
-description: Pilote le Module 3 du bootcamp RAG ALLiaNCE (DINUM) — 3h en présentiel, 6 checkpoints, 20 participants techniques qui construisent un RAG local sur le corpus ANSSI avec Mastra + LibSQL + Albert API. Charger quand l'utilisateur veut commencer, reprendre ou avancer dans l'atelier Module 3 ; déclencheurs typiques : "commencer le module 3", "démarrer l'atelier RAG", "/module-3-rag", "checkpoint suivant", "je suis bloqué sur CP<n>", "valider mon checkpoint".
+description: >
+  Pilote le Module 3 du bootcamp RAG ALLiaNCE (DINUM) — 3h en présentiel, 6 checkpoints, 20 participants techniques qui construisent un RAG local sur le corpus ANSSI avec Mastra + LibSQL + Albert API. Charger quand l'utilisateur veut commencer, reprendre ou avancer dans l'atelier Module 3 ; déclencheurs typiques : "commencer le module 3", "démarrer l'atelier RAG", "/module-3-rag", "checkpoint suivant", "je suis bloqué sur CP<n>", "valider mon checkpoint".
 ---
 
 # Module 3 — Construis ton RAG
