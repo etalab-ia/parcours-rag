@@ -24,7 +24,7 @@ Grandes lignes :
 1. Charger `data/chunks.json`.
 2. Batcher les appels à `dinum/albert/openweight-embeddings` (taille de batch à déterminer — sujet pédagogique).
 3. Créer un store LibSQL via `@mastra/libsql` (dimension 1024).
-4. Upsert : `{ id, vector, metadata: { source, page, guide_id, text } }`.
+4. Upsert : `{ id, vector, metadata: { source, page, guide_id, chunk_index, text } }`. Conserver `chunk_index` (défini en CP2) permet de reconstruire l'ordre des passages lors de la génération et facilite le débogage.
 5. Vérifier par `SELECT COUNT(*)` ou API Mastra équivalente que N vecteurs = N chunks.
 
 ## Exit criteria

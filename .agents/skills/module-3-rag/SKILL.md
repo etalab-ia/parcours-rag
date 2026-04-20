@@ -22,9 +22,9 @@ Tu pilotes un participant à travers un atelier de 3h en 6 checkpoints. Chaque c
 Quand l'utilisateur veut commencer ou reprendre :
 
 1. Vérifie l'état courant (quel CP est en cours) :
-   - Pas de `pnpm-lock.yaml` installé ou `.env` absent → CP1
+   - Dossier `node_modules/` absent ou `.env` absent → CP1
    - `.env` OK mais pas de `data/chunks.json` → CP2
-   - `data/chunks.json` présent mais pas de vecteurs en LibSQL → CP3
+   - `data/chunks.json` présent mais pas de base `data/index.db` → CP3
    - Vecteurs OK mais pas de fonction `retrieve()` testée → CP4
    - `retrieve()` OK mais pas d'agent RAG citant ses sources → CP5
    - Tout le reste OK mais pas de `eval-findings.md` → CP6
