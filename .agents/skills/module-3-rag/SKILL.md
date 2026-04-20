@@ -35,14 +35,16 @@ Quand l'utilisateur veut commencer ou reprendre :
 
 Pour le contenu de chaque checkpoint, lire le fichier de référence correspondant.
 
+Charger le fichier de référence correspondant au CP en cours (et **uniquement** celui-là) — c'est le mécanisme de *progressive disclosure* : tu ne lis pas les 6 CPs d'un coup, tu charges celui que tu pilotes.
+
 | # | Checkpoint | Durée | But | LO | Référence |
 |---|---|---|---|---|---|
-| 1 | Setup | 20 min | Projet Mastra qui démarre, agent de chat fonctionnel | LO1 | [[references/cp1-setup.md]] |
-| 2 | Ingestion & chunking | 30 min | Extraire le texte des 17 PDFs, découper en chunks naïfs | LO1, LO4 | [[references/cp2-ingestion.md]] |
-| 3 | Embeddings & index | 25 min | Vectoriser les chunks et les stocker dans LibSQL | LO1, LO2 | [[references/cp3-embeddings.md]] |
-| 4 | Retrieval | 25 min | Fonction `retrieve(query, k=5)` qui renvoie les chunks pertinents | LO2 | [[references/cp4-retrieval.md]] |
-| 5 | Génération + citations | 30 min | Agent RAG qui répond en citant ses sources | LO3 | [[references/cp5-generation.md]] |
-| 6 | Éval + analyse de failles | 20 min | 5 questions d'éval, observation de 3+ failles | LO4, LO5 | [[references/cp6-eval.md]] |
+| 1 | Setup | 20 min | Projet Mastra qui démarre, agent de chat fonctionnel | LO1 | [references/cp1-setup.md](references/cp1-setup.md) |
+| 2 | Ingestion & chunking | 30 min | Extraire le texte des 17 PDFs, découper en chunks naïfs | LO1, LO4 | [references/cp2-ingestion.md](references/cp2-ingestion.md) |
+| 3 | Embeddings & index | 25 min | Vectoriser les chunks et les stocker dans LibSQL | LO1, LO2 | [references/cp3-embeddings.md](references/cp3-embeddings.md) |
+| 4 | Retrieval | 25 min | Fonction `retrieve(query, k=5)` qui renvoie les chunks pertinents | LO2 | [references/cp4-retrieval.md](references/cp4-retrieval.md) |
+| 5 | Génération + citations | 30 min | Agent RAG qui répond en citant ses sources | LO3 | [references/cp5-generation.md](references/cp5-generation.md) |
+| 6 | Éval + analyse de failles | 20 min | 5 questions d'éval, observation de 3+ failles | LO4, LO5 | [references/cp6-eval.md](references/cp6-eval.md) |
 
 ## Structure attendue de chaque fichier de référence
 
