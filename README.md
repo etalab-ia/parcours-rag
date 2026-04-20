@@ -49,7 +49,7 @@ discussion collective entre chaque checkpoint.
 
 ```
 parcours-rag/
-├── corpus/anssi-essentiels/   Corpus pré-téléchargé (30 guides PDF)
+├── corpus/anssi-essentiels/   Corpus pré-téléchargé (15 guides ANSSI, 17 PDFs)
 ├── src/mastra/                Code Mastra — vous travaillez ici
 │   ├── agents/                Agents (chat, puis RAG)
 │   ├── gateways/              Gateway Albert (chat + embeddings)
