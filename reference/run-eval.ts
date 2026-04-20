@@ -39,9 +39,20 @@ interface EvalRun {
     }[];
     answer: string;
     sources_hit: string[]; // unique filenames retrieved
-    expected_sources_hit: boolean;
+    top_score: number; // score of the best-matching chunk
+    // For non-piège questions: true iff at least one expected source appears in top-k.
+    // For piège questions (expected_sources = []): null — the top-k always returns 5
+    // results, so a boolean "did we hit nothing" is impossible. Quality is judged by
+    // top_score (below ~0.55 = weak match, consistent with "out-of-corpus") AND by
+    // qualitative review of the generated answer (did the LLM refuse or hallucinate?).
+    expected_sources_hit: boolean | null;
   }[];
 }
+
+// Empirical threshold from observed-behavior.md §3: scores below ~0.55 tend to
+// correspond to tangential or no-corpus-match. Used only as an advisory signal
+// for piège questions; final judgement is qualitative.
+const WEAK_MATCH_THRESHOLD = 0.55;
 
 async function main() {
   if (!process.env.ALBERT_API_KEY) {
@@ -63,12 +74,23 @@ async function main() {
     console.log(`Q: ${q.question}`);
     const retrieved = await retrieve(q.question, 5);
     const sourcesHit = [...new Set(retrieved.map((r) => r.source))];
-    const expectedHit =
+    const topScore = retrieved[0]?.score ?? 0;
+    // Piège questions have no expected sources — we can't judge hit/miss by
+    // source overlap. Flag as null; the top_score + manual answer review drive
+    // the evaluation.
+    const expectedHit: boolean | null =
       q.expected_sources.length === 0
-        ? sourcesHit.length === 0 // for "piège" questions, ideally nothing relevant
+        ? null
         : q.expected_sources.some((src) => sourcesHit.includes(src));
     const { answer } = await generate(q.question, retrieved);
     console.log(`A: ${answer.slice(0, 300)}${answer.length > 300 ? "..." : ""}`);
+    if (q.expected_sources.length === 0) {
+      const warn =
+        topScore < WEAK_MATCH_THRESHOLD
+          ? "top score below weak-match threshold (expected for piège)"
+          : "top score above weak-match threshold — retrieval pretended to know";
+      console.log(`   [piège] ${warn} (top=${topScore.toFixed(3)})`);
+    }
     run.results.push({
       id: q.id,
       profile: q.profile,
@@ -81,6 +103,7 @@ async function main() {
       })),
       answer,
       sources_hit: sourcesHit,
+      top_score: topScore,
       expected_sources_hit: expectedHit,
     });
   }

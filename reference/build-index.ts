@@ -15,7 +15,7 @@
  */
 
 import "dotenv/config";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { LibSQLVector } from "@mastra/libsql";
@@ -127,6 +127,9 @@ async function main() {
   }
 
   await mkdir(DATA_DIR, { recursive: true });
+  // Remove any existing index so re-runs don't leave stale vectors from a
+  // previous corpus (upsert only overwrites matching IDs, not drops deleted ones).
+  await rm(INDEX_DB_PATH, { force: true });
 
   const manifest = await loadManifest();
   const pdfs = manifest.map((m) => m.filename);
