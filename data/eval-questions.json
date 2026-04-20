@@ -1,0 +1,67 @@
+{
+  "description": "5 questions d'évaluation pour le Module 3 RAG — exécutées par les participants au CP6. Couvrent 5 profils pédagogiques distincts afin d'exposer différents types de failles d'une pipeline RAG naïve. Rédigées contre l'index de référence (90 chunks sur 17 guides ANSSI « Les Essentiels »).",
+  "corpus": "anssi-essentiels (17 PDFs, 90 chunks naïfs de 500 tokens / overlap 50, embeddings BAAI/bge-m3 via Albert)",
+  "profiles": {
+    "facile": "Réponse présente dans un seul chunk — test de base du retrieval",
+    "moyenne": "Réponse nécessite la synthèse de 2 chunks ou plus — test de la génération",
+    "piege": "Réponse impossible à donner depuis le corpus — test du refus / garde-fou hallucination",
+    "ambigue": "Question à plusieurs interprétations valides dans le corpus — test de la sélectivité",
+    "multi-document": "Réponse répartie sur 3+ guides différents — test de la synthèse trans-document"
+  },
+  "questions": [
+    {
+      "id": "q1-zero-trust",
+      "profile": "facile",
+      "question": "Quels sont les objectifs principaux du modèle Zero Trust selon l'ANSSI ?",
+      "expected_sources": ["anssi_essentiels_zero_trust_1.0.pdf"],
+      "gold_answer": "Le modèle Zero Trust vise à réduire la confiance implicite accordée à un sujet souhaitant accéder au système d'information. Le contrôle d'accès logique repose sur : (1) une évaluation dynamique et régulière du sujet cherchant à accéder à une ressource, (2) une évaluation dynamique et régulière du contexte d'accès (incluant l'état de sécurité du poste utilisé), (3) la prise en compte de la criticité de la ressource (disponibilité, intégrité, confidentialité). Il ne remplace pas la défense périmétrique mais la complète, et son adoption doit être maîtrisée et progressive.",
+      "expected_citations_min": 1,
+      "success_criteria": "Réponse fidèle au guide Zero Trust, cite au moins une source pointant vers ce guide, mentionne explicitement la notion de « réduction de la confiance implicite »."
+    },
+    {
+      "id": "q2-migration",
+      "profile": "moyenne",
+      "question": "Quelles sont les étapes stratégiques et techniques pour sécuriser une migration numérique selon l'ANSSI ?",
+      "expected_sources": ["anssi_essentiels_migration_1.0.pdf"],
+      "gold_answer": "Le guide migration décrit deux volets complémentaires. VOLET STRATÉGIQUE : impliquer en amont les équipes métier, DSI et sécurité ; maintenir à jour la cartographie des SI jusqu'au décommissionnement ; mettre à jour l'analyse de risque ; adapter PCA et PRA ; étudier le niveau de sécurité contractuel du prestataire et les conditions de réversibilité. VOLET TECHNIQUE : sécuriser les données sensibles en transit (chiffrement) ; anticiper les risques sur les sauvegardes (identifier les impactées, conserver les infrastructures de restauration) ; s'assurer que les moyens d'administration et les socles cibles sont de confiance ; profiter de la refonte pour appliquer durcissement, filtrage des flux, MCO/MCS, et ne faire aucune modification impactante pendant la phase critique.",
+      "expected_citations_min": 2,
+      "success_criteria": "Réponse couvre les DEUX volets (stratégique + technique). Si un seul volet est couvert, le chunking ou le top-k sont en cause — à remonter en debrief CP6."
+    },
+    {
+      "id": "q3-mots-de-passe",
+      "profile": "piege",
+      "question": "Quelles sont les règles d'hygiène des mots de passe selon l'ANSSI ?",
+      "expected_sources": [],
+      "gold_answer": "Ce corpus ne contient pas de guide dédié aux règles d'hygiène des mots de passe. Les guides « Les Essentiels » inclus ici citent comme référence externe les « Recommandations relatives à l'authentification multifacteur et aux mots de passe » de l'ANSSI (ex: guide BDD relationnelles), mais ce document de référence n'est pas dans le corpus. Une réponse acceptable doit signaler cette absence et renvoyer vers le document externe. Une réponse *inacceptable* fabriquerait une liste de règles en compilant des fragments tangentiels d'autres guides (authentification MFA, compte administrateur, etc.).",
+      "expected_citations_min": 0,
+      "success_criteria": "La réponse NE doit PAS fabriquer une liste de règles comme si le corpus les contenait. Réponse idéale : reconnaît l'absence et pointe vers le document externe. Piège classique : le RAG retourne les 5 chunks tangentiels (scores ~0.57) et le LLM hallucine une liste en les combinant."
+    },
+    {
+      "id": "q4-serveur-windows",
+      "profile": "ambigue",
+      "question": "Comment sécuriser un serveur Windows selon l'ANSSI ?",
+      "expected_sources": [
+        "anssi_essentiels_serveur_Windows_autonome_v1.0.pdf",
+        "anssi_essentiels_serveur_Windows_membre_AD_DS_v1.0.pdf",
+        "anssi_essentiels_serveur_Windows_controleur_domaine_v1.0.pdf"
+      ],
+      "gold_answer": "La question est ambiguë car le corpus contient TROIS guides distincts, chacun couvrant un rôle spécifique : (1) serveur Windows autonome, (2) serveur membre d'Active Directory Domain Services, (3) contrôleur de domaine. Une réponse idéale reconnaît cette ambiguïté, demande une clarification sur le rôle du serveur, puis résume les bonnes pratiques communes (durcissement, mise à jour, moindre privilège, journalisation) en précisant quelles mesures additionnelles s'appliquent selon le rôle. Une réponse *sous-optimale* répond sur un seul des trois rôles sans le signaler.",
+      "expected_citations_min": 2,
+      "success_criteria": "La réponse signale l'existence de plusieurs rôles OU couvre les trois. Un échec typique (à remonter en CP6) : réponse plausible mais mélangeant des mesures spécifiques à l'un des rôles avec d'autres, sans distinction claire."
+    },
+    {
+      "id": "q5-comptes-admin",
+      "profile": "multi-document",
+      "question": "Quelles bonnes pratiques concernant les comptes administrateur sont recommandées par l'ANSSI dans ce corpus ?",
+      "expected_sources": [
+        "anssi_essentiels_bdd_relationnelles_1.0.pdf",
+        "anssi_essentiels_serveur_Windows_autonome_v1.0.pdf",
+        "anssi_essentiels_architecture_securisee_v1.0.pdf",
+        "anssi_essentiels_migration_1.0.pdf"
+      ],
+      "gold_answer": "Les recommandations concernant les comptes administrateur sont réparties sur plusieurs guides : BDD relationnelles (analyser régulièrement le compte administrateur natif, utilisé en dernier recours ; authentification multifacteur pour les administrateurs ; journalisation des accès administrateurs), serveurs Windows (sécurisation initiale, principe du moindre privilège), architecture sécurisée (principes généraux de contrôle d'accès), et migration (s'assurer que les moyens d'administration sont de confiance et intègres). Principes transverses : moindre privilège, MFA, journalisation, séparation compte admin / compte courant.",
+      "expected_citations_min": 3,
+      "success_criteria": "La réponse cite des pratiques issues d'au moins 3 guides différents. Si elle ne s'appuie que sur un seul guide (typiquement BDD ou Windows), c'est une limite du top-k=5 face à un sujet transverse — à remonter en debrief CP6."
+    }
+  ]
+}
