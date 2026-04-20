@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "mastra dev",
     "build": "mastra build",
-    "format": "biome format --write .",
+    "format": "biome check --write .",
     "lint": "biome lint .",
     "check": "biome check .",
     "typecheck": "tsc --noEmit",
