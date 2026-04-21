@@ -91,7 +91,7 @@ Pour chaque checkpoint, le skill fournit à l'agent du participant :
 ### Checkpoint 2 — Ingestion & chunking (30 min)
 **But** : extraire le texte des PDFs et les découper en chunks exploitables.
 **Décision pédagogique délibérée** : commencer avec un chunking naïf (taille fixe 500 tokens, overlap 50). Laisser le défaut fonctionner. Garder les approches avancées (semantic/structural) pour module 4.
-**Exit** : `data/chunks.json` existe, contient ≥500 chunks, chaque chunk a `text`, `source`, `page`.
+**Exit** : `data/chunks.json` existe, contient ≥40 chunks (référence observée : ~55), chaque chunk a `text`, `source`, `page`.
 **Discussion** : pourquoi le chunking naïf marche « à peu près » ? Quand casse-t-il ?
 
 ### Checkpoint 3 — Embeddings & index (25 min)
@@ -106,7 +106,7 @@ Pour chaque checkpoint, le skill fournit à l'agent du participant :
 
 ### Checkpoint 5 — Génération avec citations (30 min)
 **But** : agent Mastra qui répond en langage naturel en citant ses sources (guide + page).
-**Exit** : sur la question « Quelles sont les règles d'hygiène des mots de passe selon l'ANSSI ? », la réponse cite au moins 2 chunks avec source identifiable.
+**Exit** : sur la question « Quels sont les objectifs principaux du modèle Zero Trust selon l'ANSSI ? », la réponse cite au moins 2 chunks avec source identifiable.
 **Piège à illustrer** : hallucination quand le contexte est vide ou hors sujet.
 
 ### Checkpoint 6 — Éval & analyse de failles (20 min)

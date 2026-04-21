@@ -70,12 +70,10 @@ Chaque `cp<n>-*.md` suit ce gabarit fixe, pour que ton comportement soit prévis
 - `pnpm dev` échoue avec une erreur TLS / 401 → vérifie `ALBERT_API_KEY` en premier, puis la connectivité réseau. Ne pas débugger plus loin avant d'avoir confirmé la clé.
 - Incohérence entre une ligne de ce skill et le comportement réel de Mastra → fais confiance à Mastra (consulte le skill mastra, lis `node_modules/@mastra/core/dist/docs/references/`), note la divergence pour mise à jour du skill après workshop.
 
-## État du squelette
+## État du contenu
 
-Les fichiers `references/cp*.md` existent en **version squelette** dans ce PR. Les sections *Procédure*, *Vérification*, *Hint ladder*, *Pièges* et *Side quest* seront rédigées en détail dans les PRs suivantes :
+- ✅ **CP1 + CP2 détaillés** : sections *Procédure*, *Vérification*, *Hint ladder*, *Pièges* et *Side quest* rédigées.
+- 🟡 **CP3 → CP6 encore en squelette** : le cadre est posé, mais le contenu opérationnel détaillé sera livré dans la PR dédiée CP3→CP6.
+- 🟡 **Pass hint ladder global** encore à faire pour harmoniser finement les formulations sur les 6 CPs.
 
-- CP1 + CP2 → PR de rédaction détaillée CP1/CP2 (priorité : dynamique de démarrage).
-- CP3 → CP6 → PR de rédaction détaillée CP3→CP6.
-- Hint ladder complet → PR dédiée (pass de cohérence à travers les 6 CPs).
-
-Ne tente pas de piloter un participant réel avec ce squelette seul — il décrit la forme, pas le contenu.
+Conclusion opérationnelle : ce skill est exploitable pour piloter un participant en CP1/CP2, mais pas encore pour dérouler tout le module complet sans support facilitateur.
