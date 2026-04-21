@@ -29,13 +29,26 @@ Exécuter 5 questions d'évaluation sur le RAG construit, observer les réponses
    - génère la réponse (`answer`/`generate`),
    - sérialise : question, réponses, top chunks, citations, scores.
 
+   Format recommandé pour `data/eval-results.json` :
+
+   ```json
+   {
+     "run_at": "2026-...",
+     "results": [
+       { "id": "q1-...", "question": "...", "answer": "..." }
+     ]
+   }
+   ```
+
+   (Un tableau JSON à la racine est aussi acceptable pour la vérification.)
+
 3. **Exécuter l'évaluation complète** et écrire :
 
    - `data/eval-results.json`
 
 4. **Rédiger `eval-findings.md`** avec 2 sections minimales :
 
-   - `## Résultats par question` (5 entrées)
+   - `## Résultats par question` (5 entrées titrées `### Q1` à `### Q5`)
    - `## Failles observées` (au moins 3 failles nommées)
 
 5. **Pour chaque question**, noter explicitement :
@@ -84,7 +97,7 @@ Exécuter les checks suivants :
 2. **5 résultats bien exécutés** :
 
    ```bash
-   node -e 'const fs=require("node:fs"); const r=JSON.parse(fs.readFileSync("data/eval-results.json","utf8")); if(!Array.isArray(r.results)||r.results.length!==5){console.error(r.results?.length); process.exit(1)}; console.log("eval-results=ok");'
+   node -e 'const fs=require("node:fs"); const data=JSON.parse(fs.readFileSync("data/eval-results.json","utf8")); const results=Array.isArray(data)?data:data.results; if(!Array.isArray(results)||results.length!==5){console.error(results?.length); process.exit(1)}; console.log("eval-results=ok");'
    ```
 
 3. **Structure minimale de `eval-findings.md`** :

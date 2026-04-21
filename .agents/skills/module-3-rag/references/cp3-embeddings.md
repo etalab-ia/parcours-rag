@@ -30,7 +30,7 @@ Vectoriser l'ensemble des chunks via l'API Albert (`openweight-embeddings`, 1024
    - entrée : `chunk.text`,
    - sortie attendue : vecteur 1024 dimensions.
 
-4. **Créer un index LibSQL** (ex: `anssi_essentiels`) sur `file:data/index.db` avec :
+4. **Créer un index LibSQL** nommé `anssi_essentiels` sur `file:data/index.db` avec :
 
    - `dimension: 1024`,
    - `metric: "cosine"`.
