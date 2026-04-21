@@ -18,13 +18,44 @@ Faire tourner l'environnement Mastra + Albert API de bout en bout sur le poste d
 
 ## Procédure
 
-> ⚠️ Squelette — procédure détaillée à rédiger dans la PR « CP1+CP2 détail ».
+1. **Vérifier les prérequis locaux** (rapidement, sans s'y bloquer trop longtemps) :
 
-Grandes lignes :
-1. Installer les dépendances (`pnpm install`).
-2. Dupliquer `.env.example` en `.env` et renseigner `ALBERT_API_KEY`.
-3. Lancer `pnpm dev` et ouvrir Mastra Studio.
-4. Valider la réponse du `chat-agent` à une question simple en français.
+   ```bash
+   node -v
+   pnpm -v
+   ```
+
+   Attendu : Node 20+ et `pnpm` disponible.
+
+2. **Installer les dépendances** :
+
+   ```bash
+   pnpm install
+   ```
+
+3. **Créer le fichier d'environnement** :
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   Puis ouvrir `.env` et renseigner `ALBERT_API_KEY` (valeur non vide).
+
+4. **Lancer Mastra en local** :
+
+   ```bash
+   pnpm dev
+   ```
+
+   Garder ce terminal ouvert.
+
+5. **Valider l'agent baseline** dans Mastra Studio (`http://localhost:4111`) :
+   - sélectionner l'agent `chat-agent`,
+   - poser une question de test en français, par exemple :
+
+     > « Présente-toi en 2 phrases et précise pourquoi tu n'as pas encore accès aux guides ANSSI. »
+
+   - vérifier que la réponse est en français et mentionne explicitement l'absence de contexte ANSSI à ce stade.
 
 ## Exit criteria
 
@@ -35,26 +66,67 @@ Grandes lignes :
 
 ## Vérification
 
-> ⚠️ Séquence exacte à rédiger dans la PR « CP1+CP2 détail ».
+Exécuter ces checks dans l'ordre.
 
-Idée : lire `.env`, hit `GET /api/agents`, poster un message de test via l'API, vérifier la réponse.
+1. **Dépendances installées** :
+
+   ```bash
+   test -d node_modules
+   ```
+
+2. **`.env` présent + clé non vide** (sans afficher la clé) :
+
+   ```bash
+   test -f .env
+   awk -F= '/^ALBERT_API_KEY=/{if(length($2)>10) ok=1} END{exit ok?0:1}' .env
+   ```
+
+3. **Mastra up** (`pnpm dev` déjà lancé dans un autre terminal) :
+
+   ```bash
+   curl -sf http://localhost:4111/api/agents >/tmp/cp1-agents.json
+   grep -q 'chat-agent' /tmp/cp1-agents.json
+   ```
+
+4. **Réponse fonctionnelle du chat-agent** :
+   - dans Studio, envoyer le prompt de test,
+   - vérifier manuellement :
+     - réponse en français,
+     - mention explicite qu'il n'a pas encore accès au corpus ANSSI.
 
 ## Hint ladder
 
-> ⚠️ À rédiger dans la PR « hint ladder complet ».
+1. **Hint socratique**
 
-1. *Hint socratique* : TODO
-2. *Solution complète* : TODO
+   « Quel est le plus petit test observable qui te prouve que le problème vient de la clé/API et pas de ton code d'agent ? »
+
+2. **Solution complète**
+
+   « Repars de la base :
+   1) `cp .env.example .env`,
+   2) renseigne `ALBERT_API_KEY` (non vide),
+   3) `pnpm install`,
+   4) `pnpm dev`,
+   5) `curl -sf http://localhost:4111/api/agents | grep chat-agent`.
+   Si ça passe mais Studio ne répond pas, c'est souvent un souci de port occupé ou de session `.env` non rechargée. »
 
 ## Pièges pédagogiques
 
-> ⚠️ À rédiger dans la PR « CP1+CP2 détail ».
-
-Candidats : mauvaise version de Node, `.env` oublié, proxy d'entreprise bloquant `albert.api.etalab.gouv.fr`.
+- **`.env` existe mais clé vide** (`ALBERT_API_KEY=`) : le participant pense avoir "fait le setup" alors que l'auth échouera.
+- **Mauvais dossier courant** : `pnpm dev` lancé hors du repo, ce qui masque les vraies erreurs.
+- **Port 4111 déjà pris** : Mastra ne démarre pas proprement ou démarre sur un autre port sans que le participant le voie.
+- **Contrainte réseau/proxy** : poste d'entreprise bloquant l'accès à `albert.api.etalab.gouv.fr`.
+- **Version Node trop ancienne** : erreurs d'exécution floues avant même d'atteindre l'API.
 
 ## Side quest
 
-> ⚠️ À rédiger dans la PR « CP1+CP2 détail ». Candidat : faire parler l'agent en changeant son `instructions`.
+Pour les participants en avance :
+
+- modifier `src/mastra/agents/chat-agent.ts` pour changer légèrement le style (ex: finir chaque réponse par `✅ Baseline CP1`),
+- relancer `pnpm dev`,
+- vérifier dans Studio que le changement d'instructions est bien pris en compte.
+
+But : montrer qu'ils contrôlent le comportement de base avant d'ajouter le RAG.
 
 ## Transition
 

@@ -10,7 +10,7 @@ Extraire le texte des 17 PDFs ANSSI et le découper en chunks exploitables, avec
 
 ## Durée cible
 
-30 min (pilote agent) + 10 min de debrief plénier.
+30 min (pilote agent) + 10 min de débrief plénier.
 
 ## Brief participant
 
@@ -18,45 +18,111 @@ Extraire le texte des 17 PDFs ANSSI et le découper en chunks exploitables, avec
 
 ## Procédure
 
-> ⚠️ Squelette — procédure détaillée à rédiger dans la PR « CP1+CP2 détail ».
+1. **Créer un script d'ingestion dédié**, par exemple :
 
-Grandes lignes :
-1. Choisir l'outil d'extraction PDF (candidat : `@mastra/rag` ou `pdf-parse`).
-2. Lire `corpus/anssi-essentiels/manifest.json` pour la liste de documents + métadonnées.
-3. Pour chaque PDF : extraire le texte page par page, concaténer.
-4. Appliquer un chunker *token-based* taille 500, overlap 50 (cf. skill mastra — MDocument et chunkers intégrés).
-5. Écrire `data/chunks.json` : array d'objets `{ text, source, page, chunk_index, guide_id }`.
+   - `src/mastra/rag/build-chunks.ts`
+
+2. **Charger le manifest** `corpus/anssi-essentiels/manifest.json` pour piloter la boucle d'ingestion.
+
+3. **Pour chaque PDF du manifest** :
+
+   - lire le fichier depuis `corpus/anssi-essentiels/<filename>`,
+   - extraire le texte page par page (avec `unpdf`),
+   - chunker chaque page avec `@mastra/rag` (`MDocument`) en stratégie token :
+     - `maxSize = 500`
+     - `overlap = 50`
+
+4. **Construire les chunks** au format minimal :
+
+   ```json
+   {
+     "text": "...",
+     "source": "anssi_essentiels_zero_trust_1.0.pdf",
+     "page": 1,
+     "chunk_index": 0,
+     "guide_id": "modele-zero-trust"
+   }
+   ```
+
+   Recommandé : ajouter aussi `guide_nom` et `url` (utile pour CP5/CP6).
+
+5. **Écrire `data/chunks.json`** (créer `data/` si nécessaire), puis exécuter le script :
+
+   ```bash
+   pnpm tsx src/mastra/rag/build-chunks.ts
+   ```
+
+6. **Lire rapidement la sortie** (count + un exemple) avant de passer à CP3.
 
 ## Exit criteria
 
 - [ ] `data/chunks.json` existe.
-- [ ] Le fichier contient ≥ 500 chunks.
+- [ ] Le fichier contient **≥ 40 chunks** (référence observée : ~55 sur ce corpus).
 - [ ] Chaque chunk porte au minimum les clés `text`, `source`, `page`.
-- [ ] Les 17 guides du manifest sont tous représentés (au moins un chunk par `guide_id`).
+- [ ] Les **17 PDFs** du manifest sont tous représentés (au moins un chunk par `source`/`filename`).
 
 ## Vérification
 
-> ⚠️ Séquence exacte à rédiger dans la PR « CP1+CP2 détail ».
+Exécuter les checks suivants :
 
-Idée : lire le JSON, compter les chunks, vérifier les clés du premier et d'un chunk aléatoire, croiser avec le manifest.
+1. **Fichier présent** :
+
+   ```bash
+   test -f data/chunks.json
+   ```
+
+2. **Cardinalité minimale** :
+
+   ```bash
+   node -e 'const fs=require("node:fs"); const chunks=JSON.parse(fs.readFileSync("data/chunks.json","utf8")); if(!Array.isArray(chunks)||chunks.length<40){console.error(`chunks=${chunks?.length ?? "n/a"}`); process.exit(1);} console.log(`chunks=${chunks.length}`);'
+   ```
+
+3. **Schéma minimal d'un chunk** :
+
+   ```bash
+   node -e 'const fs=require("node:fs"); const chunks=JSON.parse(fs.readFileSync("data/chunks.json","utf8")); const ok=chunks.every(c=>typeof c.text==="string"&&c.text.trim().length>0&&typeof c.source==="string"&&typeof c.page==="number"); if(!ok){process.exit(1)}; console.log("schema=ok")'
+   ```
+
+4. **Couverture des 17 PDFs du manifest** :
+
+   ```bash
+   node -e 'const fs=require("node:fs"); const chunks=JSON.parse(fs.readFileSync("data/chunks.json","utf8")); const manifest=JSON.parse(fs.readFileSync("corpus/anssi-essentiels/manifest.json","utf8")); const seen=new Set(chunks.map(c=>c.source)); const missing=manifest.map(m=>m.filename).filter(f=>!seen.has(f)); if(missing.length){console.error("missing sources:", missing); process.exit(1)}; console.log(`sources=ok (${seen.size})`)'
+   ```
 
 ## Hint ladder
 
-> ⚠️ À rédiger dans la PR « hint ladder complet ».
+1. **Hint socratique**
 
-1. *Hint socratique* : TODO
-2. *Solution complète* : TODO
+   « Qu'est-ce qui te prouve objectivement que tu as bien ingéré *tout* le corpus : un compteur global… ou un croisement avec le manifest ? »
+
+2. **Solution complète**
+
+   « Fais un script unique `build-chunks.ts` qui :
+   1) lit `manifest.json`,
+   2) boucle sur chaque `filename`,
+   3) extrait page par page,
+   4) chunk en token `500/50`,
+   5) écrit `data/chunks.json`.
+   Puis valide avec 3 checks : `chunks.length >= 40`, clés minimales présentes, et **aucun filename manquant** par rapport au manifest. »
 
 ## Pièges pédagogiques
 
-Le chunking naïf est délibéré. **Ne pas laisser le participant l'améliorer**. Noter les cas où ça va manifestement mal couper (milieu de liste à puces, en-tête de section coupé du paragraphe qui suit, tableaux éclatés) — ces observations deviennent le matériau du débrief plénier.
-
-Autres pièges candidats (à affiner dans la PR détail) : encodage des PDFs, textes en plusieurs colonnes, PDFs qui sont en fait des scans sans OCR.
+- Le chunking naïf est **délibéré**. Ne pas laisser le participant « améliorer » maintenant (semantic chunking, nettoyage avancé, reranker…). Noter les défauts observés pour CP6.
+- Les en-têtes/pieds ANSSI polluent les chunks (quasi-doublons p1/p2) : c'est attendu et pédagogique.
+- Le `guide_id` n'est pas unique sur les 3 PDFs Windows : vérifier la couverture par `source` (`filename`), pas seulement par `guide_id`.
+- Oubli de `mkdir data/` avant écriture de `chunks.json`.
+- Tentation de viser `500+` chunks : ce corpus produit ~55 chunks avec la config 500/50, donc viser `≥40`.
 
 ## Side quest
 
-> ⚠️ À rédiger dans la PR « CP1+CP2 détail ». Candidat : écrire une fonction qui visualise la distribution des tailles de chunks.
+Pour les participants en avance : ajouter un mini script d'analyse :
+
+- distribution des tailles (`min`, `max`, `moyenne`) des `text.length`,
+- top 3 des `source` qui produisent le plus de chunks,
+- affichage de 2 chunks consécutifs d'un même PDF pour observer les quasi-doublons.
+
+Objectif : préparer le débrief CP2 sans commencer à corriger la pipeline.
 
 ## Transition
 
-« Tu as 500+ morceaux de texte, tous indifférenciés. Au debrief on va comparer ce que donne le chunking naïf sur un guide clair (ex: migration) vs un guide structuré (ex: serveur Windows). Après la pause on passe aux embeddings. »
+« Tu as maintenant ~40–60 morceaux de texte, tous indifférenciés. Au débrief on compare ce que le chunking naïf fait bien (rapidité) et ce qu'il casse (doublons, coupures, bruit d'en-tête). Ensuite on passe aux embeddings. »
