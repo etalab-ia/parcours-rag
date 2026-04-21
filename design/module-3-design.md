@@ -97,7 +97,7 @@ Pour chaque checkpoint, le skill fournit à l'agent du participant :
 ### Checkpoint 3 — Embeddings & index (25 min)
 **But** : vectoriser et stocker dans un index local (LibSQL ou PgLite via Mastra).
 **Exit** : index contient N vecteurs = N chunks, dimension attendue selon modèle.
-**Piège à illustrer** : coût/latence de l'embedding sur 500 chunks — faire toucher le sujet du batching.
+**Piège à illustrer** : coût/latence de l'embedding sur ~40-60 chunks — faire toucher le sujet du batching.
 
 ### Checkpoint 4 — Retrieval (25 min)
 **But** : fonction `retrieve(query, k=5)` qui renvoie les chunks les plus pertinents.
@@ -111,7 +111,7 @@ Pour chaque checkpoint, le skill fournit à l'agent du participant :
 
 ### Checkpoint 6 — Éval & analyse de failles (20 min)
 **But** : faire tourner 5 questions d'éval fournies, observer où ça casse, nommer au moins 3 types de failles.
-**Questions d'éval** : à définir — 5 questions dont :
+**Questions d'éval** : définies dans `data/eval-questions.json` — 5 questions dont :
   - 1 facile (directement dans un chunk)
   - 1 moyenne (nécessite 2 chunks)
   - 1 piège (réponse ne peut pas être dans le corpus)
@@ -130,7 +130,7 @@ Pour chaque checkpoint, le skill fournit à l'agent du participant :
 | 4 | **Corpus** | **Pré-shippé** dans le repo (`corpus/anssi-essentiels/*.pdf`, 17 PDFs, 2.7 MB total, manifest dans `manifest.json`). Participants ne téléchargent rien → démarrage garanti. |
 | 5 | **Template CP1** | Starter Mastra avec **un simple agent de chat sans mémoire**. Point de départ minimal, permet de valider « ça marche » avant d'attaquer le RAG. |
 | 6 | **Hint ladder** | **1 hint socratique, puis solution complète**. On ajustera après retours participants. |
-| 7 | **Questions d'éval** | À rédiger interactivement une fois le corpus en place. |
+| 7 | **Questions d'éval** | Définies dans `data/eval-questions.json` (5 profils : facile, moyenne, piège, ambiguë, multi-document). |
 
 ## 9. Gateway Albert — extension embeddings
 
