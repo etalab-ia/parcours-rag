@@ -10,7 +10,7 @@ Vectoriser l'ensemble des chunks via l'API Albert (`openweight-embeddings`, 1024
 
 ## Durée cible
 
-25 min (pilote agent) + 5 min de debrief plénier.
+25 min (pilote agent) + 5 min de débrief plénier.
 
 ## Brief participant
 
@@ -18,38 +18,100 @@ Vectoriser l'ensemble des chunks via l'API Albert (`openweight-embeddings`, 1024
 
 ## Procédure
 
-> ⚠️ Squelette — procédure détaillée à rédiger dans la PR « CP3→CP6 détail ».
+1. **Créer un script d'indexation**, par exemple :
 
-Grandes lignes :
-1. Charger `data/chunks.json`.
-2. Batcher les appels à `dinum/albert/openweight-embeddings` (taille de batch à déterminer — sujet pédagogique).
-3. Créer un store LibSQL via `@mastra/libsql` (dimension 1024).
-4. Upsert : `{ id, vector, metadata: { source, page, guide_id, chunk_index, text } }`. Conserver `chunk_index` (défini en CP2) permet de reconstruire l'ordre des passages lors de la génération et facilite le débogage.
-5. Vérifier par `SELECT COUNT(*)` ou API Mastra équivalente que N vecteurs = N chunks.
+   - `src/mastra/rag/build-index.ts`
+
+2. **Charger les chunks** depuis `data/chunks.json`.
+
+3. **Embedder en batchs** (taille 16 ou 32 recommandée) via l'endpoint Albert `/embeddings` :
+
+   - modèle : `openweight-embeddings`,
+   - entrée : `chunk.text`,
+   - sortie attendue : vecteur 1024 dimensions.
+
+4. **Créer un index LibSQL** nommé `anssi_essentiels` sur `file:data/index.db` avec :
+
+   - `dimension: 1024`,
+   - `metric: "cosine"`.
+
+5. **Upsert les vecteurs** avec métadonnées minimales :
+
+   - `source`, `page`, `guide_id`, `chunk_index`, `text`.
+
+   ⚠️ Les 3 PDFs Windows partagent le même `guide_id` : utiliser des IDs de chunk uniques basés sur `source + chunk_index` (pas `guide_id` seul).
+
+6. **Ajouter un mini smoke test** à la fin du script :
+
+   - lire `describeIndex()`,
+   - afficher `count` et `dimension`,
+   - exécuter une requête de test (`topK=1`) et afficher `source/page` du premier résultat.
+
+7. **Lancer l'indexation** :
+
+   ```bash
+   pnpm tsx src/mastra/rag/build-index.ts
+   ```
 
 ## Exit criteria
 
 - [ ] Fichier `data/index.db` (ou équivalent LibSQL) créé.
-- [ ] Nombre de vecteurs dans l'index = nombre de chunks dans `chunks.json`.
+- [ ] Nombre de vecteurs dans l'index = nombre de chunks dans `data/chunks.json`.
 - [ ] Dimension des vecteurs = 1024 (cohérente avec `openweight-embeddings`).
-- [ ] Au moins une requête `SELECT` manuelle renvoie un vecteur avec métadonnées non vides.
+- [ ] Une requête de smoke test (`topK=1`) renvoie au moins un résultat avec métadonnées non vides (`source`, `page`).
 
 ## Vérification
 
-> ⚠️ Séquence exacte à rédiger dans la PR « CP3→CP6 détail ».
+Exécuter les checks suivants :
+
+1. **DB présente** :
+
+   ```bash
+   test -f data/index.db
+   ```
+
+2. **Count et dimension cohérents** :
+
+   ```bash
+   pnpm tsx -e 'import {readFileSync} from "node:fs"; import {LibSQLVector} from "@mastra/libsql"; const chunks=JSON.parse(readFileSync("data/chunks.json","utf8")); const vector=new LibSQLVector({id:"cp3",url:"file:data/index.db"}); const stats=await vector.describeIndex({indexName:"anssi_essentiels"}); if(stats.dimension!==1024||stats.count!==chunks.length){console.error({expectedCount:chunks.length, stats}); process.exit(1);} console.log("index-stats=ok", stats);'
+   ```
+
+3. **Smoke query avec métadonnées** :
+
+   ```bash
+   pnpm tsx -e 'import {LibSQLVector} from "@mastra/libsql"; const base=process.env.ALBERT_BASE_URL ?? "https://albert.api.etalab.gouv.fr/v1"; const key=process.env.ALBERT_API_KEY; if(!key){process.exit(1)}; const emb=await fetch(`${base}/embeddings`,{method:"POST",headers:{Authorization:`Bearer ${key}`,"Content-Type":"application/json"},body:JSON.stringify({model:"openweight-embeddings",input:"Zero Trust"})}); const embJson=await emb.json(); const vector=new LibSQLVector({id:"cp3",url:"file:data/index.db"}); const hits=await vector.query({indexName:"anssi_essentiels",queryVector:embJson.data[0].embedding,topK:1}); const ok=hits.length>0 && hits[0]?.metadata?.source && hits[0]?.metadata?.page; if(!ok){console.error(hits[0]); process.exit(1)}; console.log("query-smoke=ok", hits[0].metadata.source, hits[0].metadata.page);'
+   ```
 
 ## Hint ladder
 
-> ⚠️ À rédiger dans la PR « hint ladder complet ».
+1. **Hint socratique**
+
+   « Si ton index contient moins de vecteurs que de chunks, est-ce un problème d'embedding… ou d'identifiants qui se collisionnent à l'upsert ? »
+
+2. **Solution complète**
+
+   « Procède en 3 blocs simples :
+   1) `chunks.json` → embeddings en batch (16/32),
+   2) `createIndex({dimension:1024})`,
+   3) `upsert(ids,vectors,metadata)` avec IDs uniques basés sur `source`.
+   Termine par `describeIndex()` et compare `stats.count` à `chunks.length`. Si ça diffère, vérifie d'abord les collisions d'IDs. »
 
 ## Pièges pédagogiques
 
-Le coût/latence de l'embedding sur 500+ chunks est le sujet de discussion. À laisser émerger : rate limits Albert, batching, reprise sur erreur. **Ne pas pré-optimiser pour le participant** — on veut qu'il voie le coût.
+- **Batch trop gros** (ex: 200+) : latence élevée, erreurs API, debugging pénible.
+- **IDs non uniques** : vecteurs écrasés silencieusement à l'upsert.
+- **Index non réinitialisé** entre deux runs : données obsolètes conservées.
+- **Mauvaise dimension** (modèle embedding différent) : incohérence durable pour CP4.
+- **Env API non chargé** : l'erreur ressemble à un bug code alors que c'est juste la clé.
 
 ## Side quest
 
-> ⚠️ À rédiger dans la PR « CP3→CP6 détail ». Candidat : afficher la distance moyenne entre deux vecteurs aléatoires du même guide vs de guides différents.
+Pour les participants en avance :
+
+- comparer 2 tailles de batch (16 vs 32),
+- mesurer le temps total,
+- noter dans 3 lignes le compromis latence/stabilité observé.
 
 ## Transition
 
-« L'index est chaud, 500+ vecteurs dedans. Au debrief on parle coût et batching. Après ça on passe à la récupération. »
+« L'index est prêt. Au débrief on compare les tailles de batch et les collisions d'IDs rencontrées. Ensuite on passe à la récupération (`retrieve`). »

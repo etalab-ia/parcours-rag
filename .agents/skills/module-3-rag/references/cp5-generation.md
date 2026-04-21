@@ -2,7 +2,7 @@
 
 ## Objectif
 
-Faire parler un agent Mastra qui répond à une question utilisateur en s'appuyant sur les chunks récupérés, et qui **cite** ses sources (guide + page).
+Produire une réponse RAG en français à partir des chunks récupérés, avec citations traçables (`source` + `page`) pour chaque affirmation importante.
 
 ## Learning Objective
 
@@ -10,50 +10,112 @@ Faire parler un agent Mastra qui répond à une question utilisateur en s'appuya
 
 ## Durée cible
 
-30 min (pilote agent) + 10 min de debrief plénier.
+30 min (pilote agent) + 10 min de débrief plénier.
 
 ## Brief participant
 
-« On branche `retrieve()` en amont du LLM. Le prompt impose deux contraintes : répondre uniquement à partir des passages fournis, et citer la source (nom du guide + page) pour chaque affirmation. Tu vas voir : c'est là que les failles du chunking remontent à la surface. »
+« On branche `retrieve()` en amont du LLM. Le prompt impose deux contraintes : répondre uniquement à partir des passages fournis, et citer la source (guide + page) pour chaque affirmation. »
 
 ## Procédure
 
-> ⚠️ Squelette — procédure détaillée à rédiger dans la PR « CP3→CP6 détail ».
+1. **Créer un module de génération**, par exemple `src/mastra/rag/generate.ts`, qui :
 
-Grandes lignes :
-1. Transformer `chat-agent` (ou créer `rag-agent`) avec un tool `retrieve` ou un middleware de contexte.
-2. Écrire le system prompt : ton de réponse, obligation de citation, comportement si contexte vide/hors sujet.
-3. Format de citation à normaliser (ex: `[Guide Zero Trust — p. 4]`).
-4. Tester sur une question témoin fournie.
+   - reçoit `question` + `contextChunks`,
+   - appelle Albert `/chat/completions` (`openweight-large`),
+   - applique un prompt système avec format de citation obligatoire.
+
+2. **Normaliser un format de citation unique**, par exemple :
+
+   - `[source: <filename>, p<page>]`
+
+3. **Créer une orchestration RAG**, par exemple `src/mastra/rag/answer.ts`, qui enchaîne :
+
+   - `retrieve(question, 5)` (CP4),
+   - `generate(question, retrievedChunks)`.
+
+4. **Ajouter un mode CLI** :
+
+   ```bash
+   pnpm tsx src/mastra/rag/answer.ts "<question>"
+   ```
+
+5. **Tester sur deux questions** :
+
+   - **in-corpus (happy path)** :
+     - « Quels sont les objectifs principaux du modèle Zero Trust selon l'ANSSI ? »
+   - **hors-corpus (piège)** :
+     - « Quelles sont les règles d'hygiène des mots de passe selon l'ANSSI ? »
+
+6. **Documenter le comportement observé** (2-3 lignes) :
+
+   - la question in-corpus doit être bien citée,
+   - la question hors-corpus doit expliciter l'insuffisance du contexte (et éviter l'invention).
 
 ## Exit criteria
 
-- [ ] Agent `rag-agent` (ou équivalent) accessible via `pnpm dev`.
-- [ ] Sur la question témoin « Quelles sont les règles d'hygiène des mots de passe selon l'ANSSI ? », la réponse :
+- [ ] Point d'entrée RAG exécutable (`answer.ts` CLI ou équivalent agent) présent.
+- [ ] Sur la question Zero Trust, la réponse :
   - est en français,
-  - cite au moins 2 sources au format convenu,
-  - chaque citation pointe un `source` et une `page` cohérents avec les chunks retournés par `retrieve`.
-- [ ] Si le contexte est vide (ex: question hors corpus), l'agent répond qu'il ne sait pas, **sans inventer**.
+  - contient au moins 2 citations au format convenu,
+  - cite des `source/page` cohérents avec les chunks retournés par `retrieve`.
+- [ ] Sur la question hors-corpus mots de passe, la réponse signale explicitement les limites du contexte et n'invente pas de règles absentes du corpus.
 
 ## Vérification
 
-> ⚠️ Séquence exacte à rédiger dans la PR « CP3→CP6 détail ».
+Exécuter les checks suivants :
+
+1. **Run in-corpus** :
+
+   ```bash
+   pnpm tsx src/mastra/rag/answer.ts "Quels sont les objectifs principaux du modèle Zero Trust selon l'ANSSI ?" > data/cp5-zero-trust.txt
+   ```
+
+2. **Run hors-corpus** :
+
+   ```bash
+   pnpm tsx src/mastra/rag/answer.ts "Quelles sont les règles d'hygiène des mots de passe selon l'ANSSI ?" > data/cp5-mots-de-passe.txt
+   ```
+
+3. **Au moins 2 citations dans la réponse in-corpus** :
+
+   ```bash
+   test "$(grep -Eo '\[source: [^]]+, p[0-9]+\]' data/cp5-zero-trust.txt | wc -l | tr -d ' ')" -ge 2
+   ```
+
+4. **Contrôle qualitatif manuel (obligatoire)** :
+
+   - comparer les citations de `cp5-zero-trust.txt` avec un run `retrieve()` de la même question,
+   - lire `cp5-mots-de-passe.txt` et vérifier qu'il n'y a pas de liste inventée présentée comme certaine.
 
 ## Hint ladder
 
-> ⚠️ À rédiger dans la PR « hint ladder complet ».
+1. **Hint socratique**
+
+   « Si le modèle répond très bien mais sans citer, le problème vient plutôt du retrieval… ou du contrat que tu lui donnes dans le prompt ? »
+
+2. **Solution complète**
+
+   « Fais une chaîne simple `retrieve -> generate` avec un format de citation imposé dans le prompt (`[source: ..., p...]`).
+   Teste ensuite deux questions :
+   - Zero Trust (doit bien citer),
+   - mots de passe (doit admettre que le corpus ne suffit pas).
+   Si le modèle invente, renforce explicitement l'instruction : “Si le contexte est insuffisant, dis-le et n'invente pas.” »
 
 ## Pièges pédagogiques
 
-C'est le CP où l'hallucination apparaît si on ne cadre pas le prompt. À illustrer dans le debrief :
-- Citation correcte mais contenu inventé (le modèle extrapole entre deux chunks).
-- Absence de citation sur un paragraphe « de synthèse » du modèle.
-- Contexte vide → réponse qui tente de sauver la face.
+- **Réponse fluide mais non traçable** : texte convaincant sans citations.
+- **Citations décoratives** : source citée qui ne soutient pas vraiment l'affirmation.
+- **Hallucination sur hors-corpus** : le modèle complète les trous avec des "bonnes pratiques" génériques.
+- **Format de citation instable** : impossible à vérifier automatiquement en CP6.
 
 ## Side quest
 
-> ⚠️ À rédiger dans la PR « CP3→CP6 détail ». Candidat : streamer les tokens et afficher les citations en temps réel.
+Pour les participants en avance :
+
+- ajouter une section `Contexte utilisé` en fin de réponse (liste des 5 chunks avec score),
+- comparer une exécution avec `k=3` puis `k=5`,
+- noter l'impact sur la qualité des citations.
 
 ## Transition
 
-« Ton RAG répond et cite. Au debrief on regarde collectivement un cas où ça marche et un cas où ça triche. Dernier CP : on le pousse sur 5 questions d'éval pour voir vraiment où il casse. »
+« Ton RAG répond et cite. Au débrief on compare un cas où il est fidèle et un cas où il dérive. Dernier CP : évaluation structurée sur 5 questions. »

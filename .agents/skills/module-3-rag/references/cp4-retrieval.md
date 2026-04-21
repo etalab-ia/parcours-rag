@@ -2,7 +2,7 @@
 
 ## Objectif
 
-Exposer une fonction `retrieve(query, k=5)` qui prend une question en langage naturel et renvoie les k chunks les plus pertinents avec leurs métadonnées.
+Exposer une fonction `retrieve(query, k=5)` qui prend une question en langage naturel et renvoie les `k` chunks les plus pertinents avec leurs métadonnées.
 
 ## Learning Objective
 
@@ -10,45 +10,108 @@ Exposer une fonction `retrieve(query, k=5)` qui prend une question en langage na
 
 ## Durée cible
 
-25 min (pilote agent) + 5 min de debrief plénier.
+25 min (pilote agent) + 5 min de débrief plénier.
 
 ## Brief participant
 
-« La requête utilisateur est elle aussi vectorisée, puis on fait une recherche de similarité cosinus dans l'index. Top 5, pas top 1, pas top 50 — on en reparle au debrief. »
+« La requête utilisateur est elle aussi vectorisée, puis on fait une recherche de similarité cosinus dans l'index. Top-5, pas top-1, pas top-50 — on en reparle au débrief. »
 
 ## Procédure
 
-> ⚠️ Squelette — procédure détaillée à rédiger dans la PR « CP3→CP6 détail ».
+1. **Créer le module retrieval**, par exemple `src/mastra/rag/retrieve.ts`, avec :
 
-Grandes lignes :
-1. Écrire la fonction `retrieve(query, k=5)`.
-2. Embedder la query avec le même modèle qu'en CP3.
-3. Interroger l'index LibSQL, retourner les chunks + scores.
-4. Exécuter 3 requêtes de test prédéfinies, imprimer les résultats.
+   - `embedQuery(query)` via Albert `/embeddings` (`openweight-embeddings`),
+   - `retrieve(query, k=5)` qui interroge `data/index.db` (LibSQL),
+   - retour structuré : `score`, `text`, `source`, `page`, `guide_id`/`guide_nom`.
+
+2. **Conserver le contrat simple** :
+
+   - pas de seuil de score,
+   - pas de reranking,
+   - pas de rewriting de requête.
+
+3. **Ajouter un mode CLI** pour le smoke test, ex :
+
+   ```bash
+   pnpm tsx src/mastra/rag/retrieve.ts "<question>"
+   ```
+
+4. **Tester avec 3 requêtes contrastées** :
+
+   - Q1 (cas "propre") :
+     - « Quels sont les objectifs principaux du modèle Zero Trust selon l'ANSSI ? »
+   - Q2 (cas transversal) :
+     - « Quelles bonnes pratiques concernant les comptes administrateur sont recommandées ? »
+   - Q3 (hors-corpus volontaire) :
+     - « Quelle est la meilleure recette de gratin dauphinois ? »
+
+5. **Afficher les résultats** de manière lisible :
+
+   - score,
+   - source/page,
+   - extrait court du chunk.
 
 ## Exit criteria
 
 - [ ] Fonction `retrieve` exportée et exécutable.
-- [ ] Sur 3 requêtes de test fournies, chaque appel retourne 5 chunks non vides avec métadonnées (`source`, `page`).
-- [ ] Les scores sont décroissants.
-- [ ] Au moins une des 3 requêtes fait remonter un chunk manifestement pertinent (le participant peut pointer *pourquoi*).
+- [ ] Sur les 3 requêtes test, chaque appel retourne 5 chunks non vides avec métadonnées (`source`, `page`).
+- [ ] Les scores sont triés en ordre décroissant.
+- [ ] Sur la requête Zero Trust, au moins un chunk du guide `anssi_essentiels_zero_trust_1.0.pdf` apparaît dans le top-5.
 
 ## Vérification
 
-> ⚠️ Séquence exacte à rédiger dans la PR « CP3→CP6 détail ».
+Exécuter les checks suivants :
+
+1. **Smoke tests CLI** :
+
+   ```bash
+   pnpm tsx src/mastra/rag/retrieve.ts "Quels sont les objectifs principaux du modèle Zero Trust selon l'ANSSI ?"
+   pnpm tsx src/mastra/rag/retrieve.ts "Quelles bonnes pratiques concernant les comptes administrateur sont recommandées ?"
+   pnpm tsx src/mastra/rag/retrieve.ts "Quelle est la meilleure recette de gratin dauphinois ?"
+   ```
+
+2. **Scores décroissants + top-5 complet** :
+
+   ```bash
+   pnpm tsx -e 'import {retrieve} from "./src/mastra/rag/retrieve.ts"; const res=await retrieve("Quels sont les objectifs principaux du modèle Zero Trust selon ANSSI ?",5); const sorted=res.every((r,i,a)=>i===0 || a[i-1].score>=r.score); if(res.length!==5 || !sorted){console.error(res.map(r=>r.score)); process.exit(1);} console.log("ordering=ok");'
+   ```
+
+3. **Présence Zero Trust dans le top-5** :
+
+   ```bash
+   pnpm tsx -e 'import {retrieve} from "./src/mastra/rag/retrieve.ts"; const res=await retrieve("Quels sont les objectifs principaux du modèle Zero Trust selon ANSSI ?",5); const ok=res.some(r=>String(r.source).includes("zero_trust")); if(!ok){console.error(res.map(r=>r.source)); process.exit(1);} console.log("zerotrust-hit=ok");'
+   ```
 
 ## Hint ladder
 
-> ⚠️ À rédiger dans la PR « hint ladder complet ».
+1. **Hint socratique**
+
+   « Pour que la comparaison vectorielle soit valide, la requête utilisateur doit être transformée avec quel modèle exactement ? »
+
+2. **Solution complète**
+
+   « Fais `retrieve()` en 4 étapes :
+   1) `embedQuery(query)` avec `openweight-embeddings`,
+   2) `vector.query({topK:k})` sur `indexName=anssi_essentiels`,
+   3) mappe chaque hit vers `{score,text,source,page,...}`,
+   4) ajoute un mode CLI pour tester vite.
+   Si les résultats sont incohérents, vérifie d'abord que CP3 a bien indexé le même corpus et la même dimension (1024). »
 
 ## Pièges pédagogiques
 
-Les 3 requêtes de test seront choisies pour *montrer* : (a) un cas où le top-1 suffit, (b) un cas où top-5 ramène 2 résultats pertinents et 3 parasites, (c) un cas où aucun chunk n'est pertinent mais l'index renvoie quand même 5 résultats. C'est l'amorce de la conversation sur le seuil et la confiance.
+- **Mauvais modèle d'embedding pour la requête** : retrieval dégradé même si CP3 semblait "ok".
+- **IndexName incohérent** entre CP3 et CP4 (`anssi_essentiels` vs autre).
+- **Oubli de métadonnées** dans l'upsert CP3 : impossible de citer proprement en CP5.
+- **Lecture naïve des scores** : même une question hors-corpus renvoie un top-5 (pas de seuil).
 
 ## Side quest
 
-> ⚠️ À rédiger dans la PR « CP3→CP6 détail ». Candidat : ajouter un filtre métadonnée (`guide_id = "zero-trust"`).
+Pour les participants en avance :
+
+- ajouter un paramètre `k` au CLI (`retrieve.ts "question" 8`),
+- comparer rapidement `k=3`, `k=5`, `k=8` sur la même question,
+- noter quel `k` donne le meilleur compromis signal/bruit.
 
 ## Transition
 
-« On a la récupération. Au debrief : pourquoi top-5 et pas top-1 ? Pourquoi pas top-50 ? Ensuite on branche un LLM dessus. »
+« On récupère bien du contexte. Au débrief : que racontent vraiment les scores, et pourquoi le top-5 ment parfois. Ensuite on branche la génération avec citations. »

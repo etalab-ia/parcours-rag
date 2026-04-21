@@ -14,19 +14,56 @@ Exécuter 5 questions d'évaluation sur le RAG construit, observer les réponses
 
 ## Brief participant
 
-« Tu as construit la pipeline. Maintenant on la stresse. 5 questions, 5 profils différents : une facile, une qui exige de combiner 2 chunks, un piège hors corpus, une ambiguë, une multi-documents. Ton job : lancer, observer, écrire. Pas corriger. »
+« Tu as construit la pipeline. Maintenant on la stresse. 5 questions, 5 profils différents. Ton job : lancer, observer, écrire. Pas corriger. »
 
 ## Procédure
 
-> ⚠️ Squelette — procédure détaillée à rédiger dans la PR « CP3→CP6 détail ».
->
-> ⚠️ Les 5 questions d'éval (texte + réponses de référence) sont définies dans la PR « reference-index + 5 eval questions ». Cette PR ici fournit seulement l'orchestration.
+1. **Vérifier les entrées d'éval** :
 
-Grandes lignes :
-1. Charger les 5 questions d'éval depuis `data/eval-questions.json`.
-2. Pour chaque question : invoquer l'agent RAG, capturer (question, réponse, chunks récupérés, citations).
-3. Construire un tableau de comparaison réponse vs réponse de référence.
-4. Demander au participant de nommer ≥ 3 types de failles avec exemples concrets, rédiger `eval-findings.md`.
+   - `data/eval-questions.json` existe (5 questions),
+   - pipeline CP4/CP5 exécutable (`retrieve` + `answer`).
+
+2. **Créer un runner d'évaluation**, par exemple `src/mastra/rag/run-eval.ts`, qui pour chaque question :
+
+   - récupère les chunks (`retrieve`),
+   - génère la réponse (`answer`/`generate`),
+   - sérialise : question, réponses, top chunks, citations, scores.
+
+   Format recommandé pour `data/eval-results.json` :
+
+   ```json
+   {
+     "run_at": "2026-...",
+     "results": [
+       { "id": "q1-...", "question": "...", "answer": "..." }
+     ]
+   }
+   ```
+
+   (Un tableau JSON à la racine est aussi acceptable pour la vérification.)
+
+3. **Exécuter l'évaluation complète** et écrire :
+
+   - `data/eval-results.json`
+
+4. **Rédiger `eval-findings.md`** avec 2 sections minimales :
+
+   - `## Résultats par question` (5 entrées titrées `### Q1` à `### Q5`)
+   - `## Failles observées` (au moins 3 failles nommées)
+
+5. **Pour chaque question**, noter explicitement :
+
+   - fidélité,
+   - complétude,
+   - traçabilité.
+
+6. **Pour chaque faille identifiée**, documenter :
+
+   - type,
+   - exemple concret (question + extrait),
+   - hypothèse de cause.
+
+⚠️ Règle CP6 : **on n'améliore pas la pipeline**. On observe et on nomme.
 
 ## Critères de jugement (à imposer au participant)
 
@@ -39,31 +76,71 @@ Pour chaque question, noter au minimum :
 ## Exit criteria
 
 - [ ] Fichier `eval-findings.md` existe à la racine du projet.
-- [ ] Il contient la sortie des 5 questions d'éval (question / réponse / citations / référence).
-- [ ] Il liste au moins 3 failles nommées, avec pour chacune :
-  - un type (ex: « chunking qui coupe un tableau »),
-  - un exemple concret tiré de l'une des 5 questions,
+- [ ] `data/eval-results.json` existe et contient les 5 questions exécutées.
+- [ ] `eval-findings.md` contient les 5 résultats (question / réponse / citations / référence).
+- [ ] `eval-findings.md` liste au moins 3 failles nommées, avec pour chacune :
+  - un type,
+  - un exemple concret,
   - une hypothèse de cause.
 
 ## Vérification
 
-> ⚠️ Séquence exacte à rédiger dans la PR « CP3→CP6 détail ».
+Exécuter les checks suivants :
+
+1. **Fichiers attendus présents** :
+
+   ```bash
+   test -f data/eval-results.json
+   test -f eval-findings.md
+   ```
+
+2. **5 résultats bien exécutés** :
+
+   ```bash
+   node -e 'const fs=require("node:fs"); const data=JSON.parse(fs.readFileSync("data/eval-results.json","utf8")); const results=Array.isArray(data)?data:data.results; if(!Array.isArray(results)||results.length!==5){console.error(results?.length); process.exit(1)}; console.log("eval-results=ok");'
+   ```
+
+3. **Structure minimale de `eval-findings.md`** :
+
+   ```bash
+   grep -q '^## Résultats par question' eval-findings.md
+   grep -q '^## Failles observées' eval-findings.md
+   test "$(grep -c '^### Q' eval-findings.md)" -ge 5
+   test "$(grep -c '^- \*\*Type' eval-findings.md)" -ge 3
+   ```
+
+4. **Contrôle qualitatif manuel** :
+
+   - vérifier qu'au moins une faille décrit un cas d'hallucination ou de citation non fidèle,
+   - vérifier qu'au moins une faille est reliée à un symptôme retrieval/chunking.
 
 ## Hint ladder
 
-> ⚠️ À rédiger dans la PR « hint ladder complet ».
+1. **Hint socratique**
+
+   « Si tu devais convaincre quelqu'un en 2 minutes que ton RAG est imparfait, quels 3 exemples concrets garderais-tu ? »
+
+2. **Solution complète**
+
+   « Structure `eval-findings.md` en 2 blocs :
+   1) `Résultats par question` (Q1→Q5 avec fidélité/complétude/traçabilité),
+   2) `Failles observées` (au moins 3, chacune avec type + exemple + cause).
+   Utilise `data/eval-results.json` comme source factuelle, pas ton intuition. »
 
 ## Pièges pédagogiques (ici : c'est *tout* le CP)
 
-Les 5 questions sont conçues pour faire sortir des failles typiques. Selon le corpus et la pipeline naïve, on s'attend à voir apparaître :
-- Coupures de chunks qui perdent le sujet grammatical d'une phrase.
-- Retrieval qui ramène le bon guide mais la mauvaise section.
-- Citation du bon document mais de la mauvaise page (décalage d'1-2 pages).
-- Hallucination « entre deux chunks » (le LLM comble un trou).
-- Refus de répondre sur une question pourtant couverte (top-k trop petit).
+- Corriger le code trop tôt au lieu d'observer.
+- Écrire des conclusions vagues (« ça marche moyen ») sans exemple vérifiable.
+- Confondre "réponse plausible" et "réponse fidèle aux sources".
+- Surévaluer un score de similarité sans inspection des chunks.
 
-Tu **ne corriges rien**. Tu fais **observer** et **nommer**.
+## Side quest
+
+Pour les participants en avance :
+
+- classer les failles par priorité de correction (impact × fréquence),
+- proposer pour chaque faille **une** piste Module 4 (sans l'implémenter).
 
 ## Transition
 
-« `eval-findings.md` en main, c'est fini pour le Module 3. Le Module 4 part exactement de cette liste — chaque faille que tu as notée devient un outil à ajouter : meilleur chunking, reranking, seuils de confiance, prompt plus strict. On se revoit là-bas. »
+« `eval-findings.md` en main, Module 3 est terminé. Le Module 4 part exactement de cette liste : chaque faille devient un outil d'amélioration mesurable. »

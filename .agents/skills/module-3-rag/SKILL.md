@@ -73,7 +73,7 @@ Chaque `cp<n>-*.md` suit ce gabarit fixe, pour que ton comportement soit prévis
 ## État du contenu
 
 - ✅ **CP1 + CP2 détaillés** : sections *Procédure*, *Vérification*, *Hint ladder*, *Pièges* et *Side quest* rédigées.
-- 🟡 **CP3 → CP6 encore en squelette** : le cadre est posé, mais le contenu opérationnel détaillé sera livré dans la PR dédiée CP3→CP6.
-- 🟡 **Pass hint ladder global** encore à faire pour harmoniser finement les formulations sur les 6 CPs.
+- ✅ **CP3 → CP6 détaillés** : contenus opérationnels rédigés (procédures, vérifications, hints, pièges, side quests).
+- 🟡 **Pass hint ladder global** encore à faire pour harmoniser finement le ton/gradation sur les 6 CPs.
 
-Conclusion opérationnelle : ce skill est exploitable pour piloter un participant en CP1/CP2, mais pas encore pour dérouler tout le module complet sans support facilitateur.
+Conclusion opérationnelle : ce skill est exploitable pour dérouler tout le module (CP1→CP6) avec un participant, en gardant la plénière et le pilotage de rythme côté facilitateur.
