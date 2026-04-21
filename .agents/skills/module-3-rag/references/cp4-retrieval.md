@@ -92,7 +92,7 @@ Exécuter les checks suivants :
 
    « Reprends `retrieve()` avec ce contrat minimal :
    1) `embedQuery(query)` avec `openweight-embeddings`
-   2) `vector.query({ indexName: "anssi_essentiels", topK: k })`
+   2) `vector.query({ indexName: "anssi_essentiels", queryVector: embeddedQuery, topK: k })`
    3) retourner `score/text/source/page` pour chaque hit
    4) tester via CLI sur les 3 requêtes de smoke test
 
