@@ -91,15 +91,19 @@ Exécuter les checks suivants :
 
 1. **Hint socratique**
 
-   « Si le modèle répond très bien mais sans citer, le problème vient plutôt du retrieval… ou du contrat que tu lui donnes dans le prompt ? »
+   « Si la réponse est fluide mais sans citations vérifiables, as-tu imposé un format de citation obligatoire dans le prompt système ? »
 
 2. **Solution complète**
 
-   « Fais une chaîne simple `retrieve -> generate` avec un format de citation imposé dans le prompt (`[source: ..., p...]`).
-   Teste ensuite deux questions :
-   - Zero Trust (doit bien citer),
-   - mots de passe (doit admettre que le corpus ne suffit pas).
-   Si le modèle invente, renforce explicitement l'instruction : “Si le contexte est insuffisant, dis-le et n'invente pas.” »
+   « Remets une chaîne stricte `retrieve -> generate` :
+   1) `retrieve(question, 5)`
+   2) injecter les 5 chunks dans le prompt
+   3) imposer le format `[source: <filename>, p<page>]` pour chaque affirmation
+   4) ajouter la règle : “Si le contexte est insuffisant, dis-le et n'invente pas.”
+
+   Valide ensuite avec les 2 runs demandés :
+   - Zero Trust : au moins 2 citations cohérentes
+   - mots de passe : reconnaissance explicite des limites du corpus. »
 
 ## Pièges pédagogiques
 

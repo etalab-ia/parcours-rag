@@ -74,6 +74,6 @@ Chaque `cp<n>-*.md` suit ce gabarit fixe, pour que ton comportement soit prévis
 
 - ✅ **CP1 + CP2 détaillés** : sections *Procédure*, *Vérification*, *Hint ladder*, *Pièges* et *Side quest* rédigées.
 - ✅ **CP3 → CP6 détaillés** : contenus opérationnels rédigés (procédures, vérifications, hints, pièges, side quests).
-- 🟡 **Pass hint ladder global** encore à faire pour harmoniser finement le ton/gradation sur les 6 CPs.
+- ✅ **Pass hint ladder global** appliqué : ton, gradation et critères de recovery harmonisés sur CP1→CP6.
 
 Conclusion opérationnelle : ce skill est exploitable pour dérouler tout le module (CP1→CP6) avec un participant, en gardant la plénière et le pilotage de rythme côté facilitateur.

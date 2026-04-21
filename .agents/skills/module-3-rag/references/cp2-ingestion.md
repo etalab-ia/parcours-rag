@@ -94,17 +94,23 @@ Exécuter les checks suivants :
 
 1. **Hint socratique**
 
-   « Qu'est-ce qui te prouve objectivement que tu as bien ingéré *tout* le corpus : un compteur global… ou un croisement avec le manifest ? »
+   « Pour valider CP2, ton indicateur principal c'est quoi : juste le nombre total de chunks… ou la couverture des 17 `filename` du manifest ? »
 
 2. **Solution complète**
 
-   « Fais un script unique `build-chunks.ts` qui :
-   1) lit `manifest.json`,
-   2) boucle sur chaque `filename`,
-   3) extrait page par page puis concatène le document,
-   4) chunk en token `500/50`,
-   5) écrit `data/chunks.json`.
-   Puis valide avec 3 checks : `chunks.length >= 40`, clés minimales présentes, et **aucun filename manquant** par rapport au manifest. »
+   « Implémente un seul script `build-chunks.ts` qui fait exactement :
+   1) lire `corpus/anssi-essentiels/manifest.json`
+   2) pour chaque `filename`, extraire le texte PDF, concaténer le document
+   3) chunker en token `500/50`
+   4) écrire `data/chunks.json` avec `text/source/page/chunk_index/guide_id`
+
+   Puis exécute les vérifications dans cet ordre :
+   - `test -f data/chunks.json`
+   - `chunks.length >= 40`
+   - schéma minimal valide
+   - **zéro `filename` manquant** vs manifest.
+
+   Tant qu'un check échoue, ne passe pas à CP3. »
 
 ## Pièges pédagogiques
 
