@@ -28,7 +28,8 @@ Extraire le texte des 17 PDFs ANSSI et le découper en chunks exploitables, avec
 
    - lire le fichier depuis `corpus/anssi-essentiels/<filename>`,
    - extraire le texte page par page (avec `unpdf`),
-   - chunker chaque page avec `@mastra/rag` (`MDocument`) en stratégie token :
+   - concaténer le texte du document,
+   - chunker le document avec `@mastra/rag` (`MDocument`) en stratégie token :
      - `maxSize = 500`
      - `overlap = 50`
 
@@ -58,7 +59,7 @@ Extraire le texte des 17 PDFs ANSSI et le découper en chunks exploitables, avec
 
 - [ ] `data/chunks.json` existe.
 - [ ] Le fichier contient **≥ 40 chunks** (référence observée : ~55 sur ce corpus).
-- [ ] Chaque chunk porte au minimum les clés `text`, `source`, `page`.
+- [ ] Chaque chunk porte au minimum les clés `text`, `source`, `page`, `chunk_index`, `guide_id`.
 - [ ] Les **17 PDFs** du manifest sont tous représentés (au moins un chunk par `source`/`filename`).
 
 ## Vérification
@@ -80,7 +81,7 @@ Exécuter les checks suivants :
 3. **Schéma minimal d'un chunk** :
 
    ```bash
-   node -e 'const fs=require("node:fs"); const chunks=JSON.parse(fs.readFileSync("data/chunks.json","utf8")); const ok=chunks.every(c=>typeof c.text==="string"&&c.text.trim().length>0&&typeof c.source==="string"&&typeof c.page==="number"); if(!ok){process.exit(1)}; console.log("schema=ok")'
+   node -e 'const fs=require("node:fs"); const chunks=JSON.parse(fs.readFileSync("data/chunks.json","utf8")); const ok=chunks.every(c=>typeof c.text==="string"&&c.text.trim().length>0&&typeof c.source==="string"&&typeof c.page==="number"&&typeof c.chunk_index==="number"&&typeof c.guide_id==="string"); if(!ok){process.exit(1)}; console.log("schema=ok")'
    ```
 
 4. **Couverture des 17 PDFs du manifest** :
@@ -100,7 +101,7 @@ Exécuter les checks suivants :
    « Fais un script unique `build-chunks.ts` qui :
    1) lit `manifest.json`,
    2) boucle sur chaque `filename`,
-   3) extrait page par page,
+   3) extrait page par page puis concatène le document,
    4) chunk en token `500/50`,
    5) écrit `data/chunks.json`.
    Puis valide avec 3 checks : `chunks.length >= 40`, clés minimales présentes, et **aucun filename manquant** par rapport au manifest. »
@@ -108,7 +109,7 @@ Exécuter les checks suivants :
 ## Pièges pédagogiques
 
 - Le chunking naïf est **délibéré**. Ne pas laisser le participant « améliorer » maintenant (semantic chunking, nettoyage avancé, reranker…). Noter les défauts observés pour CP6.
-- Les en-têtes/pieds ANSSI polluent les chunks (quasi-doublons p1/p2) : c'est attendu et pédagogique.
+- Les en-têtes/pieds ANSSI polluent les chunks (bruit répétitif inter-pages) : c'est attendu et pédagogique.
 - Le `guide_id` n'est pas unique sur les 3 PDFs Windows : vérifier la couverture par `source` (`filename`), pas seulement par `guide_id`.
 - Oubli de `mkdir data/` avant écriture de `chunks.json`.
 - Tentation de viser `500+` chunks : ce corpus produit ~55 chunks avec la config 500/50, donc viser `≥40`.

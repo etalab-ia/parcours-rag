@@ -84,8 +84,7 @@ Exécuter ces checks dans l'ordre.
 3. **Mastra up** (`pnpm dev` déjà lancé dans un autre terminal) :
 
    ```bash
-   curl -sf http://localhost:4111/api/agents >/tmp/cp1-agents.json
-   grep -q 'chat-agent' /tmp/cp1-agents.json
+   curl -sf http://localhost:4111/api/agents | grep -q 'chat-agent'
    ```
 
 4. **Réponse fonctionnelle du chat-agent** :
