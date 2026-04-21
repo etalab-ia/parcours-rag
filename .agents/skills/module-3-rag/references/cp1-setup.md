@@ -97,17 +97,18 @@ Exécuter ces checks dans l'ordre.
 
 1. **Hint socratique**
 
-   « Quel est le plus petit test observable qui te prouve que le problème vient de la clé/API et pas de ton code d'agent ? »
+   « Le premier critère de sortie qui échoue chez toi, c'est lequel exactement : dépendances, `.env`, service `:4111`, ou réponse de `chat-agent` ? »
 
 2. **Solution complète**
 
-   « Repars de la base :
-   1) `cp .env.example .env`,
-   2) renseigne `ALBERT_API_KEY` (non vide),
-   3) `pnpm install`,
-   4) `pnpm dev`,
-   5) `curl -sf http://localhost:4111/api/agents | grep chat-agent`.
-   Si ça passe mais Studio ne répond pas, c'est souvent un souci de port occupé ou de session `.env` non rechargée. »
+   « Repars dans cet ordre, sans sauter d'étape :
+   1) `pnpm install`
+   2) `cp .env.example .env` puis renseigne `ALBERT_API_KEY` (non vide)
+   3) `pnpm dev`
+   4) `curl -sf http://localhost:4111/api/agents | grep -q 'chat-agent'`
+   5) dans Studio, envoie le prompt de test et vérifie une réponse en français mentionnant l'absence de contexte ANSSI.
+
+   Si une étape échoue, corrige-la avant de passer à la suivante. »
 
 ## Pièges pédagogiques
 

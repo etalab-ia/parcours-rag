@@ -86,16 +86,21 @@ Exécuter les checks suivants :
 
 1. **Hint socratique**
 
-   « Pour que la comparaison vectorielle soit valide, la requête utilisateur doit être transformée avec quel modèle exactement ? »
+   « Si tes résultats semblent hors sujet, as-tu vérifié que la requête est embeddée avec le même modèle que les chunks de CP3 ? »
 
 2. **Solution complète**
 
-   « Fais `retrieve()` en 4 étapes :
-   1) `embedQuery(query)` avec `openweight-embeddings`,
-   2) `vector.query({topK:k})` sur `indexName=anssi_essentiels`,
-   3) mappe chaque hit vers `{score,text,source,page,...}`,
-   4) ajoute un mode CLI pour tester vite.
-   Si les résultats sont incohérents, vérifie d'abord que CP3 a bien indexé le même corpus et la même dimension (1024). »
+   « Reprends `retrieve()` avec ce contrat minimal :
+   1) `embedQuery(query)` avec `openweight-embeddings`
+   2) `vector.query({ indexName: "anssi_essentiels", queryVector: embeddedQuery, topK: k })`
+   3) retourner `score/text/source/page` pour chaque hit
+   4) tester via CLI sur les 3 requêtes de smoke test
+
+   Ensuite valide les deux checks critiques :
+   - scores décroissants
+   - au moins un hit `zero_trust` pour la question Zero Trust.
+
+   Si ça échoue, compare d'abord modèle/indexName avec CP3. »
 
 ## Pièges pédagogiques
 

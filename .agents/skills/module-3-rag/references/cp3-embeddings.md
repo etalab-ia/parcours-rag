@@ -86,15 +86,18 @@ Exécuter les checks suivants :
 
 1. **Hint socratique**
 
-   « Si ton index contient moins de vecteurs que de chunks, est-ce un problème d'embedding… ou d'identifiants qui se collisionnent à l'upsert ? »
+   « Si `stats.count` est différent de `chunks.length`, quelle hypothèse testes-tu en premier : un échec d'embedding, ou des IDs non uniques à l'upsert ? »
 
 2. **Solution complète**
 
-   « Procède en 3 blocs simples :
-   1) `chunks.json` → embeddings en batch (16/32),
-   2) `createIndex({dimension:1024})`,
-   3) `upsert(ids,vectors,metadata)` avec IDs uniques basés sur `source`.
-   Termine par `describeIndex()` et compare `stats.count` à `chunks.length`. Si ça diffère, vérifie d'abord les collisions d'IDs. »
+   « Repars en pipeline déterministe :
+   1) charger `data/chunks.json`
+   2) embedder par batch (16/32) avec `openweight-embeddings`
+   3) créer l'index `anssi_essentiels` en dimension 1024
+   4) upsert avec IDs uniques basés sur `source + chunk_index`
+   5) vérifier `describeIndex()` : `count === chunks.length` et `dimension === 1024`
+
+   Si `count` est trop bas, vérifie d'abord les collisions d'IDs avant de suspecter LibSQL. »
 
 ## Pièges pédagogiques
 

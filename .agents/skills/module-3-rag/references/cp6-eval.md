@@ -118,14 +118,18 @@ Exécuter les checks suivants :
 
 1. **Hint socratique**
 
-   « Si tu devais convaincre quelqu'un en 2 minutes que ton RAG est imparfait, quels 3 exemples concrets garderais-tu ? »
+   « Quelle preuve écrite peux-tu montrer pour chaque faille : un extrait de résultat + une cause probable, ou juste une impression ? »
 
 2. **Solution complète**
 
-   « Structure `eval-findings.md` en 2 blocs :
-   1) `Résultats par question` (Q1→Q5 avec fidélité/complétude/traçabilité),
-   2) `Failles observées` (au moins 3, chacune avec type + exemple + cause).
-   Utilise `data/eval-results.json` comme source factuelle, pas ton intuition. »
+   « Rédige `eval-findings.md` avec ce gabarit minimal :
+   1) `## Résultats par question` avec 5 sous-sections `### Q1` à `### Q5`
+      - fidélité / complétude / traçabilité
+   2) `## Failles observées`
+      - au moins 3 items commençant par `- **Type** ...`
+      - pour chaque item : exemple concret + hypothèse de cause
+
+   Appuie-toi sur `data/eval-results.json` (pas sur mémoire/intuition), puis lance les checks automatiques. »
 
 ## Pièges pédagogiques (ici : c'est *tout* le CP)
 
