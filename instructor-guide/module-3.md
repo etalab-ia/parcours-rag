@@ -3,7 +3,9 @@
 > Public : formateurs (Noellie + Luis).
 > 
 > Ce document est le playbook d'animation en présentiel (3h, 20 participants techniques).
-> Le détail technique de chaque checkpoint est dans `.agents/skills/module-3-rag/references/cp*.md`.
+> Le détail technique de chaque checkpoint est dans `.skills/module-3-rag/references/cp*.md`.
+>
+> Note de structure : dans cette version du repo, les contenus checkpoint sont maintenus dans `references/cp*.md` (et non dans `steps/`).
 
 ---
 
@@ -86,7 +88,7 @@ Checklist :
 - 00:30–00:50 : travail individuel
 - 00:50–01:00 : débrief plénier CP2
 
-**Signal de passage** : majorité avec `data/chunks.json` valide (>=40 chunks, couverture 17 PDFs).
+**Signal de passage** : >80% de la salle avec `data/chunks.json` valide (>=40 chunks, couverture 17 PDFs).
 
 ### Débrief CP2 (10 min) — questions
 
@@ -106,7 +108,7 @@ Checklist :
 - 01:00–01:20 : travail individuel
 - 01:20–01:25 : débrief plénier CP3
 
-**Signal de passage** : index créé, `count == chunks.length`, dimension 1024.
+**Signal de passage** : >80% de la salle avec index créé, `count == chunks.length`, dimension 1024, et métadonnées `chunk_index` présentes dans les résultats de smoke test.
 
 ### Débrief CP3 (5 min) — questions
 
@@ -131,7 +133,7 @@ Couper franchement. Afficher heure de reprise explicite.
 - 01:35–01:55 : travail individuel
 - 01:55–02:00 : débrief plénier CP4
 
-**Signal de passage** : `retrieve(query,k=5)` stable avec scores décroissants + hit Zero Trust.
+**Signal de passage** : >80% de la salle avec `retrieve(query,k=5)` stable, scores décroissants, et hit Zero Trust.
 
 ### Débrief CP4 (5 min) — questions
 
@@ -150,7 +152,7 @@ Couper franchement. Afficher heure de reprise explicite.
 - 02:00–02:20 : travail individuel
 - 02:20–02:30 : débrief plénier CP5
 
-**Signal de passage** : réponse Zero Trust bien citée + comportement maîtrisé sur question hors corpus.
+**Signal de passage** : >80% de la salle avec réponse Zero Trust bien citée + comportement maîtrisé sur question hors corpus.
 
 ### Débrief CP5 (10 min) — questions
 
@@ -170,7 +172,7 @@ Couper franchement. Afficher heure de reprise explicite.
 - 02:30–02:45 : travail individuel
 - 02:45–02:50 : mini debrief salle + préparation clôture
 
-**Signal de passage** : `eval-findings.md` existe, 5 questions traitées, 3 failles nommées avec causes.
+**Signal de passage** : >80% de la salle avec `eval-findings.md` existant, 5 questions traitées, 3 failles nommées avec causes.
 
 ### Débrief CP6 (5 min) — questions
 
@@ -264,6 +266,6 @@ Fin session :
 ## 7) Liens de travail
 
 - Source de vérité design : `design/module-3-design.md`
-- Références CP détaillées : `.agents/skills/module-3-rag/references/cp1-setup.md` à `cp6-eval.md`
+- Références CP détaillées : `.skills/module-3-rag/references/cp1-setup.md` à `cp6-eval.md`
 - Observations pipeline de référence : `reference/observed-behavior.md`
 - Questions d'éval : `data/eval-questions.json`
