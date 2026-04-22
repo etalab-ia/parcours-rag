@@ -30,7 +30,7 @@ Conduire en micro-étapes : préparer les entrées, lancer, lire les résultats,
 
 - Fournir du code en markdown copiable (fichier complet ou extrait ciblé selon la taille).
 - Vérifier que les métadonnées issues des étapes précédentes (`chunk_index`, `source`, `page`, `guide_id`) restent exploitables dans les artefacts d'évaluation.
-- Si un typage embedding est nécessaire, utiliser exclusivement des types publics exposés (ex: `EmbeddingModelV3` importé depuis `@ai-sdk/provider`) — ne jamais utiliser de types internes (ex: `GatewayEmbeddingModel`).
+- Si un typage embedding est nécessaire, utiliser exclusivement des types publics exposés (ex: `EmbeddingModelV3` importé depuis `@ai-sdk/provider`, notamment `Promise<EmbeddingModelV3>` comme type de retour de `resolveEmbeddingModel`) — ne jamais utiliser de types internes (ex: `GatewayEmbeddingModel`).
 
 ## Procédure
 
