@@ -24,6 +24,14 @@ Dérouler en micro-étapes : une modification, un test, une validation.
 - expliquer brièvement chaque commande avant exécution,
 - confirmer le résultat obtenu avant la suite.
 
+⚠️ Utilise le gabarit de restitution uniquement comme format de sortie ; adapte toujours le code au contexte courant (ce n'est pas une réponse modèle).
+
+## Restitution de code (obligatoire)
+
+- Fournir du code en markdown copiable (fichier complet ou extrait ciblé selon la taille).
+- Préserver et exposer les métadonnées utiles au retrieval (`chunk_index`, `source`, `page`, `guide_id`) dans les retours de `retrieve()`.
+- Si un typage embedding est nécessaire, privilégier les types publics (ex: `EmbeddingModelV3` importé depuis `@ai-sdk/provider`) plutôt que des types internes (ex: `GatewayEmbeddingModel`).
+
 ## Procédure
 
 1. **Micro-étape 4.1 — Créer le module retrieval**, par exemple `src/mastra/rag/retrieve.ts`, avec :

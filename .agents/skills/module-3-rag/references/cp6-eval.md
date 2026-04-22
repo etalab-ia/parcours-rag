@@ -24,6 +24,14 @@ Conduire en micro-étapes : préparer les entrées, lancer, lire les résultats,
 - faire valider chaque livrable intermédiaire (`eval-results.json`, puis `eval-findings.md`),
 - rappeler à chaque fois : ici on observe, on n'optimise pas.
 
+⚠️ Utilise le gabarit de restitution uniquement comme format de sortie ; adapte toujours le code au contexte courant (ce n'est pas une réponse modèle).
+
+## Restitution de code (obligatoire)
+
+- Fournir du code en markdown copiable (fichier complet ou extrait ciblé selon la taille).
+- Vérifier que les métadonnées issues des étapes précédentes (`chunk_index`, `source`, `page`, `guide_id`) restent exploitables dans les artefacts d'évaluation.
+- Si un typage embedding est nécessaire, privilégier les types publics (ex: `EmbeddingModelV3` importé depuis `@ai-sdk/provider`) plutôt que des types internes (ex: `GatewayEmbeddingModel`).
+
 ## Procédure
 
 1. **Micro-étape 6.1 — Vérifier les entrées d'éval** :
