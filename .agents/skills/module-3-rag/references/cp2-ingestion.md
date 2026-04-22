@@ -1,4 +1,4 @@
-# CP2 — Ingestion & chunking
+# Étape 2 (CP2) — Ingestion & chunking
 
 ## Objectif
 
@@ -14,26 +14,49 @@ Extraire le texte des 17 PDFs ANSSI et le découper en chunks exploitables, avec
 
 ## Brief participant
 
-« On va lire les 17 PDFs, découper chaque document en morceaux de taille fixe, et tout stocker dans un fichier JSON. Chunking naïf exprès : 500 tokens avec overlap de 50. En CP6 on reviendra regarder ce que ce choix nous coûte. »
+« On va lire les 17 PDFs, découper chaque document en morceaux de taille fixe, et tout stocker dans un fichier JSON. Chunking naïf exprès : 500 tokens avec overlap de 50. En Étape 6 (CP6), on reviendra regarder ce que ce choix nous coûte. »
+
+## Conduite guidée (obligatoire)
+
+Ne pas envoyer la procédure complète d'un coup. Piloter en micro-étapes :
+
+- une action concrète,
+- une explication courte,
+- une validation observable,
+- puis seulement l'action suivante.
 
 ## Procédure
 
-1. **Créer un script d'ingestion dédié**, par exemple :
+1. **Micro-étape 2.1 — Créer le squelette du script**
 
-   - `src/mastra/rag/build-chunks.ts`
+   Créer `src/mastra/rag/build-chunks.ts` avec :
 
-2. **Charger le manifest** `corpus/anssi-essentiels/manifest.json` pour piloter la boucle d'ingestion.
+   - imports (`fs/promises`, `path`, `unpdf`, `MDocument`),
+   - fonction `main()` vide,
+   - constante des chemins (`manifest`, dossier corpus, sortie JSON).
 
-3. **Pour chaque PDF du manifest** :
+   Validation locale : le fichier existe et compile (`pnpm tsx src/mastra/rag/build-chunks.ts` sans logique métier complète peut déjà tourner sans crash syntaxique).
 
-   - lire le fichier depuis `corpus/anssi-essentiels/<filename>`,
+2. **Micro-étape 2.2 — Charger le manifest**
+
+   Implémenter la lecture de `corpus/anssi-essentiels/manifest.json` et afficher le nombre d'entrées.
+
+   Validation locale : sortie terminal du type `manifest entries: 17`.
+
+3. **Micro-étape 2.3 — Tester extraction + chunking sur 1 PDF**
+
+   Sur le premier PDF du manifest :
+
+   - lire le fichier dans `corpus/anssi-essentiels/<filename>`,
    - extraire le texte page par page (avec `unpdf`),
-   - concaténer le texte du document,
-   - chunker le document avec `@mastra/rag` (`MDocument`) en stratégie token :
-     - `maxSize = 500`
-     - `overlap = 50`
+   - concaténer le document,
+   - chunker avec `MDocument` en stratégie token (`maxSize=500`, `overlap=50`).
 
-4. **Construire les chunks** au format minimal :
+   Validation locale : afficher pages lues + nombre de chunks générés pour ce PDF.
+
+4. **Micro-étape 2.4 — Généraliser aux 17 PDFs**
+
+   Boucler sur tout le manifest et construire les chunks au format minimal :
 
    ```json
    {
@@ -45,15 +68,23 @@ Extraire le texte des 17 PDFs ANSSI et le découper en chunks exploitables, avec
    }
    ```
 
-   Recommandé : ajouter aussi `guide_nom` et `url` (utile pour CP5/CP6).
+   Recommandé : ajouter aussi `guide_nom` et `url` (utile pour Étapes 5 et 6).
 
-5. **Écrire `data/chunks.json`** (créer `data/` si nécessaire), puis exécuter le script :
+   Validation locale : afficher le total de chunks et le nombre de `source` distinctes.
+
+5. **Micro-étape 2.5 — Écrire la sortie**
+
+   Créer `data/` si nécessaire et écrire `data/chunks.json`.
+
+   Validation locale : `test -f data/chunks.json`.
+
+6. **Micro-étape 2.6 — Exécuter les vérifications de l'étape 2**
+
+   Lancer le script puis les checks de cardinalité, schéma et couverture.
 
    ```bash
    pnpm tsx src/mastra/rag/build-chunks.ts
    ```
-
-6. **Lire rapidement la sortie** (count + un exemple) avant de passer à CP3.
 
 ## Exit criteria
 
@@ -94,7 +125,7 @@ Exécuter les checks suivants :
 
 1. **Hint socratique**
 
-   « Pour valider CP2, ton indicateur principal c'est quoi : juste le nombre total de chunks… ou la couverture des 17 `filename` du manifest ? »
+   « Pour valider l'étape 2, ton indicateur principal c'est quoi : juste le nombre total de chunks… ou la couverture des 17 `filename` du manifest ? »
 
 2. **Solution complète**
 
@@ -110,11 +141,11 @@ Exécuter les checks suivants :
    - schéma minimal valide
    - **zéro `filename` manquant** vs manifest.
 
-   Tant qu'un check échoue, ne passe pas à CP3. »
+   Tant qu'un check échoue, ne passe pas à l'Étape 3. »
 
 ## Pièges pédagogiques
 
-- Le chunking naïf est **délibéré**. Ne pas laisser le participant « améliorer » maintenant (semantic chunking, nettoyage avancé, reranker…). Noter les défauts observés pour CP6.
+- Le chunking naïf est **délibéré**. Ne pas laisser le participant « améliorer » maintenant (semantic chunking, nettoyage avancé, reranker…). Noter les défauts observés pour l'Étape 6.
 - Les en-têtes/pieds ANSSI polluent les chunks (bruit répétitif inter-pages) : c'est attendu et pédagogique.
 - Le `guide_id` n'est pas unique sur les 3 PDFs Windows : vérifier la couverture par `source` (`filename`), pas seulement par `guide_id`.
 - Oubli de `mkdir data/` avant écriture de `chunks.json`.
@@ -128,8 +159,8 @@ Pour les participants en avance : ajouter un mini script d'analyse :
 - top 3 des `source` qui produisent le plus de chunks,
 - affichage de 2 chunks consécutifs d'un même PDF pour observer les quasi-doublons.
 
-Objectif : préparer le débrief CP2 sans commencer à corriger la pipeline.
+Objectif : préparer le débrief Étape 2 sans commencer à corriger la pipeline.
 
 ## Transition
 
-« Tu as maintenant ~40–60 morceaux de texte, tous indifférenciés. Au débrief on compare ce que le chunking naïf fait bien (rapidité) et ce qu'il casse (doublons, coupures, bruit d'en-tête). Ensuite on passe aux embeddings. »
+« Tu as maintenant ~40–60 morceaux de texte, tous indifférenciés. Au débrief on compare ce que le chunking naïf fait bien (rapidité) et ce qu'il casse (doublons, coupures, bruit d'en-tête). Ensuite on passe à l'Étape 3 (embeddings). »

@@ -1,4 +1,4 @@
-# CP1 — Setup projet + chat baseline
+# Étape 1 (CP1) — Setup projet + chat baseline
 
 ## Objectif
 
@@ -14,11 +14,25 @@ Faire tourner l'environnement Mastra + Albert API de bout en bout sur le poste d
 
 ## Brief participant
 
-« Avant d'ajouter le RAG, on valide que la fondation marche. À la fin de ce CP tu auras un agent qui parle français via l'API Albert, hébergé en local, prêt à être augmenté. »
+« Avant d'ajouter le RAG, on valide que la fondation marche. À la fin de cette étape tu auras un agent qui parle français via l'API Albert, hébergé en local, prêt à être augmenté. »
+
+## Conduite guidée (obligatoire)
+
+Piloter cette étape en micro-étapes :
+
+- proposer **une seule action** à la fois,
+- expliquer chaque commande avant exécution (objectif + résultat attendu),
+- valider le résultat avant de passer à l'action suivante,
+- ne donner le plan complet que si l'utilisateur le demande explicitement.
+
+Au début de l'étape, demander la préférence de rythme :
+
+- **mode guidé** (par défaut, pédagogique),
+- **mode rapide** (moins de détails, mais toujours une explication courte avant commande).
 
 ## Procédure
 
-1. **Vérifier les prérequis locaux** (rapidement, sans s'y bloquer trop longtemps) :
+1. **Micro-étape 1.1 — Vérifier les prérequis locaux** :
 
    ```bash
    node -v
@@ -27,13 +41,17 @@ Faire tourner l'environnement Mastra + Albert API de bout en bout sur le poste d
 
    Attendu : Node 20+ et `pnpm` disponible.
 
-2. **Installer les dépendances** :
+   Validation locale : versions affichées sans erreur.
+
+2. **Micro-étape 1.2 — Installer les dépendances** :
 
    ```bash
    pnpm install
    ```
 
-3. **Créer le fichier d'environnement** :
+   Validation locale : dossier `node_modules/` créé.
+
+3. **Micro-étape 1.3 — Créer le fichier d'environnement** :
 
    ```bash
    cp .env.example .env
@@ -41,7 +59,9 @@ Faire tourner l'environnement Mastra + Albert API de bout en bout sur le poste d
 
    Puis ouvrir `.env` et renseigner `ALBERT_API_KEY` (valeur non vide).
 
-4. **Lancer Mastra en local** :
+   Validation locale : `.env` présent, clé renseignée (non vide).
+
+4. **Micro-étape 1.4 — Lancer Mastra en local** :
 
    ```bash
    pnpm dev
@@ -49,13 +69,17 @@ Faire tourner l'environnement Mastra + Albert API de bout en bout sur le poste d
 
    Garder ce terminal ouvert.
 
-5. **Valider l'agent baseline** dans Mastra Studio (`http://localhost:4111`) :
-   - sélectionner l'agent `chat-agent`,
+   Validation locale : endpoint des agents répond.
+
+5. **Micro-étape 1.5 — Valider l'agent baseline** dans Mastra Studio (`http://localhost:4111`) :
+   - sélectionner l'agent `chat-agent` (nom technique) ; dans l'UI, le label peut être `Agent de chat (baseline)`,
    - poser une question de test en français, par exemple :
 
      > « Présente-toi en 2 phrases et précise pourquoi tu n'as pas encore accès aux guides ANSSI. »
 
    - vérifier que la réponse est en français et mentionne explicitement l'absence de contexte ANSSI à ce stade.
+
+   Validation locale : réponse en français + pas d'accès au corpus ANSSI.
 
 ## Exit criteria
 
@@ -91,13 +115,13 @@ Exécuter ces checks dans l'ordre.
    - dans Studio, envoyer le prompt de test,
    - vérifier manuellement :
      - réponse en français,
-     - mention explicite qu'il n'a pas encore accès au corpus ANSSI.
+    - mention explicite qu'il n'a pas encore accès au corpus ANSSI (la formulation exacte peut varier).
 
 ## Hint ladder
 
 1. **Hint socratique**
 
-   « Le premier critère de sortie qui échoue chez toi, c'est lequel exactement : dépendances, `.env`, service `:4111`, ou réponse de `chat-agent` ? »
+   « Le premier critère de sortie qui échoue chez toi, c'est lequel exactement : dépendances, `.env`, service `:4111`, ou réponse de l'agent ? »
 
 2. **Solution complète**
 
@@ -130,4 +154,4 @@ But : montrer qu'ils contrôlent le comportement de base avant d'ajouter le RAG.
 
 ## Transition
 
-« Ton agent parle, mais il ne sait rien du corpus ANSSI. C'est le moment du debrief plénier — on se retrouve dans 5 minutes pour attaquer l'ingestion. »
+« Ton agent parle, mais il ne sait rien du corpus ANSSI. C'est le moment du débrief plénier — on se retrouve dans 5 minutes pour attaquer l'Étape 2 (ingestion). »

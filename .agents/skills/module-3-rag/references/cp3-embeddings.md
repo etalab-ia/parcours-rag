@@ -1,4 +1,4 @@
-# CP3 — Embeddings & index vectoriel
+# Étape 3 (CP3) — Embeddings & index vectoriel
 
 ## Objectif
 
@@ -16,38 +16,53 @@ Vectoriser l'ensemble des chunks via l'API Albert (`openweight-embeddings`, 1024
 
 « Chaque chunk devient un vecteur de 1024 dimensions via l'API Albert. On range tout dans LibSQL — un SQLite augmenté, intégré à Mastra, zéro serveur à démarrer. »
 
+## Conduite guidée (obligatoire)
+
+Piloter en micro-étapes : implémenter un bloc, le tester, valider, puis continuer.
+
+- Ne pas donner toute la recette d'un coup.
+- Avant chaque commande, expliquer le but et le résultat attendu.
+
 ## Procédure
 
-1. **Créer un script d'indexation**, par exemple :
+1. **Micro-étape 3.1 — Créer le script d'indexation**, par exemple :
 
    - `src/mastra/rag/build-index.ts`
 
-2. **Charger les chunks** depuis `data/chunks.json`.
+   Validation locale : fichier créé et exécutable sans erreur syntaxique.
 
-3. **Embedder en batchs** (taille 16 ou 32 recommandée) via l'endpoint Albert `/embeddings` :
+2. **Micro-étape 3.2 — Charger les chunks** depuis `data/chunks.json`.
+
+   Validation locale : afficher le nombre de chunks chargés.
+
+3. **Micro-étape 3.3 — Embedder en batchs** (taille 16 ou 32 recommandée) via l'endpoint Albert `/embeddings` :
 
    - modèle : `openweight-embeddings`,
    - entrée : `chunk.text`,
    - sortie attendue : vecteur 1024 dimensions.
 
-4. **Créer un index LibSQL** nommé `anssi_essentiels` sur `file:data/index.db` avec :
+   Validation locale : au moins un batch retourne des vecteurs de dimension 1024.
+
+4. **Micro-étape 3.4 — Créer un index LibSQL** nommé `anssi_essentiels` sur `file:data/index.db` avec :
 
    - `dimension: 1024`,
    - `metric: "cosine"`.
 
-5. **Upsert les vecteurs** avec métadonnées minimales :
+5. **Micro-étape 3.5 — Upsert les vecteurs** avec métadonnées minimales :
 
    - `source`, `page`, `guide_id`, `chunk_index`, `text`.
 
    ⚠️ Les 3 PDFs Windows partagent le même `guide_id` : utiliser des IDs de chunk uniques basés sur `source + chunk_index` (pas `guide_id` seul).
 
-6. **Ajouter un mini smoke test** à la fin du script :
+   Validation locale : `count` progresse et aucun écrasement massif dû à des IDs non uniques.
+
+6. **Micro-étape 3.6 — Ajouter un mini smoke test** à la fin du script :
 
    - lire `describeIndex()`,
    - afficher `count` et `dimension`,
    - exécuter une requête de test (`topK=1`) et afficher `source/page` du premier résultat.
 
-7. **Lancer l'indexation** :
+7. **Micro-étape 3.7 — Lancer l'indexation complète** :
 
    ```bash
    pnpm tsx src/mastra/rag/build-index.ts
@@ -117,4 +132,4 @@ Pour les participants en avance :
 
 ## Transition
 
-« L'index est prêt. Au débrief on compare les tailles de batch et les collisions d'IDs rencontrées. Ensuite on passe à la récupération (`retrieve`). »
+« L'index est prêt. Au débrief on compare les tailles de batch et les collisions d'IDs rencontrées. Ensuite on passe à l'Étape 4 (`retrieve`). »

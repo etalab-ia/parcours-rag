@@ -1,4 +1,4 @@
-# CP6 — Éval + analyse de failles
+# Étape 6 (CP6) — Éval + analyse de failles
 
 ## Objectif
 
@@ -16,14 +16,22 @@ Exécuter 5 questions d'évaluation sur le RAG construit, observer les réponses
 
 « Tu as construit la pipeline. Maintenant on la stresse. 5 questions, 5 profils différents. Ton job : lancer, observer, écrire. Pas corriger. »
 
+## Conduite guidée (obligatoire)
+
+Conduire en micro-étapes : préparer les entrées, lancer, lire les résultats, rédiger, vérifier.
+
+- ne pas balancer toute la to-do list d'un coup,
+- faire valider chaque livrable intermédiaire (`eval-results.json`, puis `eval-findings.md`),
+- rappeler à chaque fois : ici on observe, on n'optimise pas.
+
 ## Procédure
 
-1. **Vérifier les entrées d'éval** :
+1. **Micro-étape 6.1 — Vérifier les entrées d'éval** :
 
    - `data/eval-questions.json` existe (5 questions),
    - pipeline CP4/CP5 exécutable (`retrieve` + `answer`).
 
-2. **Créer un runner d'évaluation**, par exemple `src/mastra/rag/run-eval.ts`, qui pour chaque question :
+2. **Micro-étape 6.2 — Créer un runner d'évaluation**, par exemple `src/mastra/rag/run-eval.ts`, qui pour chaque question :
 
    - récupère les chunks (`retrieve`),
    - génère la réponse (`answer`/`generate`),
@@ -42,28 +50,32 @@ Exécuter 5 questions d'évaluation sur le RAG construit, observer les réponses
 
    (Un tableau JSON à la racine est aussi acceptable pour la vérification.)
 
-3. **Exécuter l'évaluation complète** et écrire :
+   Validation locale : exécution d'une question unique possible (smoke test).
+
+3. **Micro-étape 6.3 — Exécuter l'évaluation complète** et écrire :
 
    - `data/eval-results.json`
 
-4. **Rédiger `eval-findings.md`** avec 2 sections minimales :
+   Validation locale : `data/eval-results.json` présent avec 5 résultats.
+
+4. **Micro-étape 6.4 — Rédiger `eval-findings.md`** avec 2 sections minimales :
 
    - `## Résultats par question` (5 entrées titrées `### Q1` à `### Q5`)
    - `## Failles observées` (au moins 3 failles nommées)
 
-5. **Pour chaque question**, noter explicitement :
+5. **Micro-étape 6.5 — Pour chaque question, noter explicitement** :
 
    - fidélité,
    - complétude,
    - traçabilité.
 
-6. **Pour chaque faille identifiée**, documenter :
+6. **Micro-étape 6.6 — Pour chaque faille identifiée, documenter** :
 
    - type,
    - exemple concret (question + extrait),
    - hypothèse de cause.
 
-⚠️ Règle CP6 : **on n'améliore pas la pipeline**. On observe et on nomme.
+⚠️ Règle Étape 6 : **on n'améliore pas la pipeline**. On observe et on nomme.
 
 ## Critères de jugement (à imposer au participant)
 

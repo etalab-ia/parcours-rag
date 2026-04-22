@@ -1,4 +1,4 @@
-# CP5 — Génération avec contexte + citations
+# Étape 5 (CP5) — Génération avec contexte + citations
 
 ## Objectif
 
@@ -16,37 +16,52 @@ Produire une réponse RAG en français à partir des chunks récupérés, avec c
 
 « On branche `retrieve()` en amont du LLM. Le prompt impose deux contraintes : répondre uniquement à partir des passages fournis, et citer la source (guide + page) pour chaque affirmation. »
 
+## Conduite guidée (obligatoire)
+
+Piloter cette étape en séquence courte :
+
+- un bloc de code,
+- un test ciblé,
+- un constat,
+- puis la suite.
+
+Éviter les réponses "plan complet" sauf demande explicite de l'utilisateur.
+
 ## Procédure
 
-1. **Créer un module de génération**, par exemple `src/mastra/rag/generate.ts`, qui :
+1. **Micro-étape 5.1 — Créer un module de génération**, par exemple `src/mastra/rag/generate.ts`, qui :
 
    - reçoit `question` + `contextChunks`,
    - appelle Albert `/chat/completions` (`openweight-large`),
    - applique un prompt système avec format de citation obligatoire.
 
-2. **Normaliser un format de citation unique**, par exemple :
+   Validation locale : module `generate` exécutable avec un contexte minimal.
+
+2. **Micro-étape 5.2 — Normaliser un format de citation unique**, par exemple :
 
    - `[source: <filename>, p<page>]`
 
-3. **Créer une orchestration RAG**, par exemple `src/mastra/rag/answer.ts`, qui enchaîne :
+3. **Micro-étape 5.3 — Créer une orchestration RAG**, par exemple `src/mastra/rag/answer.ts`, qui enchaîne :
 
    - `retrieve(question, 5)` (CP4),
    - `generate(question, retrievedChunks)`.
 
-4. **Ajouter un mode CLI** :
+   Validation locale : `answer.ts` retourne une réponse sur une question simple.
+
+4. **Micro-étape 5.4 — Ajouter un mode CLI** :
 
    ```bash
    pnpm tsx src/mastra/rag/answer.ts "<question>"
    ```
 
-5. **Tester sur deux questions** :
+5. **Micro-étape 5.5 — Tester sur deux questions** :
 
    - **in-corpus (happy path)** :
      - « Quels sont les objectifs principaux du modèle Zero Trust selon l'ANSSI ? »
    - **hors-corpus (piège)** :
      - « Quelles sont les règles d'hygiène des mots de passe selon l'ANSSI ? »
 
-6. **Documenter le comportement observé** (2-3 lignes) :
+6. **Micro-étape 5.6 — Documenter le comportement observé** (2-3 lignes) :
 
    - la question in-corpus doit être bien citée,
    - la question hors-corpus doit expliciter l'insuffisance du contexte (et éviter l'invention).
@@ -122,4 +137,4 @@ Pour les participants en avance :
 
 ## Transition
 
-« Ton RAG répond et cite. Au débrief on compare un cas où il est fidèle et un cas où il dérive. Dernier CP : évaluation structurée sur 5 questions. »
+« Ton RAG répond et cite. Au débrief on compare un cas où il est fidèle et un cas où il dérive. Dernière étape : Étape 6 (évaluation structurée sur 5 questions). »

@@ -1,4 +1,4 @@
-# CP4 — Retrieval
+# Étape 4 (CP4) — Retrieval
 
 ## Objectif
 
@@ -16,27 +16,39 @@ Exposer une fonction `retrieve(query, k=5)` qui prend une question en langage na
 
 « La requête utilisateur est elle aussi vectorisée, puis on fait une recherche de similarité cosinus dans l'index. Top-5, pas top-1, pas top-50 — on en reparle au débrief. »
 
+## Conduite guidée (obligatoire)
+
+Dérouler en micro-étapes : une modification, un test, une validation.
+
+- ne pas livrer le plan complet en une seule réponse,
+- expliquer brièvement chaque commande avant exécution,
+- confirmer le résultat obtenu avant la suite.
+
 ## Procédure
 
-1. **Créer le module retrieval**, par exemple `src/mastra/rag/retrieve.ts`, avec :
+1. **Micro-étape 4.1 — Créer le module retrieval**, par exemple `src/mastra/rag/retrieve.ts`, avec :
 
    - `embedQuery(query)` via Albert `/embeddings` (`openweight-embeddings`),
    - `retrieve(query, k=5)` qui interroge `data/index.db` (LibSQL),
    - retour structuré : `score`, `text`, `source`, `page`, `guide_id`/`guide_nom`.
 
-2. **Conserver le contrat simple** :
+   Validation locale : module créé, export `retrieve` présent.
+
+2. **Micro-étape 4.2 — Conserver le contrat simple** :
 
    - pas de seuil de score,
    - pas de reranking,
    - pas de rewriting de requête.
 
-3. **Ajouter un mode CLI** pour le smoke test, ex :
+3. **Micro-étape 4.3 — Ajouter un mode CLI** pour le smoke test, ex :
 
    ```bash
    pnpm tsx src/mastra/rag/retrieve.ts "<question>"
    ```
 
-4. **Tester avec 3 requêtes contrastées** :
+   Validation locale : un appel CLI retourne bien une liste structurée.
+
+4. **Micro-étape 4.4 — Tester avec 3 requêtes contrastées** :
 
    - Q1 (cas "propre") :
      - « Quels sont les objectifs principaux du modèle Zero Trust selon l'ANSSI ? »
@@ -45,7 +57,7 @@ Exposer une fonction `retrieve(query, k=5)` qui prend une question en langage na
    - Q3 (hors-corpus volontaire) :
      - « Quelle est la meilleure recette de gratin dauphinois ? »
 
-5. **Afficher les résultats** de manière lisible :
+5. **Micro-étape 4.5 — Afficher les résultats** de manière lisible :
 
    - score,
    - source/page,
@@ -119,4 +131,4 @@ Pour les participants en avance :
 
 ## Transition
 
-« On récupère bien du contexte. Au débrief : que racontent vraiment les scores, et pourquoi le top-5 ment parfois. Ensuite on branche la génération avec citations. »
+« On récupère bien du contexte. Au débrief : que racontent vraiment les scores, et pourquoi le top-5 ment parfois. Ensuite on branche l'Étape 5 (génération avec citations). »
