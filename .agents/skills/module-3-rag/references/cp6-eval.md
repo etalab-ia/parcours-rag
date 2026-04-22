@@ -71,7 +71,7 @@ Conduire en micro-étapes : préparer les entrées, lancer, lire les résultats,
 
 6. **Micro-étape 6.6 — Pour chaque faille identifiée, documenter** :
 
-   - type,
+   - **Type** : [nom du type],
    - exemple concret (question + extrait),
    - hypothèse de cause.
 
@@ -91,7 +91,7 @@ Pour chaque question, noter au minimum :
 - [ ] `data/eval-results.json` existe et contient les 5 questions exécutées.
 - [ ] `eval-findings.md` contient les 5 résultats (question / réponse / citations / référence).
 - [ ] `eval-findings.md` liste au moins 3 failles nommées, avec pour chacune :
-  - un type,
+  - une ligne `- **Type** : ...`,
   - un exemple concret,
   - une hypothèse de cause.
 
