@@ -1,6 +1,9 @@
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
-import type { EmbeddingModelV2, LanguageModelV2 } from "@ai-sdk/provider";
-import { MastraModelGateway, type ProviderConfig } from "@mastra/core/llm";
+import {
+  type GatewayLanguageModel,
+  MastraModelGateway,
+  type ProviderConfig,
+} from "@mastra/core/llm";
 
 const DEFAULT_BASE_URL = "https://albert.api.etalab.gouv.fr/v1";
 
@@ -79,7 +82,7 @@ export class AlbertAPIGateway extends MastraModelGateway {
     providerId: string;
     apiKey: string;
     headers?: Record<string, string>;
-  }): Promise<LanguageModelV2> {
+  }): Promise<GatewayLanguageModel> {
     const baseURL = this.getBaseUrl();
 
     return createOpenAICompatible({
@@ -100,7 +103,7 @@ export class AlbertAPIGateway extends MastraModelGateway {
     providerId: string;
     apiKey: string;
     headers?: Record<string, string>;
-  }): Promise<EmbeddingModelV2<string>> {
+  }) {
     const baseURL = this.getBaseUrl();
 
     return createOpenAICompatible({
