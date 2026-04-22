@@ -1,4 +1,5 @@
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import type { EmbeddingModelV3 } from "@ai-sdk/provider";
 import {
   type GatewayLanguageModel,
   MastraModelGateway,
@@ -103,7 +104,7 @@ export class AlbertAPIGateway extends MastraModelGateway {
     providerId: string;
     apiKey: string;
     headers?: Record<string, string>;
-  }) {
+  }): Promise<EmbeddingModelV3> {
     const baseURL = this.getBaseUrl();
 
     return createOpenAICompatible({

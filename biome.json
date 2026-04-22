@@ -24,14 +24,14 @@
   "files": {
     "includes": [
       "**",
-      "!**/node_modules",
-      "!**/dist",
-      "!**/.mastra",
       "!**/*.min.js",
-      "!**/.agents",
-      "!**/.skills",
-      "!**/.claude",
-      "!**/.pi"
+      "!!**/node_modules",
+      "!!**/dist",
+      "!!**/.mastra",
+      "!!**/.agents",
+      "!!**/.skills",
+      "!!**/.claude",
+      "!!**/.pi"
     ]
   }
 }
