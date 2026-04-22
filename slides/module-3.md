@@ -135,7 +135,7 @@ style: |
 - Chunking token `500/50`
 - Écrire `data/chunks.json`
 
-<div class="card">Signal de passage : >80% avec `chunks.json` valide (>=40 chunks + couverture 17 PDFs).</div>
+<div class="card">Signal de passage : >80% avec `chunks.json` valide (>=40 chunks, couverture 17 PDFs, présence de `source` et `page`).</div>
 
 ---
 
@@ -161,7 +161,7 @@ style: |
 - Créer index `anssi_essentiels` (LibSQL)
 - Upsert vecteurs + métadonnées
 
-<div class="card">Signal de passage : >80% avec `count == chunks.length`, dimension 1024, métadonnées présentes.</div>
+<div class="card">Signal de passage : >80% avec `count == chunks.length`, dimension 1024, métadonnées (`chunk_index`) présentes.</div>
 
 ---
 
