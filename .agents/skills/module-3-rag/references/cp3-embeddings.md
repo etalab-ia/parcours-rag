@@ -25,6 +25,12 @@ Piloter en micro-étapes : implémenter un bloc, le tester, valider, puis contin
 
 ⚠️ Utilise le gabarit de restitution uniquement comme format de sortie ; adapte toujours le code au contexte courant (ce n'est pas une réponse modèle).
 
+## Restitution de code (obligatoire)
+
+- Fournir du code en markdown copiable (fichier complet ou extrait ciblé selon la taille).
+- Préserver les métadonnées produites en amont (`chunk_index`, `source`, `page`, `guide_id`) lors de l'upsert dans l'index.
+- Si un typage embedding est nécessaire, privilégier les types publics (ex: `EmbeddingModelV3` importé depuis `@ai-sdk/provider`) plutôt que des types internes.
+
 ## Procédure
 
 1. **Micro-étape 3.1 — Créer le script d'indexation**, par exemple :

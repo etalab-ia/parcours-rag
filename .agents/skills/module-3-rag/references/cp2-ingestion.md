@@ -27,6 +27,12 @@ Ne pas envoyer la procédure complète d'un coup. Piloter en micro-étapes :
 
 ⚠️ Utilise le gabarit de restitution uniquement comme format de sortie ; adapte toujours le code au contexte courant (ce n'est pas une réponse modèle).
 
+## Restitution de code (obligatoire)
+
+- Fournir du code en markdown copiable (fichier complet ou extrait ciblé selon la taille).
+- Préserver les métadonnées produites à cette étape (`chunk_index`, `source`, `page`, `guide_id`) dans les étapes suivantes.
+- Si un typage embedding est nécessaire, privilégier les types publics (ex: `EmbeddingModelV3` importé depuis `@ai-sdk/provider`) plutôt que des types internes.
+
 ## Procédure
 
 1. **Micro-étape 2.1 — Créer le squelette du script**
