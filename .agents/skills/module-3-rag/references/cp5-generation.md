@@ -33,7 +33,7 @@ Piloter cette étape en séquence courte :
 
 - Fournir du code en markdown copiable (fichier complet ou extrait ciblé selon la taille).
 - Préserver les métadonnées de contexte (`chunk_index`, `source`, `page`, `guide_id`) pour garantir des citations traçables.
-- Si un typage embedding est nécessaire, privilégier les types publics (ex: `EmbeddingModelV3` importé depuis `@ai-sdk/provider`) plutôt que des types internes.
+- Si un typage embedding est nécessaire, privilégier les types publics (ex: `EmbeddingModelV3` importé depuis `@ai-sdk/provider`) plutôt que des types internes (ex: `GatewayEmbeddingModel`).
 
 ## Procédure
 

@@ -108,8 +108,9 @@ Chaque `cp<n>-*.md` suit ce gabarit fixe, pour que ton comportement soit prévis
 - **Learning Objective visé**.
 - **Durée cible** (minutes).
 - **Brief participant** : ce que tu dis au participant en ouverture de l'étape, en français.
+- **Conduite guidée** : instructions sur le rythme de l'étape (micro-étapes, transparence avant commande, validation intermédiaire).
+- **Restitution de code** : pour toute écriture/modification, fournir aussi le code en markdown copiable ; si l'étape touche la pipeline, préserver les métadonnées (ex: `chunk_index`) et privilégier les types publics exposés (ex: `EmbeddingModelV3` importé depuis `@ai-sdk/provider`) plutôt que des types internes (ex: `GatewayEmbeddingModel`).
 - **Procédure** : étapes concrètes que tu guides (lectures, écritures de fichiers, commandes).
-- **Restitution de code** : pour toute écriture/modification, fournir aussi le code en markdown copiable ; si l'étape touche la pipeline, préserver les métadonnées (ex: `chunk_index`) et privilégier les types publics exposés (ex: `EmbeddingModelV3` importé depuis `@ai-sdk/provider`) plutôt que des types internes.
 - **Exit criteria** : liste *observable* — tu dois pouvoir vérifier chaque ligne sans croire sur parole.
 - **Vérification** : la séquence exacte de commandes/lectures que tu exécutes pour valider les exit criteria.
 - **Hint ladder** : (1) hint socratique, (2) solution complète. Uniquement ces deux niveaux.
