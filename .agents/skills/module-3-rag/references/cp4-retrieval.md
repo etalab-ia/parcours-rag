@@ -30,7 +30,7 @@ Dérouler en micro-étapes : une modification, un test, une validation.
 
 - Fournir du code en markdown copiable (fichier complet ou extrait ciblé selon la taille).
 - Préserver et exposer les métadonnées utiles au retrieval (`chunk_index`, `source`, `page`, `guide_id`) dans les retours de `retrieve()`.
-- Si un typage embedding est nécessaire, utiliser exclusivement des types publics (ex: `EmbeddingModelV3` importé depuis `@ai-sdk/provider`) et ne jamais utiliser de types internes (ex: `GatewayEmbeddingModel`).
+- Si un typage embedding est nécessaire, utiliser exclusivement des types publics exposés (ex: `EmbeddingModelV3` importé depuis `@ai-sdk/provider`) — ne jamais utiliser de types internes (ex: `GatewayEmbeddingModel`).
 
 ## Procédure
 

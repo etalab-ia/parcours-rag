@@ -29,7 +29,7 @@ Piloter en micro-étapes : implémenter un bloc, le tester, valider, puis contin
 
 - Fournir du code en markdown copiable (fichier complet ou extrait ciblé selon la taille).
 - Préserver les métadonnées produites en amont (`chunk_index`, `source`, `page`, `guide_id`) lors de l'upsert dans l'index.
-- Si un typage embedding est nécessaire, utiliser exclusivement des types publics (ex: `EmbeddingModelV3` importé depuis `@ai-sdk/provider`) et ne jamais utiliser de types internes (ex: `GatewayEmbeddingModel`).
+- Si un typage embedding est nécessaire, utiliser exclusivement des types publics exposés (ex: `EmbeddingModelV3` importé depuis `@ai-sdk/provider`) — ne jamais utiliser de types internes (ex: `GatewayEmbeddingModel`).
 
 ## Procédure
 
