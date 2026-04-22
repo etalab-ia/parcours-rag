@@ -16,8 +16,8 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@ai-sdk/openai-compatible": "^1.0.0",
-    "@ai-sdk/provider": "^2.0.0",
+    "@ai-sdk/openai-compatible": "^2.0.41",
+    "@ai-sdk/provider": "^3.0.8",
     "@mastra/core": "latest",
     "@mastra/libsql": "latest",
     "@mastra/rag": "^2.2.0",
@@ -25,15 +25,15 @@
     "zod": "^4.0.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^1.9.0",
+    "@biomejs/biome": "^2.4.12",
     "@slidev/cli": "^52.14.2",
     "@slidev/theme-default": "^0.25.0",
-    "@types/node": "^22.0.0",
+    "@types/node": "^25.6.0",
     "dotenv": "^17.4.2",
     "husky": "^9.0.0",
     "mastra": "latest",
     "tsx": "^4.21.0",
-    "typescript": "^5.6.0"
+    "typescript": "^6.0.3"
   },
   "packageManager": "pnpm@9.0.0"
 }
