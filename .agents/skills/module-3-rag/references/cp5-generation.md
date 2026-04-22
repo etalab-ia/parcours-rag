@@ -27,6 +27,8 @@ Piloter cette étape en séquence courte :
 
 Éviter les réponses "plan complet" sauf demande explicite de l'utilisateur.
 
+⚠️ Utilise le gabarit de restitution uniquement comme format de sortie ; adapte toujours le code au contexte courant (ce n'est pas une réponse modèle).
+
 ## Procédure
 
 1. **Micro-étape 5.1 — Créer un module de génération**, par exemple `src/mastra/rag/generate.ts`, qui :

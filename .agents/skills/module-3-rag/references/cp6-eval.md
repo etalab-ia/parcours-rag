@@ -24,6 +24,8 @@ Conduire en micro-étapes : préparer les entrées, lancer, lire les résultats,
 - faire valider chaque livrable intermédiaire (`eval-results.json`, puis `eval-findings.md`),
 - rappeler à chaque fois : ici on observe, on n'optimise pas.
 
+⚠️ Utilise le gabarit de restitution uniquement comme format de sortie ; adapte toujours le code au contexte courant (ce n'est pas une réponse modèle).
+
 ## Procédure
 
 1. **Micro-étape 6.1 — Vérifier les entrées d'éval** :

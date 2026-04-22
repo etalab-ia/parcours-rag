@@ -24,6 +24,8 @@ Dérouler en micro-étapes : une modification, un test, une validation.
 - expliquer brièvement chaque commande avant exécution,
 - confirmer le résultat obtenu avant la suite.
 
+⚠️ Utilise le gabarit de restitution uniquement comme format de sortie ; adapte toujours le code au contexte courant (ce n'est pas une réponse modèle).
+
 ## Procédure
 
 1. **Micro-étape 4.1 — Créer le module retrieval**, par exemple `src/mastra/rag/retrieve.ts`, avec :

@@ -23,6 +23,8 @@ Piloter en micro-étapes : implémenter un bloc, le tester, valider, puis contin
 - Ne pas donner toute la recette d'un coup.
 - Avant chaque commande, expliquer le but et le résultat attendu.
 
+⚠️ Utilise le gabarit de restitution uniquement comme format de sortie ; adapte toujours le code au contexte courant (ce n'est pas une réponse modèle).
+
 ## Procédure
 
 1. **Micro-étape 3.1 — Créer le script d'indexation**, par exemple :

@@ -25,6 +25,8 @@ Ne pas envoyer la procédure complète d'un coup. Piloter en micro-étapes :
 - une validation observable,
 - puis seulement l'action suivante.
 
+⚠️ Utilise le gabarit de restitution uniquement comme format de sortie ; adapte toujours le code au contexte courant (ce n'est pas une réponse modèle).
+
 ## Procédure
 
 1. **Micro-étape 2.1 — Créer le squelette du script**
