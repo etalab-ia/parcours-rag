@@ -24,10 +24,11 @@ corpus des guides ANSSI « Les Essentiels », piloté par votre agent de codage.
 Mode recommandé pour les participants : installer les skills puis laisser l'agent
 bootstrapper le workspace atelier (Mastra + corpus) automatiquement.
 
-Comme le repo contient plusieurs skills, on filtre explicitement le skill workshop :
+Installer depuis le dossier `skills/` du repo pour récupérer tous les skills Parcours RAG
+(Module 3 aujourd'hui, Module 4 ensuite) en une seule commande :
 
 ```bash
-npx skills add etalab-ia/parcours-rag --skill "parcours-rag/module3" -a codex -y
+npx skills add https://github.com/etalab-ia/parcours-rag/tree/main/skills -a codex -y
 ```
 
 > Remplacer `-a codex` par l'agent cible (`claude-code`, `cursor`, etc.).
