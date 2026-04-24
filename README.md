@@ -25,7 +25,7 @@ Mode recommandé pour les participants : installer les skills puis laisser l'age
 bootstrapper le workspace atelier (Mastra + corpus) automatiquement.
 
 ```bash
-npx skills add etalab-ia/parcours-rag --skill "parcours-rag/module3" --skill mastra -a codex -y
+npx skills add etalab-ia/parcours-rag --skill "parcours-rag/module3" -a codex -y
 ```
 
 > Remplacer `-a codex` par l'agent cible (`claude-code`, `cursor`, etc.).
@@ -37,7 +37,8 @@ Ensuite, dans votre agent :
 ```
 
 Le skill lance d'abord un bootstrap workspace basé sur `npm create mastra@latest`
-puis déroule les checkpoints CP1 → CP6.
+puis déroule les checkpoints CP1 → CP6. Si le skill `mastra` n'est pas installé,
+il l'installe automatiquement au début du bootstrap.
 
 ### Smoke tests (clean-room)
 

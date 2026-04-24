@@ -24,6 +24,12 @@ Raison : réduire les frictions d'installation sur des postes atelier où pnpm n
 
 ## Procédure standard
 
+0. **Installer le skill `mastra` s'il manque** (pour la doc API à jour)
+
+```bash
+npx skills add mastra-ai/skills --skill mastra -y
+```
+
 1. **Créer le projet Mastra via npm** (quickstart officiel)
 
 ```bash
