@@ -7,11 +7,24 @@ const manifest = JSON.parse(
   await readFile(new URL("../../corpus/anssi-essentiels/manifest.json", import.meta.url), "utf8")
 );
 
+const FETCH_TIMEOUT_MS = 20_000;
+
+async function fetchWithTimeout(url, timeoutMs = FETCH_TIMEOUT_MS) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    return await fetch(url, { signal: controller.signal });
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 async function downloadWithRetry(url, retries = 4) {
   let lastErr;
   for (let i = 1; i <= retries; i++) {
     try {
-      const res = await fetch(url);
+      const res = await fetchWithTimeout(url);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const buf = Buffer.from(await res.arrayBuffer());
       return buf.length;
@@ -37,11 +50,9 @@ async function bench(label, toUrl) {
 
   const totalSec = (performance.now() - t0) / 1000;
   console.log(
-    `${label}\tTOTAL\t${totalBytes}\t${totalSec.toFixed(2)}s\t${(
-      totalBytes /
-      1024 /
-      1024
-    ).toFixed(2)} MiB`
+    `${label}\tTOTAL\t${totalBytes}\t${totalSec.toFixed(2)}s\t${(totalBytes / 1024 / 1024).toFixed(
+      2
+    )} MiB`
   );
 }
 
@@ -52,4 +63,3 @@ await bench("GITHUB_RAW", (entry) => {
   const encoded = encodeURIComponent(entry.filename).replace(/%2F/g, "/");
   return `https://raw.githubusercontent.com/etalab-ia/parcours-rag/main/corpus/anssi-essentiels/${encoded}`;
 });
-

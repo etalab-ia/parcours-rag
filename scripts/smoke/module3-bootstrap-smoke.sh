@@ -78,7 +78,7 @@ log_step "Prepare workshop filesystem"
 mkdir -p src/mastra/agents src/mastra/gateways src/mastra/rag corpus/anssi-essentiels data
 
 log_step "Fetch starter files from GitHub"
-measure "fetch-starter" bash -lc '
+measure "fetch-starter" bash -c '
   curl -fsSL https://raw.githubusercontent.com/etalab-ia/parcours-rag/main/.env.example -o .env.example
   curl -fsSL https://raw.githubusercontent.com/etalab-ia/parcours-rag/main/src/mastra/index.ts -o src/mastra/index.ts
   curl -fsSL https://raw.githubusercontent.com/etalab-ia/parcours-rag/main/src/mastra/agents/chat-agent.ts -o src/mastra/agents/chat-agent.ts
@@ -148,6 +148,12 @@ else
   DEV_PID=$!
   trap 'kill "$DEV_PID" >/dev/null 2>&1 || true' EXIT
 
+  sleep 1
+  if ! kill -0 "$DEV_PID" >/dev/null 2>&1; then
+    echo "Mastra process exited early. See /tmp/parcours-rag-smoke-dev.log" >&2
+    exit 1
+  fi
+
   ok="false"
   for _ in $(seq 1 45); do
     if curl -sf http://localhost:4111/api/agents | grep -q 'chat-agent'; then
@@ -172,4 +178,3 @@ echo "✅ Smoke test passed"
 echo "Workspace: $PROJECT_DIR"
 echo "Corpus source: $CORPUS_SOURCE"
 echo "Total elapsed: $((ROOT_END - ROOT_START))s"
-
