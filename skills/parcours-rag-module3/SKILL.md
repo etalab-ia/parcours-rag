@@ -1,7 +1,6 @@
 ---
 name: parcours-rag/module3
-description: >
-  Pilote le Module 3 du bootcamp RAG ALLiaNCE (DINUM) — 3h en présentiel, 6 étapes, 20 participants techniques qui construisent un RAG local sur le corpus ANSSI avec Mastra + LibSQL + Albert API. Le skill doit fonctionner même sans clone préalable du repo : bootstrap workspace via `npm create mastra@latest`, puis setup atelier. Charger quand l'utilisateur veut commencer, reprendre ou avancer dans l'atelier Module 3 ; déclencheurs typiques : "commencer le module 3", "démarrer l'atelier RAG", "/parcours-rag/module3", "étape suivante", "checkpoint suivant", "je suis bloqué sur l'étape/CP<n>", "valider mon étape/checkpoint".
+description: "Pilote le Module 3 du bootcamp RAG ALLiaNCE (DINUM) — 3h en présentiel, 6 étapes, 20 participants techniques qui construisent un RAG local sur le corpus ANSSI avec Mastra + LibSQL + Albert API. Fonctionne sans clone préalable du repo via bootstrap workspace (`npm create mastra@latest`). Charger quand l'utilisateur veut commencer, reprendre ou avancer dans l'atelier Module 3. Déclencheurs typiques — \"commencer le module 3\", \"démarrer l'atelier RAG\", \"/parcours-rag/module3\", \"/parcours-rag-module3\", \"étape suivante\", \"checkpoint suivant\", \"je suis bloqué sur l'étape/CP<n>\", \"valider mon étape/checkpoint\"."
 ---
 
 # Module 3 — Construis ton RAG
