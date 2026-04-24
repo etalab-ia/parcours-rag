@@ -30,6 +30,8 @@ Au début de l'étape, demander la préférence de rythme :
 - **mode guidé** (par défaut, pédagogique),
 - **mode rapide** (moins de détails, mais toujours une explication courte avant commande).
 
+Rappel outil : pour cet atelier standalone, exécuter les commandes avec **npm/npx uniquement** (pas de `pnpm`).
+
 ## Procédure
 
 1. **Micro-étape 1.1 — Si le projet n'existe pas, lancer le bootstrap workspace** :

@@ -13,6 +13,15 @@ la structure attendue (`src/mastra/index.ts`, `corpus/anssi-essentiels/manifest.
 - npm 10+
 - Accès réseau sortant (GitHub raw + messervices.cyber.gouv.fr)
 
+## Politique package manager (importante)
+
+Dans ce bootstrap standalone, utiliser **npm/npx uniquement**.
+
+- ✅ autorisé : `npm create`, `npm install`, `npm run`, `npx`
+- ❌ interdit : `pnpm`, `pnpx`
+
+Raison : réduire les frictions d'installation sur des postes atelier où pnpm n'est pas préinstallé.
+
 ## Procédure standard
 
 1. **Créer le projet Mastra via npm** (quickstart officiel)
