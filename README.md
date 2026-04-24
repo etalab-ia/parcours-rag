@@ -28,10 +28,8 @@ Installer depuis le dossier `skills/` du repo pour récupérer tous les skills P
 (Module 3 aujourd'hui, Module 4 ensuite) en une seule commande :
 
 ```bash
-npx skills add https://github.com/etalab-ia/parcours-rag/tree/main/skills -a codex -y
+npx skills add https://github.com/etalab-ia/parcours-rag/tree/main/skills
 ```
-
-> Remplacer `-a codex` par l'agent cible (`claude-code`, `cursor`, etc.).
 
 Ensuite, dans votre agent :
 
