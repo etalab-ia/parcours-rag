@@ -16,7 +16,7 @@ corpus des guides ANSSI « Les Essentiels », piloté par votre agent de codage.
 ## Prérequis
 
 - Node 20+
-- Un agent de codage (Letta Code, Claude Code, Cursor…)
+- Un agent de codage (Claude Code, Cursor…)
 - Une clé API Albert → [albert.api.etalab.gouv.fr](https://albert.api.etalab.gouv.fr)
 
 ## Installation via skills.sh (sans clone manuel)
@@ -31,23 +31,15 @@ Installer depuis le dossier `skills/` du repo pour récupérer tous les skills P
 npx skills add https://github.com/etalab-ia/parcours-rag/tree/main/skills
 ```
 
-Si vous utilisez **Letta Code**, ajoutez les symlinks de découverte juste après
-l'installation :
-
-```bash
-mkdir -p .skills
-ln -snf ../.agents/skills/parcours-rag-module3 .skills/parcours-rag-module3
-ln -snf ../.agents/skills/mastra .skills/mastra
-```
-
-> Le lien `mastra` peut être créé tout de suite ; la cible sera disponible après
-> l'installation automatique du skill `mastra` pendant le bootstrap du Module 3.
+Le skill du Module 3 est exposé sous le nom `parcours-rag/module3`.
 
 Ensuite, dans votre agent :
 
 ```text
 /parcours-rag/module3
 ```
+
+Selon l'agent, il peut aussi apparaître sous la forme `/parcours-rag-module3`.
 
 Le skill lance d'abord un bootstrap workspace basé sur `npm create mastra@latest`
 puis déroule les checkpoints CP1 → CP6. Si le skill `mastra` n'est pas installé,
@@ -93,6 +85,12 @@ Demandez à votre agent de codage de lancer le workshop :
 
 ```
 /parcours-rag/module3
+```
+
+Si votre agent ne propose pas ce nom exact, essayez aussi :
+
+```
+/parcours-rag-module3
 ```
 
 Votre agent vous guidera checkpoint par checkpoint. Le facilitateur orchestre la
