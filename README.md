@@ -36,9 +36,6 @@ Ensuite, dans votre agent :
 /parcours-rag/module3
 ```
 
-Compatibilité : certains environnements projet-local utilisent encore l'alias historique
-`/module-3-rag`.
-
 Le skill lance d'abord un bootstrap workspace basé sur `npm create mastra@latest`
 puis déroule les checkpoints CP1 → CP6.
 
@@ -77,15 +74,12 @@ Albert fonctionne.
 ## Comment suivre le workshop
 
 Le parcours est piloté par le *skill* `parcours-rag/module3` (installé via skills.sh
-ou présent dans ce repo sous `.skills/module-3-rag/`).
+ou présent dans ce repo sous `skills/parcours-rag-module3/`).
 Demandez à votre agent de codage de lancer le workshop :
 
 ```
 /parcours-rag/module3
 ```
-
-Compatibilité : dans certains environnements projet-local, l'alias historique
-`/module-3-rag` reste utilisable.
 
 Votre agent vous guidera checkpoint par checkpoint. Le facilitateur orchestre la
 discussion collective entre chaque checkpoint.
@@ -99,7 +93,7 @@ parcours-rag/
 │   ├── agents/                Agents (chat, puis RAG)
 │   ├── gateways/              Gateway Albert (chat + embeddings)
 │   └── index.ts               Entrée Mastra
-├── .skills/module-3-rag/      Skill qui pilote l'atelier
+├── skills/parcours-rag-module3/ Skill qui pilote l'atelier
 ├── design/                    Document de conception (lecture utile pour les formateurs)
 └── README.md
 ```
