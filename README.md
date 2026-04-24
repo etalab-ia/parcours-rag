@@ -31,6 +31,18 @@ Installer depuis le dossier `skills/` du repo pour récupérer tous les skills P
 npx skills add https://github.com/etalab-ia/parcours-rag/tree/main/skills
 ```
 
+Si vous utilisez **Letta Code**, ajoutez les symlinks de découverte juste après
+l'installation :
+
+```bash
+mkdir -p .skills
+ln -snf ../.agents/skills/parcours-rag-module3 .skills/parcours-rag-module3
+ln -snf ../.agents/skills/mastra .skills/mastra
+```
+
+> Le lien `mastra` peut être créé tout de suite ; la cible sera disponible après
+> l'installation automatique du skill `mastra` pendant le bootstrap du Module 3.
+
 Ensuite, dans votre agent :
 
 ```text
