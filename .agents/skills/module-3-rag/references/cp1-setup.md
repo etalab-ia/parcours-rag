@@ -32,26 +32,36 @@ Au début de l'étape, demander la préférence de rythme :
 
 ## Procédure
 
-1. **Micro-étape 1.1 — Vérifier les prérequis locaux** :
+1. **Micro-étape 1.1 — Si le projet n'existe pas, lancer le bootstrap workspace** :
+
+   Si `src/mastra/index.ts` est absent, charger et exécuter d'abord :
+   - `references/bootstrap-workspace.md`
+
+   Validation locale :
+   - `src/mastra/index.ts` présent,
+   - `corpus/anssi-essentiels/manifest.json` présent,
+   - au moins 17 PDFs dans `corpus/anssi-essentiels/`.
+
+2. **Micro-étape 1.2 — Vérifier les prérequis locaux** :
 
    ```bash
    node -v
-   pnpm -v
+   npm -v
    ```
 
-   Attendu : Node 20+ et `pnpm` disponible.
+   Attendu : Node 20+ et `npm` disponible.
 
    Validation locale : versions affichées sans erreur.
 
-2. **Micro-étape 1.2 — Installer les dépendances** :
+3. **Micro-étape 1.3 — Installer les dépendances** :
 
    ```bash
-   pnpm install
+   npm install
    ```
 
    Validation locale : dossier `node_modules/` créé.
 
-3. **Micro-étape 1.3 — Créer le fichier d'environnement** :
+4. **Micro-étape 1.4 — Créer le fichier d'environnement** :
 
    ```bash
    cp .env.example .env
@@ -61,17 +71,17 @@ Au début de l'étape, demander la préférence de rythme :
 
    Validation locale : `.env` présent, clé renseignée (non vide).
 
-4. **Micro-étape 1.4 — Lancer Mastra en local** :
+5. **Micro-étape 1.5 — Lancer Mastra en local** :
 
    ```bash
-   pnpm dev
+   npm run dev
    ```
 
    Garder ce terminal ouvert.
 
    Validation locale : endpoint des agents répond.
 
-5. **Micro-étape 1.5 — Valider l'agent baseline** dans Mastra Studio (`http://localhost:4111`) :
+6. **Micro-étape 1.6 — Valider l'agent baseline** dans Mastra Studio (`http://localhost:4111`) :
    - sélectionner l'agent `chat-agent` (nom technique) ; dans l'UI, le label peut être `Agent de chat (baseline)`,
    - poser une question de test en français, par exemple :
 
@@ -83,9 +93,9 @@ Au début de l'étape, demander la préférence de rythme :
 
 ## Exit criteria
 
-- [ ] `node_modules/` présent (pnpm install réussi).
+- [ ] `node_modules/` présent (`npm install` réussi).
 - [ ] `.env` existe et contient `ALBERT_API_KEY=...` (valeur non vide, pas la chaîne littérale d'exemple).
-- [ ] `pnpm dev` démarre sans erreur et expose `http://localhost:4111`.
+- [ ] `npm run dev` démarre sans erreur et expose `http://localhost:4111`.
 - [ ] L'agent `chat-agent` répond à une question de test en français.
 
 ## Vérification
@@ -105,7 +115,7 @@ Exécuter ces checks dans l'ordre.
    awk -F= '/^ALBERT_API_KEY=/{if(length($2)>10) ok=1} END{exit ok?0:1}' .env
    ```
 
-3. **Mastra up** (`pnpm dev` déjà lancé dans un autre terminal) :
+3. **Mastra up** (`npm run dev` déjà lancé dans un autre terminal) :
 
    ```bash
    curl -sf http://localhost:4111/api/agents | grep -q 'chat-agent'
@@ -126,9 +136,9 @@ Exécuter ces checks dans l'ordre.
 2. **Solution complète**
 
    « Repars dans cet ordre, sans sauter d'étape :
-   1) `pnpm install`
+   1) `npm install`
    2) `cp .env.example .env` puis renseigne `ALBERT_API_KEY` (non vide)
-   3) `pnpm dev`
+   3) `npm run dev`
    4) `curl -sf http://localhost:4111/api/agents | grep -q 'chat-agent'`
    5) dans Studio, envoie le prompt de test et vérifie une réponse en français mentionnant l'absence de contexte ANSSI.
 
@@ -137,7 +147,7 @@ Exécuter ces checks dans l'ordre.
 ## Pièges pédagogiques
 
 - **`.env` existe mais clé vide** (`ALBERT_API_KEY=`) : le participant pense avoir "fait le setup" alors que l'auth échouera.
-- **Mauvais dossier courant** : `pnpm dev` lancé hors du repo, ce qui masque les vraies erreurs.
+- **Mauvais dossier courant** : `npm run dev` lancé hors du projet atelier, ce qui masque les vraies erreurs.
 - **Port 4111 déjà pris** : Mastra ne démarre pas proprement ou démarre sur un autre port sans que le participant le voie.
 - **Contrainte réseau/proxy** : poste d'entreprise bloquant l'accès à `albert.api.etalab.gouv.fr`.
 - **Version Node trop ancienne** : erreurs d'exécution floues avant même d'atteindre l'API.
@@ -147,7 +157,7 @@ Exécuter ces checks dans l'ordre.
 Pour les participants en avance :
 
 - modifier `src/mastra/agents/chat-agent.ts` pour changer légèrement le style (ex: finir chaque réponse par `✅ Baseline CP1`),
-- relancer `pnpm dev`,
+- relancer `npm run dev`,
 - vérifier dans Studio que le changement d'instructions est bien pris en compte.
 
 But : montrer qu'ils contrôlent le comportement de base avant d'ajouter le RAG.
