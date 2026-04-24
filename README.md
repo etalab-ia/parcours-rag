@@ -25,7 +25,7 @@ Mode recommandé pour les participants : installer les skills puis laisser l'age
 bootstrapper le workspace atelier (Mastra + corpus) automatiquement.
 
 ```bash
-npx skills add etalab-ia/parcours-rag --skill module-3-rag --skill mastra -a codex -y
+npx skills add etalab-ia/parcours-rag --skill "parcours-rag/module3" --skill mastra -a codex -y
 ```
 
 > Remplacer `-a codex` par l'agent cible (`claude-code`, `cursor`, etc.).
@@ -33,8 +33,11 @@ npx skills add etalab-ia/parcours-rag --skill module-3-rag --skill mastra -a cod
 Ensuite, dans votre agent :
 
 ```text
-/module-3-rag
+/parcours-rag/module3
 ```
+
+Compatibilité : certains environnements projet-local utilisent encore l'alias historique
+`/module-3-rag`.
 
 Le skill lance d'abord un bootstrap workspace basé sur `npm create mastra@latest`
 puis déroule les checkpoints CP1 → CP6.
@@ -73,13 +76,16 @@ Albert fonctionne.
 
 ## Comment suivre le workshop
 
-Le parcours est piloté par le *skill* `module-3-rag` (installé via skills.sh ou
-présent dans ce repo sous `.skills/module-3-rag/`).
+Le parcours est piloté par le *skill* `parcours-rag/module3` (installé via skills.sh
+ou présent dans ce repo sous `.skills/module-3-rag/`).
 Demandez à votre agent de codage de lancer le workshop :
 
 ```
-/module-3-rag
+/parcours-rag/module3
 ```
+
+Compatibilité : dans certains environnements projet-local, l'alias historique
+`/module-3-rag` reste utilisable.
 
 Votre agent vous guidera checkpoint par checkpoint. Le facilitateur orchestre la
 discussion collective entre chaque checkpoint.
