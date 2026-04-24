@@ -1,0 +1,5 @@
+# Exclude agent/tool specific directories from Gemini Code Assist IDE context
+.agents/
+.skills/
+.claude/
+.pi/
