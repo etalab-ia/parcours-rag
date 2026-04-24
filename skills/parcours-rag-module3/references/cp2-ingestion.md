@@ -43,7 +43,7 @@ Ne pas envoyer la procédure complète d'un coup. Piloter en micro-étapes :
    - fonction `main()` vide,
    - constante des chemins (`manifest`, dossier corpus, sortie JSON).
 
-   Validation locale : le fichier existe et compile (`pnpm tsx src/mastra/rag/build-chunks.ts` sans logique métier complète peut déjà tourner sans crash syntaxique).
+   Validation locale : le fichier existe et compile (`npx tsx src/mastra/rag/build-chunks.ts` sans logique métier complète peut déjà tourner sans crash syntaxique).
 
 2. **Micro-étape 2.2 — Charger le manifest**
 
@@ -91,7 +91,7 @@ Ne pas envoyer la procédure complète d'un coup. Piloter en micro-étapes :
    Lancer le script puis les checks de cardinalité, schéma et couverture.
 
    ```bash
-   pnpm tsx src/mastra/rag/build-chunks.ts
+   npx tsx src/mastra/rag/build-chunks.ts
    ```
 
 ## Exit criteria

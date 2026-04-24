@@ -73,7 +73,7 @@ Piloter en micro-étapes : implémenter un bloc, le tester, valider, puis contin
 7. **Micro-étape 3.7 — Lancer l'indexation complète** :
 
    ```bash
-   pnpm tsx src/mastra/rag/build-index.ts
+   npx tsx src/mastra/rag/build-index.ts
    ```
 
 ## Exit criteria
@@ -96,13 +96,13 @@ Exécuter les checks suivants :
 2. **Count et dimension cohérents** :
 
    ```bash
-   pnpm tsx -e 'import {readFileSync} from "node:fs"; import {LibSQLVector} from "@mastra/libsql"; const chunks=JSON.parse(readFileSync("data/chunks.json","utf8")); const vector=new LibSQLVector({id:"cp3",url:"file:data/index.db"}); const stats=await vector.describeIndex({indexName:"anssi_essentiels"}); if(stats.dimension!==1024||stats.count!==chunks.length){console.error({expectedCount:chunks.length, stats}); process.exit(1);} console.log("index-stats=ok", stats);'
+   npx tsx -e 'import {readFileSync} from "node:fs"; import {LibSQLVector} from "@mastra/libsql"; const chunks=JSON.parse(readFileSync("data/chunks.json","utf8")); const vector=new LibSQLVector({id:"cp3",url:"file:data/index.db"}); const stats=await vector.describeIndex({indexName:"anssi_essentiels"}); if(stats.dimension!==1024||stats.count!==chunks.length){console.error({expectedCount:chunks.length, stats}); process.exit(1);} console.log("index-stats=ok", stats);'
    ```
 
 3. **Smoke query avec métadonnées** :
 
    ```bash
-   pnpm tsx -e 'import {LibSQLVector} from "@mastra/libsql"; const base=process.env.ALBERT_BASE_URL ?? "https://albert.api.etalab.gouv.fr/v1"; const key=process.env.ALBERT_API_KEY; if(!key){process.exit(1)}; const emb=await fetch(`${base}/embeddings`,{method:"POST",headers:{Authorization:`Bearer ${key}`,"Content-Type":"application/json"},body:JSON.stringify({model:"openweight-embeddings",input:"Zero Trust"})}); const embJson=await emb.json(); const vector=new LibSQLVector({id:"cp3",url:"file:data/index.db"}); const hits=await vector.query({indexName:"anssi_essentiels",queryVector:embJson.data[0].embedding,topK:1}); const ok=hits.length>0 && hits[0]?.metadata?.source && hits[0]?.metadata?.page; if(!ok){console.error(hits[0]); process.exit(1)}; console.log("query-smoke=ok", hits[0].metadata.source, hits[0].metadata.page);'
+   npx tsx -e 'import {LibSQLVector} from "@mastra/libsql"; const base=process.env.ALBERT_BASE_URL ?? "https://albert.api.etalab.gouv.fr/v1"; const key=process.env.ALBERT_API_KEY; if(!key){process.exit(1)}; const emb=await fetch(`${base}/embeddings`,{method:"POST",headers:{Authorization:`Bearer ${key}`,"Content-Type":"application/json"},body:JSON.stringify({model:"openweight-embeddings",input:"Zero Trust"})}); const embJson=await emb.json(); const vector=new LibSQLVector({id:"cp3",url:"file:data/index.db"}); const hits=await vector.query({indexName:"anssi_essentiels",queryVector:embJson.data[0].embedding,topK:1}); const ok=hits.length>0 && hits[0]?.metadata?.source && hits[0]?.metadata?.page; if(!ok){console.error(hits[0]); process.exit(1)}; console.log("query-smoke=ok", hits[0].metadata.source, hits[0].metadata.page);'
    ```
 
 ## Hint ladder

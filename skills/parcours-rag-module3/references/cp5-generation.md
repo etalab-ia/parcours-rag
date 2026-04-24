@@ -59,7 +59,7 @@ Piloter cette étape en séquence courte :
 4. **Micro-étape 5.4 — Ajouter un mode CLI** :
 
    ```bash
-   pnpm tsx src/mastra/rag/answer.ts "<question>"
+   npx tsx src/mastra/rag/answer.ts "<question>"
    ```
 
 5. **Micro-étape 5.5 — Tester sur deux questions** :
@@ -90,13 +90,13 @@ Exécuter les checks suivants :
 1. **Run in-corpus** :
 
    ```bash
-   pnpm tsx src/mastra/rag/answer.ts "Quels sont les objectifs principaux du modèle Zero Trust selon l'ANSSI ?" > data/cp5-zero-trust.txt
+   npx tsx src/mastra/rag/answer.ts "Quels sont les objectifs principaux du modèle Zero Trust selon l'ANSSI ?" > data/cp5-zero-trust.txt
    ```
 
 2. **Run hors-corpus** :
 
    ```bash
-   pnpm tsx src/mastra/rag/answer.ts "Quelles sont les règles d'hygiène des mots de passe selon l'ANSSI ?" > data/cp5-mots-de-passe.txt
+   npx tsx src/mastra/rag/answer.ts "Quelles sont les règles d'hygiène des mots de passe selon l'ANSSI ?" > data/cp5-mots-de-passe.txt
    ```
 
 3. **Au moins 2 citations dans la réponse in-corpus** :

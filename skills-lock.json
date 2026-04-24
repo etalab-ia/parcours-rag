@@ -1,29 +1,9 @@
 {
   "version": 1,
   "skills": {
-    "gws-shared": {
-      "source": "googleworkspace/cli",
-      "sourceType": "github",
-      "computedHash": "b197590681ce3d5a52e9c15a68652b5445d111dbfc0dc453f68fb0785aac443c"
-    },
-    "gws-slides": {
-      "source": "googleworkspace/cli",
-      "sourceType": "github",
-      "computedHash": "5018c4b5578fae15b5c5212ad5a68263721c59c40e4bbecd8f4494cc93cb5471"
-    },
-    "mastra": {
-      "source": "mastra-ai/skills",
-      "sourceType": "github",
-      "computedHash": "b42f583342dfee7deb541f4d094f03e8748898257f1f884fa71de1fdba9f38a2"
-    },
-    "module-3-rag": {
-      "source": "./.skills/module-3-rag",
+    "parcours-rag/module3": {
+      "source": "./skills/parcours-rag-module3",
       "sourceType": "local"
-    },
-    "slidev": {
-      "source": "antfu/skills",
-      "sourceType": "github",
-      "computedHash": "4973bc1baf08fa1303f99ef3abce8ec3aedfb2637e4315de30a2421746b610e3"
     }
   }
 }

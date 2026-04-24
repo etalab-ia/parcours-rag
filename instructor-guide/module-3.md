@@ -3,7 +3,7 @@
 > Public : formateurs (Noellie + Luis).
 > 
 > Ce document est le playbook d'animation en présentiel (3h, 20 participants techniques).
-> Le détail technique de chaque checkpoint est dans `.skills/module-3-rag/references/cp*.md`.
+> Le détail technique de chaque checkpoint est dans `skills/parcours-rag-module3/references/cp*.md`.
 >
 > Note de structure : dans cette version du repo, les contenus checkpoint sont maintenus dans `references/cp*.md` (et non dans `steps/`).
 
@@ -266,6 +266,6 @@ Fin session :
 ## 7) Liens de travail
 
 - Source de vérité design : `design/module-3-design.md`
-- Références CP détaillées : `.skills/module-3-rag/references/cp1-setup.md` à `cp6-eval.md`
+- Références CP détaillées : `skills/parcours-rag-module3/references/cp1-setup.md` à `cp6-eval.md`
 - Observations pipeline de référence : `reference/observed-behavior.md`
 - Questions d'éval : `data/eval-questions.json`

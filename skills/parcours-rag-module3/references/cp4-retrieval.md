@@ -51,7 +51,7 @@ Dérouler en micro-étapes : une modification, un test, une validation.
 3. **Micro-étape 4.3 — Ajouter un mode CLI** pour le smoke test, ex :
 
    ```bash
-   pnpm tsx src/mastra/rag/retrieve.ts "<question>"
+   npx tsx src/mastra/rag/retrieve.ts "<question>"
    ```
 
    Validation locale : un appel CLI retourne bien une liste structurée.
@@ -85,21 +85,21 @@ Exécuter les checks suivants :
 1. **Smoke tests CLI** :
 
    ```bash
-   pnpm tsx src/mastra/rag/retrieve.ts "Quels sont les objectifs principaux du modèle Zero Trust selon l'ANSSI ?"
-   pnpm tsx src/mastra/rag/retrieve.ts "Quelles bonnes pratiques concernant les comptes administrateur sont recommandées ?"
-   pnpm tsx src/mastra/rag/retrieve.ts "Quelle est la meilleure recette de gratin dauphinois ?"
+   npx tsx src/mastra/rag/retrieve.ts "Quels sont les objectifs principaux du modèle Zero Trust selon l'ANSSI ?"
+   npx tsx src/mastra/rag/retrieve.ts "Quelles bonnes pratiques concernant les comptes administrateur sont recommandées ?"
+   npx tsx src/mastra/rag/retrieve.ts "Quelle est la meilleure recette de gratin dauphinois ?"
    ```
 
 2. **Scores décroissants + top-5 complet** :
 
    ```bash
-   pnpm tsx -e 'import {retrieve} from "./src/mastra/rag/retrieve.ts"; const res=await retrieve("Quels sont les objectifs principaux du modèle Zero Trust selon ANSSI ?",5); const sorted=res.every((r,i,a)=>i===0 || a[i-1].score>=r.score); if(res.length!==5 || !sorted){console.error(res.map(r=>r.score)); process.exit(1);} console.log("ordering=ok");'
+   npx tsx -e 'import {retrieve} from "./src/mastra/rag/retrieve.ts"; const res=await retrieve("Quels sont les objectifs principaux du modèle Zero Trust selon ANSSI ?",5); const sorted=res.every((r,i,a)=>i===0 || a[i-1].score>=r.score); if(res.length!==5 || !sorted){console.error(res.map(r=>r.score)); process.exit(1);} console.log("ordering=ok");'
    ```
 
 3. **Présence Zero Trust dans le top-5** :
 
    ```bash
-   pnpm tsx -e 'import {retrieve} from "./src/mastra/rag/retrieve.ts"; const res=await retrieve("Quels sont les objectifs principaux du modèle Zero Trust selon ANSSI ?",5); const ok=res.some(r=>String(r.source).includes("zero_trust")); if(!ok){console.error(res.map(r=>r.source)); process.exit(1);} console.log("zerotrust-hit=ok");'
+   npx tsx -e 'import {retrieve} from "./src/mastra/rag/retrieve.ts"; const res=await retrieve("Quels sont les objectifs principaux du modèle Zero Trust selon ANSSI ?",5); const ok=res.some(r=>String(r.source).includes("zero_trust")); if(!ok){console.error(res.map(r=>r.source)); process.exit(1);} console.log("zerotrust-hit=ok");'
    ```
 
 ## Hint ladder

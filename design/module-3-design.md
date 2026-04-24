@@ -23,7 +23,7 @@
 ```
 design/module-3-design.md          ← ce document (source de vérité)
          │
-         ├──> .skills/module-3-rag/           (runtime pour l'agent du participant)
+         ├──> skills/parcours-rag-module3/    (runtime pour l'agent du participant)
          │    ├── SKILL.md                     (entrée, description, orchestration des étapes)
          │    ├── steps/01-setup.md             (une étape = un checkpoint)
          │    ├── steps/02-ingest.md
