@@ -3,6 +3,11 @@ import { LibSQLVector } from "@mastra/libsql";
 import { getAlbertBaseUrl, requireAlbertApiKey } from "./albert";
 import { indexDbPath } from "./paths";
 
+const vectorStore = new LibSQLVector({
+  url: `file:${indexDbPath}`,
+  id: "anssi-essentiels-store",
+});
+
 export interface RetrievedChunk {
   id: string;
   score: number;
@@ -47,10 +52,6 @@ export async function retrieve(query: string, topK = 5): Promise<RetrievedChunk[
   }
 
   const queryVector = await embedQuery(normalizedQuery);
-  const vectorStore = new LibSQLVector({
-    url: `file:${indexDbPath}`,
-    id: "anssi-essentiels-store",
-  });
 
   const hits = await vectorStore.query({
     indexName: "anssi_essentiels",
