@@ -30,7 +30,7 @@
     "@mastra/libsql": "latest",
     "@mastra/rag": "^2.2.0",
     "unpdf": "^1.6.0",
-    "zod": "^4.0.0"
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.4.13",
