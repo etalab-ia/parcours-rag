@@ -67,6 +67,9 @@ async function answerWithAgent(question: string, evidence: string): Promise<stri
   const agent = mastra.getAgent("chatAgent");
   const result = await agent.generate(`
 Tu es un expert ANSSI. Réponds à la question en utilisant les preuves fournies.
+Quand tu cites une source, respecte STRICTEMENT ce format: [source: <nom_du_guide>, p.<numéro_de_page>].
+Exemple valide: [source: anssi_essentiels_zero_trust_1.0.pdf, p.1]
+N'invente pas de source ni de page.
 
 PREUVES :
 ${evidence}
