@@ -48,7 +48,7 @@ interface EvalRun {
 }
 
 function extractCitations(answer: string): Citation[] {
-  const regex = /\[source:\s*([^,\]]+)(?:,\s*p(\d+))?\]/gi;
+  const regex = /\[source:\s*([^,\]]+)(?:,\s*p\.?\s*(\d+))?\]/gi;
   const citations: Citation[] = [];
   let match = regex.exec(answer);
 
