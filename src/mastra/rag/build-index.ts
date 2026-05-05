@@ -68,7 +68,7 @@ async function main() {
       indexName: "anssi_essentiels",
       vectors: vectors,
       metadata: batch,
-      ids: batch.map((c) => `${c.source}-${c.chunk_index}`),
+      ids: batch.map((c) => `${c.source}-p${c.page}-c${c.chunk_index}`),
     });
   }
 

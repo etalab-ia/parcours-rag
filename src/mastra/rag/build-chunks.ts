@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { MDocument } from "@mastra/rag";
-import { extractText } from "unpdf";
+import { extractText, getDocumentProxy } from "unpdf";
 import { chunksPath, projectRoot } from "./paths";
 
 async function main() {
@@ -14,7 +14,15 @@ async function main() {
   const manifest = JSON.parse(await readFile(manifestPath, "utf-8"));
   console.log(`✅ Manifest chargé : ${manifest.length} entrées.`);
 
-  const allChunks = [];
+  const allChunks: {
+    text: string;
+    source: string;
+    page: number;
+    chunk_index: number;
+    guide_id: string;
+    guide_nom: string;
+    url: string;
+  }[] = [];
 
   for (const entry of manifest) {
     const filePath = resolve(corpusDir, entry.filename);
@@ -23,37 +31,47 @@ async function main() {
     try {
       const buffer = await readFile(filePath);
 
-      // Extraction du texte avec unpdf (v2)
-      const { text } = await extractText(new Uint8Array(buffer));
-      const fullText = Array.isArray(text) ? text.join("\n") : text;
+      // Extraction page par page pour préserver la traçabilité des citations
+      const pdf = await getDocumentProxy(new Uint8Array(buffer));
+      const { text } = await extractText(pdf, { mergePages: false });
+      const pages = Array.isArray(text) ? text : [text];
 
-      // Chunking avec Mastra MDocument
-      const doc = MDocument.fromText(fullText, {
-        source: entry.filename,
-        guide_id: entry.guide_id,
-        guide_nom: entry.guide_nom,
-        url: entry.url,
-      });
+      let generatedForFile = 0;
+      for (let pageIndex = 0; pageIndex < pages.length; pageIndex += 1) {
+        const pageText = pages[pageIndex] ?? "";
+        if (!pageText.trim()) {
+          continue;
+        }
 
-      const chunks = await doc.chunk({
-        strategy: "token",
-        maxSize: 256,
-        overlap: 50,
-      });
+        const doc = MDocument.fromText(pageText, {
+          source: entry.filename,
+          guide_id: entry.guide_id,
+          guide_nom: entry.guide_nom,
+          url: entry.url,
+          page: pageIndex + 1,
+        });
 
-      // On formate les chunks pour notre usage
-      const formattedChunks = chunks.map((c, idx) => ({
-        text: c.text,
-        source: entry.filename,
-        page: 1, // Note: Simplification ici, unpdf extrait le texte global
-        chunk_index: idx,
-        guide_id: entry.guide_id,
-        guide_nom: entry.guide_nom,
-        url: entry.url,
-      }));
+        const chunks = await doc.chunk({
+          strategy: "token",
+          maxSize: 256,
+          overlap: 50,
+        });
 
-      allChunks.push(...formattedChunks);
-      console.log(`   └─ ${formattedChunks.length} chunks générés.`);
+        const formattedChunks = chunks.map((c, chunkIndex) => ({
+          text: c.text,
+          source: entry.filename,
+          page: pageIndex + 1,
+          chunk_index: chunkIndex,
+          guide_id: entry.guide_id,
+          guide_nom: entry.guide_nom,
+          url: entry.url,
+        }));
+
+        allChunks.push(...formattedChunks);
+        generatedForFile += formattedChunks.length;
+      }
+
+      console.log(`   └─ ${pages.length} page(s), ${generatedForFile} chunks générés.`);
     } catch (err) {
       console.error(`❌ Erreur sur ${entry.filename}:`, err instanceof Error ? err.message : err);
     }
