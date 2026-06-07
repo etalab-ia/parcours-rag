@@ -67,15 +67,26 @@ Si vous travaillez directement dans ce repo, utilisez le flux historique ci-dess
 ## Démarrage (checkpoint 1)
 
 ```bash
-npm install
+pnpm install
 cp .env.example .env
 # éditer .env et renseigner ALBERT_API_KEY
-npm run dev
+pnpm dev
 ```
 
 Ouvrir [http://localhost:4111](http://localhost:4111) — Mastra Studio doit afficher
 l'agent `chat-agent`. Posez-lui une question pour vérifier que la connexion à
 Albert fonctionne.
+
+
+## Scan des vulnérabilités de dépendances
+
+Le projet utilise OWASP CVE Lite CLI pour scanner le lockfile JavaScript/TypeScript avant de partager du code :
+
+```bash
+pnpm security:scan:js
+```
+
+Le hook Husky `pre-push` exécute ce scan avec un seuil `--fail-on high`. Les vulnérabilités faibles restent visibles pour la revue, mais seules les vulnérabilités de sévérité haute ou critique bloquent le push.
 
 ## Comment suivre le workshop
 

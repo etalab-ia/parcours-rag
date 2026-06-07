@@ -21,6 +21,7 @@
     "lint": "biome lint .",
     "check": "biome check .",
     "typecheck": "tsc --noEmit",
+    "security:scan:js": "cve-lite . --fail-on high",
     "prepare": "husky"
   },
   "dependencies": {
@@ -37,11 +38,17 @@
     "@slidev/cli": "^52.15.1",
     "@slidev/theme-default": "^0.25.0",
     "@types/node": "^25.6.0",
+    "cve-lite-cli": "1.18.1",
     "dotenv": "^17.4.2",
     "husky": "^9.0.0",
     "mastra": "latest",
     "tsx": "^4.21.0",
     "typescript": "^6.0.3"
   },
-  "packageManager": "pnpm@9.0.0"
+  "packageManager": "pnpm@9.0.0",
+  "pnpm": {
+    "overrides": {
+      "fast-uri": "3.1.2"
+    }
+  }
 }
