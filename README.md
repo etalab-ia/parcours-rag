@@ -67,10 +67,10 @@ Si vous travaillez directement dans ce repo, utilisez le flux historique ci-dess
 ## Démarrage (checkpoint 1)
 
 ```bash
-npm install
+pnpm install
 cp .env.example .env
 # éditer .env et renseigner ALBERT_API_KEY
-npm run dev
+pnpm dev
 ```
 
 Ouvrir [http://localhost:4111](http://localhost:4111) — Mastra Studio doit afficher
