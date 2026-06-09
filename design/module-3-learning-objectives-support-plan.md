@@ -8,12 +8,12 @@
 
 ## 1. Résumé exécutif
 
-Le Module 3 est déjà solide comme atelier technique : il fait construire un RAG local complet en 6 checkpoints, tout en gardant volontairement une pipeline naïve pour que ses défauts deviennent observables à la fin. Le design pédagogique implicite est bon : il suit une progression **fondation → ingestion → index → retrieval → génération → évaluation**, avec des critères de sortie vérifiables à chaque étape.
+Le Module 3 est déjà solide comme atelier technique : il fait construire un RAG local complet en 6 étapes, tout en gardant volontairement une pipeline naïve pour que ses défauts deviennent observables à la fin. Le design pédagogique implicite est bon : il suit une progression **fondation → ingestion → index → retrieval → génération → évaluation**, avec des critères de sortie vérifiables à chaque étape.
 
 L'amélioration prioritaire n'est pas d'ajouter plus de technique, mais de rendre l'intention pédagogique plus visible :
 
 1. **Avant le module** : préparer les participants à l'idée que l'objectif n'est pas de “faire le meilleur RAG”, mais de construire un système suffisamment simple pour comprendre ses points de rupture.
-2. **Pendant le module** : utiliser des slides très courtes qui cadrent chaque checkpoint par un message clé, un piège attendu, et une question de débrief.
+2. **Pendant le module** : utiliser des slides très courtes qui cadrent chaque étape par un message clé, un piège attendu, et une question de débrief.
 3. **Après le module** : transformer `eval-findings.md` en pont explicite vers le Module 4 : chaque faille devient une hypothèse d'amélioration mesurable.
 
 La recommandation de conception est un cadre hybride :
@@ -23,13 +23,36 @@ La recommandation de conception est un cadre hybride :
 - **Cognitive Load / worked examples** pour éviter de surcharger les participants techniques avec trop d'explications au moment où ils codent.
 - **Retrieval practice** pour faire formuler les apprentissages sous forme de questions de rappel et d'auto-évaluation.
 
+
+### 1.1 Addendum SOTA — 2026-06-09
+
+Une recherche complémentaire a été ajoutée dans `design/module-3-sota-research-synthesis.md`. Elle renforce le plan sur trois axes :
+
+1. **Agent-assisted learning** : les agents de code améliorent la performance immédiate mais peuvent créer une illusion de compétence si l'apprenant délègue le raisonnement. Le module doit donc installer le triptyque `prédire → vérifier → expliquer`.
+2. **Évaluation RAG** : les échecs les plus utiles à enseigner ne sont pas seulement les hallucinations, mais aussi la mauvaise pertinence du contexte, la mauvaise interprétation, la complétude partielle et les citations décoratives.
+3. **Design d'atelier complexe** : les slides doivent rester un métronome de facilitation, avec micro-débriefs, preuves observables, rappel actif et évaluation formative.
+
+Conséquence : le fil rouge du Module 3 devient :
+
+```text
+construire → vérifier → expliquer → nommer les failles → préparer l'amélioration
+```
+
+Décisions intégrées dans la prochaine itération :
+
+- utiliser **Étape** comme vocabulaire participant ;
+- cadrer l'agent comme **tuteur, pas prestataire** ;
+- ajouter un **journal de vérification participant** ;
+- élargir la grille d'évaluation à `contexte`, `fidélité`, `complétude`, `citation` ;
+- garder les métriques automatiques détaillées pour le Module 4, afin que le Module 3 construise d'abord le jugement humain.
+
 ---
 
 ## 2. Cadres de learning design candidats
 
 ### 2.1 Cadre recommandé : hybride pragmatique
 
-Pour ce module, je recommande un cadre en 5 colonnes pour chaque checkpoint :
+Pour ce module, je recommande un cadre en 5 colonnes pour chaque étape :
 
 | Colonne | Question de design | Usage concret |
 |---|---|---|
@@ -45,7 +68,7 @@ Intérêt : le module a déjà des Learning Objectives Bloom (`Appliquer`, `Anal
 
 1. Résultat attendu : construire et évaluer un RAG naïf.
 2. Preuve : artefacts locaux + `eval-findings.md`.
-3. Activités : 6 checkpoints agent-pilotés.
+3. Activités : 6 étapes agent-pilotées.
 
 À utiliser pour : reformuler les objectifs globaux et par étape en verbes observables.
 
@@ -56,8 +79,8 @@ Merrill est très adapté ici :
 - **Problem-centered** : construire un RAG sur corpus ANSSI réel.
 - **Activation** : s'appuyer sur Modules 1-2 et sur les intuitions des participants.
 - **Demonstration** : slides de cadrage + exemples de sorties attendues.
-- **Application** : chaque checkpoint produit un artefact.
-- **Integration** : CP6 formalise les failles et prépare Module 4.
+- **Application** : chaque étape produit un artefact.
+- **Integration** : Étape 6 formalise les failles et prépare Module 4.
 
 À utiliser pour : vérifier que les slides ne sont pas seulement informatives, mais activent/démontrent/appliquent/intègrent.
 
@@ -165,11 +188,11 @@ Ton : clair, institutionnel, pas marketing.
 
 ---
 
-## 4.2 Étape 1 — CP1 Setup projet + chat baseline
+## 4.2 Étape 1 — Étape 1 Setup projet + chat baseline
 
 ### Rôle dans le module
 
-CP1 installe la confiance : avant d'ajouter du RAG, le participant vérifie que la chaîne locale, le modèle de génération et l'environnement fonctionnent.
+Étape 1 installe la confiance : avant d'ajouter du RAG, le participant vérifie que la chaîne locale, le modèle de génération et l'environnement fonctionnent.
 
 ### Objectif critique
 
@@ -196,7 +219,7 @@ Faire tourner Mastra + Albert API localement avec un agent baseline qui répond 
 
 ### Slide intro
 
-**Titre** : “CP1 — Valider la fondation avant le RAG”
+**Titre** : “Étape 1 — Valider la fondation avant le RAG”
 
 **Message clé** : si le chat baseline ne marche pas, le RAG ne pourra pas être diagnostiqué.
 
@@ -213,7 +236,7 @@ Faire tourner Mastra + Albert API localement avec un agent baseline qui répond 
 
 **Message à faire émerger** : debugger par couches : dépendances → env → serveur → agent → modèle.
 
-### Contenu participant avant CP1
+### Contenu participant avant Étape 1
 
 Une fiche “pré-vol” :
 
@@ -228,7 +251,7 @@ Question de rappel : “Quelle différence concrète observes-tu entre un agent 
 ### Prompts de génération
 
 ```text
-Génère 2 slides Marp en français pour CP1 d'un atelier RAG.
+Génère 2 slides Slidev en français pour Étape 1 d'un atelier RAG.
 Slide 1 intro : objectif = valider Mastra + Albert API + chat-agent avant d'ajouter le corpus.
 Slide 2 débrief : faire verbaliser les couches de diagnostic (dépendances, .env, port, agent, modèle).
 Contraintes : 4 bullets max par slide, inclure notes facilitateur, inclure le signal de passage (>80% avec chat-agent fonctionnel).
@@ -236,18 +259,18 @@ Public : participants techniques de l'administration.
 ```
 
 ```text
-Rédige une fiche participant pré-atelier de 250 mots pour CP1.
+Rédige une fiche participant pré-atelier de 250 mots pour Étape 1.
 Elle doit expliquer pourquoi on commence par un agent de chat sans RAG, quels prérequis vérifier, et ce que signifie une réponse en français qui mentionne l'absence de contexte ANSSI.
 Ton : rassurant, pratique, sans jargon inutile.
 ```
 
 ---
 
-## 4.3 Étape 2 — CP2 Ingestion & chunking
+## 4.3 Étape 2 — Étape 2 Ingestion & chunking
 
 ### Rôle dans le module
 
-CP2 transforme le corpus brut en unités manipulables. C'est la première étape où une décision naïve est volontairement introduite pour être critiquée plus tard.
+Étape 2 transforme le corpus brut en unités manipulables. C'est la première étape où une décision naïve est volontairement introduite pour être critiquée plus tard.
 
 ### Objectif critique
 
@@ -275,7 +298,7 @@ Extraire les 17 PDFs ANSSI et produire un `chunks.json` complet, avec métadonn�
 
 ### Slide intro
 
-**Titre** : “CP2 — Transformer des PDFs en morceaux exploitables”
+**Titre** : “Étape 2 — Transformer des PDFs en morceaux exploitables”
 
 **Message clé** : le chunking est une décision de design, pas un détail technique.
 
@@ -285,7 +308,7 @@ Extraire les 17 PDFs ANSSI et produire un `chunks.json` complet, avec métadonn�
 
 **Message à faire émerger** : la simplicité rend le système constructible, mais introduit des défauts observables.
 
-### Contenu participant avant CP2
+### Contenu participant avant Étape 2
 
 Mini-explication visuelle : “document → pages → chunks → métadonnées”.
 
@@ -296,14 +319,14 @@ Exercice : choisir 2 chunks consécutifs et noter un symptôme de bruit, coupure
 ### Prompts de génération
 
 ```text
-Génère une paire de slides CP2 pour un atelier RAG.
+Génère une paire de slides Étape 2 pour un atelier RAG.
 Slide intro : expliquer le passage PDF -> texte -> chunks -> métadonnées, avec chunking naïf 500 tokens / overlap 50.
 Slide débrief : poser 3 questions sur couverture manifest, bruit de PDF, et défauts du chunking naïf.
 Inclure notes facilitateur et un rappel : ne pas optimiser maintenant, noter pour Module 4.
 ```
 
 ```text
-Génère un exercice participant post-CP2 de 10 minutes.
+Génère un exercice participant post-étape 2 de 10 minutes.
 Objectif : observer les défauts de chunking dans data/chunks.json sans corriger la pipeline.
 Livrable : 3 observations structurées (symptôme, exemple de chunk, hypothèse d'impact sur retrieval).
 Public : développeurs / data practitioners.
@@ -311,11 +334,11 @@ Public : développeurs / data practitioners.
 
 ---
 
-## 4.4 Étape 3 — CP3 Embeddings & index vectoriel
+## 4.4 Étape 3 — Étape 3 Embeddings & index vectoriel
 
 ### Rôle dans le module
 
-CP3 introduit la représentation vectorielle et l'index local. C'est le passage entre des morceaux de texte lisibles et une structure interrogeable par similarité.
+Étape 3 introduit la représentation vectorielle et l'index local. C'est le passage entre des morceaux de texte lisibles et une structure interrogeable par similarité.
 
 ### Objectif critique
 
@@ -344,7 +367,7 @@ Vectoriser tous les chunks avec `openweight-embeddings` et les stocker dans LibS
 
 ### Slide intro
 
-**Titre** : “CP3 — Chaque chunk devient un point dans l'espace”
+**Titre** : “Étape 3 — Chaque chunk devient un point dans l'espace”
 
 **Message clé** : l'index ne vaut que si count, dimension et métadonnées restent cohérents.
 
@@ -354,7 +377,7 @@ Vectoriser tous les chunks avec `openweight-embeddings` et les stocker dans LibS
 
 **Message à faire émerger** : un index peut exister et être incorrect ; il faut des checks structurels.
 
-### Contenu participant avant CP3
+### Contenu participant avant Étape 3
 
 Une analogie courte : embeddings comme coordonnées sémantiques, mais pas comme vérité.
 
@@ -365,7 +388,7 @@ Question de rappel : “Pourquoi préserver `source`, `page` et `chunk_index` au
 ### Prompts de génération
 
 ```text
-Génère 2 slides CP3 pour un atelier RAG.
+Génère 2 slides Étape 3 pour un atelier RAG.
 Slide intro : expliquer embeddings 1024d + LibSQL sans mathématiques lourdes.
 Slide débrief : faire discuter batch size, collisions d'IDs, count vs chunks.length.
 Contraintes : éviter le jargon ML avancé, inclure une note facilitateur sur la traçabilité des métadonnées.
@@ -379,11 +402,11 @@ Inclure une question d'auto-évaluation pour chaque cause.
 
 ---
 
-## 4.5 Étape 4 — CP4 Retrieval
+## 4.5 Étape 4 — Étape 4 Retrieval
 
 ### Rôle dans le module
 
-CP4 rend la pipeline interrogeable en langage naturel. C'est l'étape où les participants doivent commencer à se méfier des scores.
+Étape 4 rend la pipeline interrogeable en langage naturel. C'est l'étape où les participants doivent commencer à se méfier des scores.
 
 ### Objectif critique
 
@@ -412,7 +435,7 @@ Implémenter `retrieve(query, k=5)` et vérifier que les résultats sont structu
 
 ### Slide intro
 
-**Titre** : “CP4 — Retrouver du contexte, pas encore répondre”
+**Titre** : “Étape 4 — Retrouver du contexte, pas encore répondre”
 
 **Message clé** : retrieval sélectionne des candidats ; il ne prouve pas qu'ils répondent correctement.
 
@@ -422,7 +445,7 @@ Implémenter `retrieve(query, k=5)` et vérifier que les résultats sont structu
 
 **Message à faire émerger** : le système est forcé de retourner quelque chose ; l'absence de seuil est un choix naïf.
 
-### Contenu participant avant CP4
+### Contenu participant avant Étape 4
 
 Un schéma : `question → embedding → similarity search → top-k chunks`.
 
@@ -433,25 +456,25 @@ Comparer `k=3`, `k=5`, `k=8` et noter le compromis signal/bruit.
 ### Prompts de génération
 
 ```text
-Génère une slide CP4 intro et une slide CP4 débrief.
+Génère une slide Étape 4 intro et une slide Étape 4 débrief.
 Objectif : expliquer retrieve(query, k=5), scores décroissants, top-k, et limite hors-corpus.
 Inclure une métaphore simple : top-k comme liste de suspects, pas comme verdict.
 Inclure notes facilitateur et 3 questions de débrief.
 ```
 
 ```text
-Crée un exercice participant post-CP4.
+Crée un exercice participant post-étape 4.
 Le participant exécute la même question avec k=3, k=5, k=8 et remplit un tableau : pertinence, bruit, sources, hypothèse.
 Le but est de comprendre le compromis top-k sans introduire reranking.
 ```
 
 ---
 
-## 4.6 Étape 5 — CP5 Génération avec contexte + citations
+## 4.6 Étape 5 — Étape 5 Génération avec contexte + citations
 
 ### Rôle dans le module
 
-CP5 donne l'impression que le système “fonctionne”. C'est donc l'étape la plus dangereuse pédagogiquement : les réponses fluides peuvent masquer des défauts de fidélité.
+Étape 5 donne l'impression que le système “fonctionne”. C'est donc l'étape la plus dangereuse pédagogiquement : les réponses fluides peuvent masquer des défauts de fidélité.
 
 ### Objectif critique
 
@@ -462,7 +485,7 @@ Produire une réponse en français à partir des chunks récupérés, avec citat
 - Comprendre le rôle du prompt système dans la contrainte de fidélité.
 - Distinguer citation formelle et citation réellement soutenante.
 - Observer le risque d'hallucination sur une question hors corpus.
-- Préparer les critères CP6 : fidélité, complétude, traçabilité.
+- Préparer les critères Étape 6 : fidélité, complétude, traçabilité.
 
 ### Preuves observables
 
@@ -480,7 +503,7 @@ Produire une réponse en français à partir des chunks récupérés, avec citat
 
 ### Slide intro
 
-**Titre** : “CP5 — Répondre, mais seulement avec preuves”
+**Titre** : “Étape 5 — Répondre, mais seulement avec preuves”
 
 **Message clé** : une réponse RAG utile doit être ancrée, pas seulement plausible.
 
@@ -490,7 +513,7 @@ Produire une réponse en français à partir des chunks récupérés, avec citat
 
 **Message à faire émerger** : la citation doit soutenir l'affirmation, pas seulement être présente.
 
-### Contenu participant avant CP5
+### Contenu participant avant Étape 5
 
 Un exemple contrastif : même réponse avec citation décorative vs citation probante.
 
@@ -501,7 +524,7 @@ Auto-évaluation d'une réponse : surligner chaque affirmation importante et vé
 ### Prompts de génération
 
 ```text
-Génère 2 slides CP5 pour un atelier RAG.
+Génère 2 slides Étape 5 pour un atelier RAG.
 Slide intro : chaîne retrieve -> generate, contrainte de citation [source: filename, pN], règle "si contexte insuffisant, le dire".
 Slide débrief : citation décorative vs citation probante, hallucination hors-corpus, réponse fluide mais non fidèle.
 Inclure notes facilitateur, exemple minimal non spécifique au code, et question de discussion.
@@ -515,11 +538,11 @@ Inclure une grille simple à cocher.
 
 ---
 
-## 4.7 Étape 6 — CP6 Évaluation + analyse de failles
+## 4.7 Étape 6 — Étape 6 Évaluation + analyse de failles
 
 ### Rôle dans le module
 
-CP6 est le point culminant pédagogique. Le participant cesse de construire et commence à juger. C'est ici que le Module 3 devient le tremplin du Module 4.
+Étape 6 est le point culminant pédagogique. Le participant cesse de construire et commence à juger. C'est ici que le Module 3 devient le tremplin du Module 4.
 
 ### Objectif critique
 
@@ -548,7 +571,7 @@ Exécuter 5 questions d'évaluation, documenter les résultats, et nommer au moi
 
 ### Slide intro
 
-**Titre** : “CP6 — On n'optimise pas : on observe”
+**Titre** : “Étape 6 — On n'optimise pas : on observe”
 
 **Message clé** : l'évaluation transforme une impression en preuve exploitable.
 
@@ -558,7 +581,7 @@ Exécuter 5 questions d'évaluation, documenter les résultats, et nommer au moi
 
 **Message à faire émerger** : Module 4 commence avec les failles documentées, pas avec des recettes génériques.
 
-### Contenu participant avant CP6
+### Contenu participant avant Étape 6
 
 Une grille d'évaluation en 3 critères : fidélité, complétude, traçabilité.
 
@@ -570,8 +593,8 @@ Transformer 3 failles en backlog Module 4 : impact, cause probable, piste d'amé
 
 ```text
 Génère 3 slides pour la fin du Module 3.
-Slide CP6 intro : "On n'optimise pas : on observe" avec les critères fidélité, complétude, traçabilité.
-Slide CP6 débrief : partager 3 failles observées avec exemple et hypothèse de cause.
+Slide Étape 6 intro : "On n'optimise pas : on observe" avec les critères fidélité, complétude, traçabilité.
+Slide Étape 6 débrief : partager 3 failles observées avec exemple et hypothèse de cause.
 Slide pont Module 4 : chaque faille devient une amélioration mesurable.
 Inclure notes facilitateur et timing serré pour 20 participants.
 ```
@@ -591,7 +614,7 @@ Pour chaque faille : type, exemple concret, hypothèse de cause, piste Module 4.
 
 Je recommande de ne pas choisir tout de suite un seul outil “magique”. Le meilleur flux est en deux temps :
 
-1. **Source de vérité versionnée dans le repo** : Slidev/Marp en markdown.
+1. **Source de vérité versionnée dans le repo** : Slidev en markdown.
    - Avantages : diffable en PR, facile à corriger, compatible avec les prompts détaillés, export PDF/PPTX possible.
    - Usage : stabiliser le contenu, les notes facilitateur, le timing et les schémas.
 2. **Version visuelle finalisée dans Canva** après validation du contenu.
@@ -602,12 +625,12 @@ Les outils d'images génératives doivent rester complémentaires :
 
 | Outil | À utiliser pour | À éviter pour | Commentaire |
 |---|---|---|---|
-| **Slidev / Marp** | Source de vérité, contenu pédagogique, speaker notes, schémas simples, PR review | Design très “polished” sans travail graphique | Meilleur choix pour travailler dans ce repo. |
+| **Slidev** | Source de vérité, contenu pédagogique, speaker notes, schémas simples, PR review | Design très “polished” sans travail graphique | Meilleur choix pour travailler dans ce repo. |
 | **Canva** | Deck final on-brand, version présentable, illustrations, export partageable | Itérer lourdement sur le fond dans un outil non diffable | Très bon après validation du plan. |
 | **Gemini image generation** | 4-6 visuels conceptuels : pipeline, chunks, vector space, citation audit, pont Module 4 | Générer tout le deck | Utile pour créer des images insérables dans Slidev/Canva. |
 | **Google Flow** | Teaser vidéo, mini-storyboard d'ouverture, transition narrative éventuelle | Slides pédagogiques détaillées | Probablement secondaire pour ce besoin. |
 
-**Décision proposée** : produire d'abord `slides/module-3-facilitator.md` en Slidev/Marp avec 36-42 slides, puis générer une version Canva à partir du même slide plan. Canva devient l'outil de finition, pas l'outil de conception pédagogique.
+**Décision proposée** : produire d'abord `slides/module-3-facilitator.md` en Slidev avec 40-42 slides, puis générer une version Canva à partir du même slide plan. Canva devient l'outil de finition, pas l'outil de conception pédagogique.
 
 ### 5.2 Pourquoi plus de slides que la première proposition
 
@@ -634,34 +657,34 @@ Cela donne un deck facilitateur autour de **39 slides** : suffisamment dense pou
 | 6 | Les 5 objectifs d'apprentissage | Rendre les LO visibles. | Carte LO1→LO5. |
 | 7 | Agenda et règle de cadence | Donner le tempo. | Timeline 180 min. |
 | 8 | Comment travailler avec l'agent | Rappeler micro-étapes et exit criteria. | Checklist. |
-| 9 | CP1 — Mission | Ouvrir setup. | Section divider. |
+| 9 | Étape 1 — Mission | Ouvrir setup. | Section divider. |
 | 10 | Baseline : un agent qui parle, pas encore un RAG | Distinguer chat vs RAG. | Schéma minimal. |
-| 11 | CP1 — Signal de sortie | Clarifier la preuve observable. | Checklist sortie. |
-| 12 | CP1 — Débrief | Faire émerger le debugging par couches. | Question slide. |
-| 13 | CP2 — Mission | Ouvrir ingestion. | Section divider. |
+| 11 | Étape 1 — Signal de sortie | Clarifier la preuve observable. | Checklist sortie. |
+| 12 | Étape 1 — Débrief | Faire émerger le debugging par couches. | Question slide. |
+| 13 | Étape 2 — Mission | Ouvrir ingestion. | Section divider. |
 | 14 | Du PDF au chunk | Expliquer la transformation. | Diagramme flux. |
 | 15 | Le contrat de métadonnées | Montrer pourquoi source/page/chunk_index comptent. | Table annotée. |
 | 16 | Chunking naïf : pourquoi on l'assume | Légitimer le défaut volontaire. | Split gains/coûts. |
-| 17 | CP2 — Débrief | Observer bruit, coupures, couverture. | Question slide. |
-| 18 | CP3 — Mission | Ouvrir embeddings/index. | Section divider. |
+| 17 | Étape 2 — Débrief | Observer bruit, coupures, couverture. | Question slide. |
+| 18 | Étape 3 — Mission | Ouvrir embeddings/index. | Section divider. |
 | 19 | Embeddings : coordonnées sémantiques, pas vérité | Installer le modèle mental. | Nuage 2D stylisé. |
 | 20 | Index vectoriel : trois checks vitaux | Count, dimension, métadonnées. | Checklist technique. |
-| 21 | CP3 — Débrief | Batching, IDs, index faux. | Question slide. |
+| 21 | Étape 3 — Débrief | Batching, IDs, index faux. | Question slide. |
 | 22 | Pause — où en est la pipeline ? | Recadrer avant retrieval. | Pipeline avec étapes cochées. |
-| 23 | CP4 — Mission | Ouvrir retrieval. | Section divider. |
+| 23 | Étape 4 — Mission | Ouvrir retrieval. | Section divider. |
 | 24 | La requête devient un vecteur | Expliquer query embedding. | Diagramme question→vecteur→top-k. |
 | 25 | Top-k : liste de suspects, pas verdict | Prévenir confusion score/vérité. | Métaphore enquête. |
-| 26 | CP4 — Débrief | Top-1/top-5/top-50 et hors corpus. | Question slide. |
-| 27 | CP5 — Mission | Ouvrir génération. | Section divider. |
+| 26 | Étape 4 — Débrief | Top-1/top-5/top-50 et hors corpus. | Question slide. |
+| 27 | Étape 5 — Mission | Ouvrir génération. | Section divider. |
 | 28 | `retrieve -> generate` | Montrer l'orchestration. | Pipeline courte. |
 | 29 | Le contrat de réponse | Répondre seulement avec contexte + citations. | Règles de prompt. |
 | 30 | Citation probante vs décorative | Faire sentir la différence qualité. | Exemple contrastif. |
-| 31 | CP5 — Débrief | Fluidité vs fidélité. | Question slide. |
-| 32 | CP6 — Mission | Ouvrir évaluation. | Section divider. |
+| 31 | Étape 5 — Débrief | Fluidité vs fidélité. | Question slide. |
+| 32 | Étape 6 — Mission | Ouvrir évaluation. | Section divider. |
 | 33 | On n'optimise pas : on observe | Bloquer la tentation de corriger. | Statement slide. |
 | 34 | La grille : fidélité / complétude / traçabilité | Donner l'outil de jugement. | Matrice 3 critères. |
 | 35 | Nommer une faille correctement | Type + exemple + cause probable. | Template annoté. |
-| 36 | CP6 — Débrief | Partager 3 failles et causes. | Discussion slide. |
+| 36 | Étape 6 — Débrief | Partager 3 failles et causes. | Discussion slide. |
 | 37 | Pont Module 4 | Transformer failles en améliorations mesurables. | Funnel failles→hypothèses→tests. |
 | 38 | Ce qu'il faut conserver | Artefacts et notes utiles. | Checklist livrables. |
 | 39 | Clôture | Rappel de la boucle d'apprentissage. | Construire→observer→améliorer. |
@@ -703,7 +726,7 @@ Longueur : 700 mots maximum.
 Ton : clair, direct, pas promotionnel.
 ```
 
-### 6.2 Pendant l'atelier — “Carte des checkpoints”
+### 6.2 Pendant l'atelier — “Carte des étapes”
 
 Format : 1 page imprimable ou markdown.
 
@@ -712,8 +735,8 @@ Colonnes : CP, artefact produit, exit criterion principal, piège à observer, q
 Prompt :
 
 ```text
-Génère une carte participant des 6 checkpoints du Module 3 RAG.
-Pour chaque checkpoint : nom, artefact produit, critère de sortie principal, piège pédagogique, question à se poser.
+Génère une carte participant des 6 étapes du Module 3 RAG.
+Pour chaque étape : nom, artefact produit, critère de sortie principal, piège pédagogique, question à se poser.
 Format : tableau markdown compact, en français.
 ```
 
@@ -737,14 +760,14 @@ Inclure 5 questions de réflexion individuelle.
 
 Les prompts précédents étaient utiles comme brouillons, mais trop courts pour obtenir un bon deck. Cette section propose des prompts directement utilisables, structurés par outil et par lot de production.
 
-### 7.1 Prompt maître — génération Slidev/Marp dans le repo
+### 7.1 Prompt maître — génération Slidev dans le repo
 
 À utiliser pour créer un deck versionné, relisible en PR, avec speaker notes. C'est le meilleur premier livrable.
 
 ```text
 Tu es instructional designer, facilitateur technique et auteur de supports pédagogiques pour l'administration française.
 
-Tâche : générer un deck Slidev ou Marp en markdown pour le Module 3 "Construis ton RAG" du bootcamp RAG ALLiaNCE/DINUM.
+Tâche : générer un deck Slidev en markdown pour le Module 3 "Construis ton RAG" du bootcamp RAG ALLiaNCE/DINUM.
 
 Contexte atelier :
 - Durée : 3h en présentiel.
@@ -772,34 +795,34 @@ Structure du deck : produire 39 slides.
 6. Les 5 objectifs d'apprentissage
 7. Agenda et règle de cadence
 8. Comment travailler avec l'agent
-9. CP1 — Mission
+9. Étape 1 — Mission
 10. Baseline : un agent qui parle, pas encore un RAG
-11. CP1 — Signal de sortie
-12. CP1 — Débrief
-13. CP2 — Mission
+11. Étape 1 — Signal de sortie
+12. Étape 1 — Débrief
+13. Étape 2 — Mission
 14. Du PDF au chunk
 15. Le contrat de métadonnées
 16. Chunking naïf : pourquoi on l'assume
-17. CP2 — Débrief
-18. CP3 — Mission
+17. Étape 2 — Débrief
+18. Étape 3 — Mission
 19. Embeddings : coordonnées sémantiques, pas vérité
 20. Index vectoriel : trois checks vitaux
-21. CP3 — Débrief
+21. Étape 3 — Débrief
 22. Pause — où en est la pipeline ?
-23. CP4 — Mission
+23. Étape 4 — Mission
 24. La requête devient un vecteur
 25. Top-k : liste de suspects, pas verdict
-26. CP4 — Débrief
-27. CP5 — Mission
+26. Étape 4 — Débrief
+27. Étape 5 — Mission
 28. retrieve -> generate
 29. Le contrat de réponse
 30. Citation probante vs décorative
-31. CP5 — Débrief
-32. CP6 — Mission
+31. Étape 5 — Débrief
+32. Étape 6 — Mission
 33. On n'optimise pas : on observe
 34. La grille : fidélité / complétude / traçabilité
 35. Nommer une faille correctement
-36. CP6 — Débrief
+36. Étape 6 — Débrief
 37. Pont Module 4
 38. Ce qu'il faut conserver
 39. Clôture
@@ -816,11 +839,11 @@ Exemples de messages clés à préserver :
 - "Un index peut exister et être faux."
 - "Un score de similarité n'est pas une preuve de vérité."
 - "Une citation présente n'est pas forcément une citation probante."
-- "En CP6, on observe avant d'améliorer."
+- "En Étape 6, on observe avant d'améliorer."
 
 Sortie attendue :
 - Un fichier markdown complet prêt à enregistrer en `slides/module-3-facilitator.md`.
-- Frontmatter Slidev/Marp minimal.
+- Frontmatter Slidev minimal.
 - Séparateurs de slides `---`.
 - Speaker notes en commentaires HTML après chaque slide.
 - Pas d'images externes obligatoires ; utiliser Mermaid ou schémas texte si nécessaire.
@@ -837,7 +860,7 @@ Topic/Scope: Atelier présentiel de 3h pour construire un RAG local volontaireme
 Audience: 20 participants techniques de l'administration française ; facilitateurs : ALLiaNCE / DINUM.
 Key Messages:
 1. On construit un RAG simple pour comprendre son fonctionnement, pas pour atteindre la meilleure performance.
-2. Chaque checkpoint produit un artefact observable et vérifiable.
+2. Chaque étape produit un artefact observable et vérifiable.
 3. La traçabilité (source, page, chunk) est aussi importante que la réponse générée.
 4. Une réponse fluide peut être fausse, non fidèle ou mal citée.
 5. Les failles documentées en Module 3 deviennent les hypothèses d'amélioration du Module 4.
@@ -849,7 +872,7 @@ Style Guide:
 - Éviter : photos génériques de robots, images futuristes, surcharge de texte, jargon non expliqué.
 
 Narrative Arc
-Le deck suit une progression "Construire → Observer → Nommer → Améliorer". On commence par installer le contrat pédagogique : le RAG sera volontairement naïf. Ensuite, chaque checkpoint ajoute une brique concrète à la pipeline : setup, ingestion, index, retrieval, génération. Les débriefs transforment chaque brique technique en apprentissage : quelles preuves avons-nous, quels pièges voyons-nous, quelles limites apparaissent ? La fin du module bascule de la construction vers l'évaluation : les participants documentent les failles dans `eval-findings.md`, qui devient le point de départ du Module 4.
+Le deck suit une progression "Construire → Observer → Nommer → Améliorer". On commence par installer le contrat pédagogique : le RAG sera volontairement naïf. Ensuite, chaque étape ajoute une brique concrète à la pipeline : setup, ingestion, index, retrieval, génération. Les débriefs transforment chaque brique technique en apprentissage : quelles preuves avons-nous, quels pièges voyons-nous, quelles limites apparaissent ? La fin du module bascule de la construction vers l'évaluation : les participants documentent les failles dans `eval-findings.md`, qui devient le point de départ du Module 4.
 
 Slide Plan
 Slide 1 — "Module 3 — Construis ton RAG"
@@ -892,7 +915,7 @@ Bullets:
 - contexte → réponse citée
 - évaluation → failles
 Visuals: Diagramme horizontal en 5 blocs avec flèches.
-Speaker Notes: Cette slide reviendra mentalement à chaque checkpoint. Pointer où l'on se situe avant chaque phase.
+Speaker Notes: Cette slide reviendra mentalement à chaque étape. Pointer où l'on se situe avant chaque phase.
 
 Slide 5 — "Rôles : vous, votre agent, le facilitateur"
 Goal: Clarifier la dynamique de salle.
@@ -918,7 +941,7 @@ Speaker Notes: L'objectif le plus important n'est pas seulement "ça marche", ma
 Slide 7 — "Agenda et règle de cadence"
 Goal: Donner le tempo de l'atelier.
 Bullets:
-- 6 checkpoints
+- 6 étapes
 - Alternance pratique + débrief
 - Passage quand 80% atteignent l'exit minimal
 - Parking lot pour Module 4
@@ -935,8 +958,8 @@ Bullets:
 Visuals: Checklist courte.
 Speaker Notes: Insister sur la responsabilité du participant : l'agent aide, mais l'apprentissage vient de l'observation et des questions.
 
-Slides 9-12 — CP1 Setup
-Goal: Ouvrir, expliquer, vérifier et débriefer CP1.
+Slides 9-12 — Étape 1 Setup
+Goal: Ouvrir, expliquer, vérifier et débriefer Étape 1.
 Required content:
 - Mission : valider Mastra + Albert API + chat baseline.
 - Concept : un agent qui parle n'a pas encore accès au corpus.
@@ -945,7 +968,7 @@ Required content:
 Visuals: baseline chat vs RAG augmenté ; checklist de sortie.
 Speaker Notes: Faire émerger les problèmes d'environnement avant le code RAG.
 
-Slides 13-17 — CP2 Ingestion & chunking
+Slides 13-17 — Étape 2 Ingestion & chunking
 Goal: Expliquer PDF→chunks et faire observer les défauts du chunking naïf.
 Required content:
 - Mission : extraire 17 PDFs et produire `data/chunks.json`.
@@ -956,7 +979,7 @@ Required content:
 Visuals: découpage de page en chunks ; table de métadonnées annotée.
 Speaker Notes: Rappeler que 500/50 est volontairement naïf.
 
-Slides 18-21 — CP3 Embeddings & index
+Slides 18-21 — Étape 3 Embeddings & index
 Goal: Expliquer embeddings et intégrité d'index.
 Required content:
 - Mission : vectoriser tous les chunks et stocker dans LibSQL.
@@ -973,10 +996,10 @@ Bullets:
 - Vecteurs créés
 - Index prêt
 - Prochaine étape : interroger
-Visuals: pipeline avec CP1-CP3 cochés.
+Visuals: pipeline avec Étape 1-Étape 3 cochés.
 Speaker Notes: Utiliser cette slide pour reprendre le groupe et vérifier rapidement le niveau global.
 
-Slides 23-26 — CP4 Retrieval
+Slides 23-26 — Étape 4 Retrieval
 Goal: Expliquer top-k et limites des scores.
 Required content:
 - Mission : `retrieve(query, k=5)`.
@@ -986,7 +1009,7 @@ Required content:
 Visuals: question→embedding→top-k ; métaphore liste de suspects.
 Speaker Notes: Faire verbaliser que retrieval sélectionne des candidats, pas une vérité.
 
-Slides 27-31 — CP5 Génération + citations
+Slides 27-31 — Étape 5 Génération + citations
 Goal: Relier retrieval et génération, puis introduire l'audit des citations.
 Required content:
 - Mission : produire une réponse française citée.
@@ -997,7 +1020,7 @@ Required content:
 Visuals: pipeline courte ; exemple contrastif de citation.
 Speaker Notes: Faire tester la question hors-corpus et ne pas se satisfaire d'une belle réponse.
 
-Slides 32-36 — CP6 Évaluation
+Slides 32-36 — Étape 6 Évaluation
 Goal: Basculer de construction à jugement.
 Required content:
 - Mission : 5 questions, 5 résultats, 3 failles nommées.
@@ -1040,15 +1063,15 @@ Pour chaque image, produire aussi :
 - une recommandation de slide où l'utiliser.
 ```
 
-### 7.4 Prompt détaillé — CP1 Setup
+### 7.4 Prompt détaillé — Étape 1 Setup
 
 ```text
-Génère les slides 9 à 12 du deck Module 3 RAG, en français, pour CP1 Setup.
+Génère les slides 9 à 12 du deck Module 3 RAG, en français, pour Étape 1 Setup.
 
-Contexte CP1 : les participants doivent faire tourner Mastra + Albert API localement avec un agent baseline `chat-agent` qui répond en français. Le RAG n'est pas encore branché.
+Contexte Étape 1 : les participants doivent faire tourner Mastra + Albert API localement avec un agent baseline `chat-agent` qui répond en français. Le RAG n'est pas encore branché.
 
 Slides attendues :
-1. "CP1 — Mission : valider la fondation"
+1. "Étape 1 — Mission : valider la fondation"
    - Objectif : installer la confiance technique.
    - Bullets : dépendances, `.env`, serveur local, chat-agent.
    - Visual : section divider avec mini-pipeline où seule la brique "chat baseline" est active.
@@ -1056,11 +1079,11 @@ Slides attendues :
    - Objectif : distinguer LLM baseline et RAG augmenté.
    - Bullets : pas de corpus, pas de retrieval, pas de citations, pas encore d'ancrage documentaire.
    - Visual : deux cartes côte à côte "Chat baseline" vs "RAG".
-3. "CP1 — Signal de sortie"
+3. "Étape 1 — Signal de sortie"
    - Objectif : rendre les exit criteria observables.
    - Bullets : `node_modules`, `ALBERT_API_KEY`, `localhost:4111`, réponse en français.
    - Visual : checklist.
-4. "CP1 — Débrief : debugger par couches"
+4. "Étape 1 — Débrief : debugger par couches"
    - Objectif : faire verbaliser la méthode de diagnostic.
    - Question principale : "Quelle vérification a isolé le problème le plus vite ?"
    - Relances : clé vide ? mauvais dossier ? port occupé ? réseau ?
@@ -1072,15 +1095,15 @@ Contraintes :
 - Ne pas fournir de procédure complète de code : l'agent participant s'en charge.
 ```
 
-### 7.5 Prompt détaillé — CP2 Ingestion & chunking
+### 7.5 Prompt détaillé — Étape 2 Ingestion & chunking
 
 ```text
-Génère les slides 13 à 17 du deck Module 3 RAG, en français, pour CP2 Ingestion & chunking.
+Génère les slides 13 à 17 du deck Module 3 RAG, en français, pour Étape 2 Ingestion & chunking.
 
-Contexte CP2 : les participants extraient le texte des 17 PDFs ANSSI et génèrent `data/chunks.json` avec un chunking volontairement naïf de 500 tokens et overlap 50.
+Contexte Étape 2 : les participants extraient le texte des 17 PDFs ANSSI et génèrent `data/chunks.json` avec un chunking volontairement naïf de 500 tokens et overlap 50.
 
 Slides attendues :
-1. "CP2 — Mission : transformer les PDFs en chunks"
+1. "Étape 2 — Mission : transformer les PDFs en chunks"
    - Artefact : `data/chunks.json`.
    - Objectif critique : couvrir les 17 PDFs, pas seulement produire un nombre de chunks.
    - Piège : vouloir optimiser trop tôt.
@@ -1090,13 +1113,13 @@ Slides attendues :
    - Visual : diagramme en 4 blocs.
 3. "Le contrat de métadonnées"
    - Expliquer `text`, `source`, `page`, `chunk_index`, `guide_id`.
-   - Message clé : les métadonnées d'aujourd'hui permettent les citations de CP5.
+   - Message clé : les métadonnées d'aujourd'hui permettent les citations de Étape 5.
    - Visual : exemple de ligne JSON simplifiée, annotée.
 4. "Chunking naïf : pourquoi on l'assume"
    - Côté gains : rapide, compréhensible, comparable.
    - Côté coûts : coupures, bruit, doublons, perte de contexte.
-   - Message clé : défaut volontaire = matière pour CP6.
-5. "CP2 — Débrief : compter ne suffit pas"
+   - Message clé : défaut volontaire = matière pour Étape 6.
+5. "Étape 2 — Débrief : compter ne suffit pas"
    - Question principale : "Qu'est-ce que la couverture manifest révèle que le count ne voit pas ?"
    - Relances : en-têtes, pieds de page, guide_id non unique, chunks consécutifs redondants.
 
@@ -1107,15 +1130,15 @@ Contraintes :
 - Ne pas introduire semantic chunking comme solution ; le garder pour Module 4.
 ```
 
-### 7.6 Prompt détaillé — CP3 Embeddings & index
+### 7.6 Prompt détaillé — Étape 3 Embeddings & index
 
 ```text
-Génère les slides 18 à 21 du deck Module 3 RAG, en français, pour CP3 Embeddings & index vectoriel.
+Génère les slides 18 à 21 du deck Module 3 RAG, en français, pour Étape 3 Embeddings & index vectoriel.
 
-Contexte CP3 : les participants transforment chaque chunk en vecteur 1024d via `openweight-embeddings` et stockent les vecteurs dans LibSQL.
+Contexte Étape 3 : les participants transforment chaque chunk en vecteur 1024d via `openweight-embeddings` et stockent les vecteurs dans LibSQL.
 
 Slides attendues :
-1. "CP3 — Mission : rendre les chunks interrogeables"
+1. "Étape 3 — Mission : rendre les chunks interrogeables"
    - Artefact : `data/index.db`.
    - Objectif : vecteurs + métadonnées + index local.
 2. "Embeddings : coordonnées sémantiques, pas vérité"
@@ -1127,7 +1150,7 @@ Slides attendues :
    - dimension = 1024.
    - métadonnées présentes.
    - Message clé : un index peut exister et être faux.
-4. "CP3 — Débrief : les erreurs silencieuses"
+4. "Étape 3 — Débrief : les erreurs silencieuses"
    - Questions : batch size stable ? IDs uniques ? index réinitialisé ? métadonnées perdues ?
 
 Contraintes :
@@ -1136,15 +1159,15 @@ Contraintes :
 - Éviter les équations et la théorie ML avancée.
 ```
 
-### 7.7 Prompt détaillé — CP4 Retrieval
+### 7.7 Prompt détaillé — Étape 4 Retrieval
 
 ```text
-Génère les slides 23 à 26 du deck Module 3 RAG, en français, pour CP4 Retrieval.
+Génère les slides 23 à 26 du deck Module 3 RAG, en français, pour Étape 4 Retrieval.
 
-Contexte CP4 : les participants implémentent `retrieve(query, k=5)` qui embedde la question, interroge l'index LibSQL et retourne les chunks les plus similaires.
+Contexte Étape 4 : les participants implémentent `retrieve(query, k=5)` qui embedde la question, interroge l'index LibSQL et retourne les chunks les plus similaires.
 
 Slides attendues :
-1. "CP4 — Mission : retrouver du contexte"
+1. "Étape 4 — Mission : retrouver du contexte"
    - Artefact : fonction `retrieve`.
    - Message clé : on sélectionne des candidats, on ne répond pas encore.
 2. "La requête devient un vecteur"
@@ -1154,7 +1177,7 @@ Slides attendues :
    - Métaphore enquête.
    - Expliquer top-1 trop fragile, top-50 trop bruyant, top-5 compromis pédagogique.
    - Insister : hors-corpus renvoie quand même quelque chose sans seuil.
-4. "CP4 — Débrief : que valent les scores ?"
+4. "Étape 4 — Débrief : que valent les scores ?"
    - Question principale : "Que signifie un top-5 sur une question hors corpus ?"
    - Relances : score, bruit, seuil absent, inspection du chunk.
 
@@ -1164,15 +1187,15 @@ Contraintes :
 - Ne pas proposer reranking ou seuils comme correction immédiate ; parking lot Module 4.
 ```
 
-### 7.8 Prompt détaillé — CP5 Génération + citations
+### 7.8 Prompt détaillé — Étape 5 Génération + citations
 
 ```text
-Génère les slides 27 à 31 du deck Module 3 RAG, en français, pour CP5 Génération + citations.
+Génère les slides 27 à 31 du deck Module 3 RAG, en français, pour Étape 5 Génération + citations.
 
-Contexte CP5 : les participants branchent retrieval et génération pour produire une réponse en français, ancrée dans les chunks, avec citations au format `[source: filename, pN]`.
+Contexte Étape 5 : les participants branchent retrieval et génération pour produire une réponse en français, ancrée dans les chunks, avec citations au format `[source: filename, pN]`.
 
 Slides attendues :
-1. "CP5 — Mission : répondre avec preuves"
+1. "Étape 5 — Mission : répondre avec preuves"
    - Artefact : point d'entrée RAG exécutable.
    - Message clé : utile = ancré + traçable, pas seulement fluide.
 2. "retrieve -> generate"
@@ -1184,29 +1207,29 @@ Slides attendues :
 4. "Citation probante vs citation décorative"
    - Exemple contrastif : citation qui soutient l'affirmation vs citation juste présente.
    - Visual : deux cartes comparées.
-5. "CP5 — Débrief : fluide ou fidèle ?"
+5. "Étape 5 — Débrief : fluide ou fidèle ?"
    - Question principale : "Avez-vous obtenu une belle réponse impossible à vérifier ?"
    - Relances : hors-corpus mots de passe, citations instables, hallucination de bonnes pratiques.
 
 Contraintes :
 - Inclure notes facilitateur de 100-130 mots par slide.
-- Faire le lien explicite avec la grille CP6.
+- Faire le lien explicite avec la grille Étape 6.
 - Ne pas afficher de longues réponses générées ; utiliser des extraits courts.
 ```
 
-### 7.9 Prompt détaillé — CP6 Évaluation + pont Module 4
+### 7.9 Prompt détaillé — Étape 6 Évaluation + pont Module 4
 
 ```text
-Génère les slides 32 à 39 du deck Module 3 RAG, en français, pour CP6 Évaluation et clôture.
+Génère les slides 32 à 39 du deck Module 3 RAG, en français, pour Étape 6 Évaluation et clôture.
 
-Contexte CP6 : les participants exécutent 5 questions d'évaluation, écrivent `data/eval-results.json`, puis rédigent `eval-findings.md` avec au moins 3 failles nommées, chacune appuyée par un exemple et une hypothèse de cause.
+Contexte Étape 6 : les participants exécutent 5 questions d'évaluation, écrivent `data/eval-results.json`, puis rédigent `eval-findings.md` avec au moins 3 failles nommées, chacune appuyée par un exemple et une hypothèse de cause.
 
 Slides attendues :
-1. "CP6 — Mission : stresser la pipeline"
+1. "Étape 6 — Mission : stresser la pipeline"
    - Artefacts : `eval-results.json`, `eval-findings.md`.
    - Message clé : 5 questions, 5 profils, 3 failles.
 2. "On n'optimise pas : on observe"
-   - Règle : pas de correction pendant CP6.
+   - Règle : pas de correction pendant Étape 6.
    - Message clé : une preuve avant une solution.
 3. "La grille : fidélité / complétude / traçabilité"
    - Définir chaque critère en une phrase.
@@ -1214,7 +1237,7 @@ Slides attendues :
 4. "Nommer une faille correctement"
    - Template : Type, exemple concret, hypothèse de cause.
    - Montrer un exemple générique.
-5. "CP6 — Débrief : quelles failles reviennent ?"
+5. "Étape 6 — Débrief : quelles failles reviennent ?"
    - Activité : récolter 3 failles au tableau.
    - Relances : hallucination, citation fausse, retrieval hors sujet, chunking bruité.
 6. "Pont Module 4 : des failles aux améliorations mesurables"
@@ -1227,7 +1250,7 @@ Slides attendues :
 
 Contraintes :
 - Ton énergique mais sobre.
-- Notes facilitateur avec timing strict : CP6 doit rester court.
+- Notes facilitateur avec timing strict : Étape 6 doit rester court.
 - Inclure une phrase prête à dire pour recadrer : "C'est une très bonne amélioration — note-la pour Module 4, mais maintenant on documente la faille."
 ```
 
@@ -1240,7 +1263,7 @@ Objectif : aider à piloter la salle, pas à expliquer le code ligne par ligne.
 
 Inclure :
 - timeline minute par minute ;
-- signal de passage par checkpoint ;
+- signal de passage par étape ;
 - questions de débrief principales et relances ;
 - phrases prêtes à dire ;
 - interventions si blocage systémique ;
@@ -1262,7 +1285,7 @@ Objectif : donner aux participants un support autonome léger, sans remplacer le
 
 Sections attendues :
 1. Avant l'atelier — ce que vous allez construire et pourquoi le RAG est volontairement naïf.
-2. Carte des checkpoints — CP, artefact, exit criterion, piège à observer.
+2. Carte des étapes — CP, artefact, exit criterion, piège à observer.
 3. Glossaire minimal — chunk, embedding, index, retrieval, top-k, citation, fidélité.
 4. Grille d'évaluation — fidélité, complétude, traçabilité.
 5. Template `eval-findings.md`.
@@ -1286,7 +1309,7 @@ Tu es reviewer pédagogique d'un deck technique.
 3. Action : le participant sait-il quoi faire ou quoi observer après chaque slide ?
 4. Facilitation : les notes indiquent-elles quoi dire, quelle question poser et quand couper ?
 5. Cohérence Module 4 : les failles observées mènent-elles clairement aux améliorations futures ?
-6. Outil : le deck est-il mieux adapté à Slidev/Marp, Canva, ou nécessite-t-il des visuels générés ?
+6. Outil : le deck est-il mieux adapté à Slidev, Canva, ou nécessite-t-il des visuels générés ?
 
 Retour attendu :
 - 10 problèmes prioritaires maximum ;
@@ -1306,13 +1329,13 @@ Décisions à valider :
 - place du contenu participant avant / pendant / après ;
 - vocabulaire des critères d'évaluation ;
 - niveau d'explication conceptuelle acceptable dans les slides ;
-- choix de flux de production : Slidev/Marp source de vérité, puis Canva pour finition visuelle.
+- choix de flux de production : Slidev source de vérité, puis Canva pour finition visuelle.
 
 ### Itération 2 — Produire les supports markdown
 
 Livrables :
 
-- `slides/module-3-facilitator.md` en Slidev/Marp, basé sur l'outline 39 slides ;
+- `slides/module-3-facilitator.md` en Slidev, basé sur l'outline 39 slides ;
 - prompts Canva / Gemini prêts pour finition visuelle et illustrations ;
 - `instructor-guide/module-3.md` enrichi ;
 - `reference/module-3-participant-pack.md` ou équivalent.
@@ -1347,13 +1370,15 @@ Questions de retour :
 
 1. Voulez-vous que le deck soit le support principal de facilitation, ou seulement un métronome entre les phases agent-pilotées ?
 2. Faut-il produire une fiche participant autonome avant l'atelier, ou éviter de charger les participants avant la session ?
-3. Les critères CP6 doivent-ils rester simples (`fidélité`, `complétude`, `traçabilité`) ou introduire aussi `pertinence retrieval` et `qualité citation` ?
-4. Souhaitez-vous intégrer un mini “quiz de rappel” entre CP3 et CP4, ou préserver tout le temps pour la pratique ?
+3. Les critères Étape 6 doivent-ils être validés en version SOTA courte : `contexte`, `fidélité`, `complétude`, `citation` ?
+4. Souhaitez-vous intégrer un mini “quiz de rappel” entre Étape 3 et Étape 4, ou préserver tout le temps pour la pratique ?
 5. Le pont Module 4 doit-il mentionner explicitement les techniques futures (reranking, seuils, chunking sémantique, faithfulness eval), ou seulement les catégories de failles ?
 
 ---
 
 ## 10. Sources et justifications rapides
+
+La synthèse SOTA complète est dans `design/module-3-sota-research-synthesis.md`. Les sources ci-dessous restent les justifications pédagogiques initiales ; la nouvelle synthèse ajoute les références agent-assisted coding education, RAGAS/RAGChecker/ALCE et taxonomies de pannes RAG.
 
 - **Learning objectives / Backward Design** : objectifs observables, preuves d'apprentissage et activités alignées ; utile pour relier LO, exit criteria et supports.
 - **A-SMART / Bloom** : verbes d'action et objectifs mesurables ; cohérent avec LO1-LO5 existants.

@@ -1,8 +1,7 @@
 ---
-marp: true
-paginate: true
+theme: default
+transition: fade-out
 title: Module 3 — Construis ton RAG · Facilitateur
-size: 16:9
 style: |
   @import url("https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.0/dist/dsfr/dsfr.min.css");
 
@@ -203,12 +202,12 @@ Signal : les participants peuvent nommer les 5 familles de livrables.
   <div class="pipebox"><span class="icon">🧪</span><span class="label">Éval</span><div class="caption">failles</div></div>
 </div>
 
-<div class="card small">Chaque checkpoint ajoute une brique — CP6 juge l'ensemble.</div>
+<div class="card small">Chaque étape ajoute une brique — Étape 6 juge l'ensemble.</div>
 
 <!--
 Durée : 1 min.
 Utiliser cette slide comme carte de navigation. À chaque transition, revenir mentalement à cette chaîne. Important : la génération n'arrive qu'après retrieval ; l'évaluation ne vient qu'une fois un système complet construit.
-Question : « À quelle étape commence-t-on vraiment à pouvoir juger la qualité ? » Réponse attendue : pas avant CP5/CP6, même si des signaux apparaissent avant.
+Question : « À quelle étape commence-t-on vraiment à pouvoir juger la qualité ? » Réponse attendue : pas avant l’Étapes 5/6, même si des signaux apparaissent avant.
 -->
 
 ---
@@ -245,7 +244,7 @@ Signal : les participants savent quand appeler le facilitateur.
 
 <!--
 Durée : 1 min.
-Les objectifs 1-3 sont orientés construction. Les objectifs 4-5 sont le cœur de la maturité RAG. Les expliciter dès le départ aide les participants à accepter l'étape CP6, qui peut sembler moins “productive” mais qui est la plus importante pédagogiquement.
+Les objectifs 1-3 sont orientés construction. Les objectifs 4-5 sont le cœur de la maturité RAG. Les expliciter dès le départ aide les participants à accepter l’Étape 6, qui peut sembler moins “productive” mais qui est la plus importante pédagogiquement.
 Question : « Lequel de ces objectifs est le plus difficile à automatiser ? » Faire émerger l'évaluation.
 -->
 
@@ -256,17 +255,17 @@ Question : « Lequel de ces objectifs est le plus difficile à automatiser ? » 
 
 <div class="timeline">
   <div class="timebox"><strong>00:00</strong>Cadrage</div>
-  <div class="timebox"><strong>00:10</strong>CP1 Setup</div>
-  <div class="timebox"><strong>00:30</strong>CP2 Ingestion</div>
-  <div class="timebox"><strong>01:00</strong>CP3 Index</div>
+  <div class="timebox"><strong>00:10</strong>Étape 1 Setup</div>
+  <div class="timebox"><strong>00:30</strong>Étape 2 Ingestion</div>
+  <div class="timebox"><strong>01:00</strong>Étape 3 Index</div>
   <div class="timebox"><strong>01:25</strong>Pause</div>
-  <div class="timebox"><strong>01:35</strong>CP4 Retrieval</div>
-  <div class="timebox"><strong>02:00</strong>CP5 Génération</div>
-  <div class="timebox"><strong>02:30</strong>CP6 Éval</div>
+  <div class="timebox"><strong>01:35</strong>Étape 4 Retrieval</div>
+  <div class="timebox"><strong>02:00</strong>Étape 5 Génération</div>
+  <div class="timebox"><strong>02:30</strong>Étape 6 Éval</div>
   <div class="timebox"><strong>02:50</strong>Clôture</div>
 </div>
 
-- Débrief court entre checkpoints
+- Débrief court entre étapes
 - Passage quand **~80%** ont l'exit minimal
 - Optimisations dans le parking lot Module 4
 
@@ -283,7 +282,7 @@ Signal : acceptation de la règle des 80%.
 
 <div class="cols">
   <div class="card green"><strong>À faire</strong><br>Lire les sorties, vérifier les critères, poser une question quand un résultat surprend.</div>
-  <div class="card red"><strong>À éviter</strong><br>Copier sans comprendre, sauter un checkpoint, optimiser avant CP6.</div>
+  <div class="card red"><strong>À éviter</strong><br>Copier sans comprendre, sauter une étape, optimiser avant l’Étape 6.</div>
 </div>
 
 - Une micro-étape à la fois
@@ -292,14 +291,52 @@ Signal : acceptation de la règle des 80%.
 
 <!--
 Durée : 1 min.
-Donner un mode de collaboration avec l'agent. Le risque est que l'agent devienne une machine à copier-coller. Demander aux participants d'expliquer les résultats clés avec leurs mots, surtout à partir de CP2. Le facilitateur peut interrompre si la salle “avance” sans comprendre.
+Donner un mode de collaboration avec l'agent. Le risque est que l'agent devienne une machine à copier-coller. Demander aux participants d'expliquer les résultats clés avec leurs mots, surtout à partir de l’Étape 2. Le facilitateur peut interrompre si la salle “avance” sans comprendre.
 Question : « Quelle preuve vous autorise à passer à l'étape suivante ? »
 -->
 
 ---
 
-<div class="kicker">Checkpoint 1 · 20 min</div>
-# CP1 — Mission : valider la fondation
+<div class="kicker">Agent-assisted learning</div>
+# Réussir vite ≠ apprendre durablement
+
+<div class="statement">L'agent peut accélérer la construction. Notre travail est de garder la compréhension dans la boucle.</div>
+
+<div class="cols">
+  <div class="card green"><strong>Performance</strong><br>Le code tourne, les fichiers existent, l'agent répond.</div>
+  <div class="card orange"><strong>Apprentissage</strong><br>Vous savez expliquer, vérifier et diagnostiquer sans copier aveuglément.</div>
+</div>
+
+<div class="card small">Règle atelier : chaque étape se termine par une preuve, pas par une impression.</div>
+
+<!--
+Durée : 1 min.
+Introduire le paradoxe performance/apprentissage observé dans la littérature sur l'IA générative en programmation : les agents améliorent la réussite immédiate mais peuvent créer une illusion de compétence si l'apprenant délègue le raisonnement. Ne pas dramatiser ; poser simplement le contrat : aujourd'hui on construit ET on vérifie ce que l'on comprend.
+Question : « Comment sauriez-vous que vous avez vraiment compris une étape ? »
+-->
+
+---
+
+<div class="kicker">Posture avec l'agent</div>
+# Tuteur, pas prestataire
+
+<div class="cols">
+  <div class="card green"><h3>Mode tuteur</h3><p>« Explique le compromis chunk size / retrieval. »<br>« Quelle hypothèse cette erreur invalide-t-elle ? »</p></div>
+  <div class="card red"><h3>Mode prestataire</h3><p>« Écris tout le code. »<br>« Fixe cette erreur. »<br>Copier sans lecture.</p></div>
+</div>
+
+<div class="card blue small">Geste attendu : prédire → demander → vérifier → expliquer.</div>
+
+<!--
+Durée : 1 min.
+Nommer explicitement les deux postures. Le facilitateur peut interrompre si plusieurs participants utilisent l'agent comme prestataire. Phrase courte : « Demandez-lui d'abord de vous rendre capable de juger sa proposition. » Faire écrire une question “mode tuteur” avant le lancement de l’Étape 1 si le groupe semble novice avec les agents.
+Signal : les prompts posent des questions de compréhension, pas seulement des demandes d'exécution.
+-->
+
+---
+
+<div class="kicker">Étape 1 · 20 min</div>
+# Étape 1 — Mission : valider la fondation
 
 <div class="pipeline">
   <div class="pipebox active"><span class="icon">💬</span><span class="label">Chat baseline</span><div class="caption">Mastra + Albert</div></div>
@@ -313,14 +350,14 @@ Question : « Quelle preuve vous autorise à passer à l'étape suivante ? »
 <div class="card">Objectif : isoler les problèmes d'environnement avant les problèmes RAG.</div>
 
 <!--
-Durée : 1 min d'intro, puis lancement CP1.
-Dire : « Pour l'instant, on ne cherche pas à lire l'ANSSI. On vérifie que la chaîne locale parle au modèle. » C'est une étape de confiance : si CP1 est instable, tout le reste sera impossible à diagnostiquer.
+Durée : 1 min d'intro, puis lancement Étape 1.
+Dire : « Pour l'instant, on ne cherche pas à lire l'ANSSI. On vérifie que la chaîne locale parle au modèle. » C'est une étape de confiance : si Étape 1 est instable, tout le reste sera impossible à diagnostiquer.
 Signal de passage : plus de 80% avec Mastra Studio accessible et chat-agent fonctionnel.
 -->
 
 ---
 
-<div class="kicker">CP1 · Concept</div>
+<div class="kicker">Étape 1 · Concept</div>
 # Un agent qui parle n'est pas encore un RAG
 
 <div class="cols">
@@ -336,8 +373,8 @@ Question : « Qu'est-ce qui manque pour passer de la colonne gauche à la colonn
 
 ---
 
-<div class="kicker">CP1 · Exit criteria</div>
-# CP1 — Signal de sortie
+<div class="kicker">Étape 1 · Exit criteria</div>
+# Étape 1 — Signal de sortie
 
 - `node_modules/` présent
 - `.env` avec `ALBERT_API_KEY` non vide
@@ -347,15 +384,15 @@ Question : « Qu'est-ce qui manque pour passer de la colonne gauche à la colonn
 <div class="card orange small">Erreur fréquente : `.env` existe, mais la clé est vide ou l'agent tourne dans le mauvais dossier.</div>
 
 <!--
-Durée : 1 min avant travail, 1 min au moment de clôturer CP1.
+Durée : 1 min avant travail, 1 min au moment de clôturer Étape 1.
 Rappeler que l'on ne croit pas “ça devrait marcher” : on vérifie. Si la salle bloque massivement sur 401/403, traiter la clé Albert en plénière. Si plusieurs machines bloquent sur le port, donner une consigne unique.
 Signal : critères observés, pas déclarés.
 -->
 
 ---
 
-<div class="kicker">CP1 · Débrief 5 min</div>
-# CP1 — Debugger par couches
+<div class="kicker">Étape 1 · Débrief 5 min</div>
+# Étape 1 — Debugger par couches
 
 <div class="statement">Quelle vérification a isolé le problème le plus vite ?</div>
 
@@ -368,14 +405,14 @@ Signal : critères observés, pas déclarés.
 
 <!--
 Durée : 5 min.
-Demander 2 retours rapides, pas plus. Si un cas particulier est intéressant mais long, le mettre en parking. Faire émerger l'ordre de diagnostic : dépendances → environnement → serveur → agent → modèle. Clore en reliant à CP2 : maintenant que le modèle répond, on va lui donner un corpus.
+Demander 2 retours rapides, pas plus. Si un cas particulier est intéressant mais long, le mettre en parking. Faire émerger l'ordre de diagnostic : dépendances → environnement → serveur → agent → modèle. Clore en reliant à l’Étape 2 : maintenant que le modèle répond, on va lui donner un corpus.
 Question principale affichée. Relance : « Quel check referiez-vous en premier demain ? »
 -->
 
 ---
 
-<div class="kicker">Checkpoint 2 · 30 min</div>
-# CP2 — Mission : transformer les PDFs en chunks
+<div class="kicker">Étape 2 · 30 min</div>
+# Étape 2 — Mission : transformer les PDFs en chunks
 
 <div class="cols">
   <div class="card"><strong>Artefact</strong><br><code>data/chunks.json</code></div>
@@ -395,7 +432,7 @@ Signal de passage : `chunks.json` existe, >=40 chunks, 17 PDFs représentés.
 
 ---
 
-<div class="kicker">CP2 · Modèle mental</div>
+<div class="kicker">Étape 2 · Modèle mental</div>
 # Du PDF au chunk
 
 <div class="pipeline">
@@ -417,7 +454,7 @@ Question : « Quelle information utile peut disparaître quand on passe d'un PDF
 
 ---
 
-<div class="kicker">CP2 · Traçabilité</div>
+<div class="kicker">Étape 2 · Traçabilité</div>
 # Le contrat de métadonnées
 
 <div class="example">
@@ -437,13 +474,13 @@ Question : « Quelle information utile peut disparaître quand on passe d'un PDF
 
 <!--
 Durée : 2 min.
-Relier CP2 à CP5 : si les métadonnées sont perdues ici, les citations seront impossibles ou décoratives plus tard. C'est un point important : la qualité RAG se joue avant la génération.
+Relier Étape 2 à l’Étape 5 : si les métadonnées sont perdues ici, les citations seront impossibles ou décoratives plus tard. C'est un point important : la qualité RAG se joue avant la génération.
 Question : « Quelle clé est indispensable pour vérifier une citation ? » Réponse attendue : source/page, avec chunk_index utile pour diagnostiquer.
 -->
 
 ---
 
-<div class="kicker">CP2 · Choix volontaire</div>
+<div class="kicker">Étape 2 · Choix volontaire</div>
 # Chunking naïf : pourquoi on l'assume
 
 <div class="cols">
@@ -455,14 +492,14 @@ Question : « Quelle clé est indispensable pour vérifier une citation ? » Ré
 
 <!--
 Durée : 2 min.
-Cette slide est un amortisseur contre l'optimisation prématurée. Valider l'intuition des participants : oui, il existe de meilleurs chunkers. Mais le but est que tout le monde partage le même défaut pour pouvoir le discuter en CP6 et Module 4.
+Cette slide est un amortisseur contre l'optimisation prématurée. Valider l'intuition des participants : oui, il existe de meilleurs chunkers. Mais le but est que tout le monde partage le même défaut pour pouvoir le discuter en Étape 6 et Module 4.
 Phrase prête : « On ne corrige pas le chunking maintenant, on collecte ses symptômes. »
 -->
 
 ---
 
-<div class="kicker">CP2 · Débrief 10 min</div>
-# CP2 — Compter ne suffit pas
+<div class="kicker">Étape 2 · Débrief 10 min</div>
+# Étape 2 — Compter ne suffit pas
 
 <div class="statement">Qu'est-ce que la couverture manifest révèle que le simple count ne voit pas ?</div>
 
@@ -479,8 +516,8 @@ Signal : la salle comprend que la donnée préparée conditionne tout le reste.
 
 ---
 
-<div class="kicker">Checkpoint 3 · 25 min</div>
-# CP3 — Mission : rendre les chunks interrogeables
+<div class="kicker">Étape 3 · 25 min</div>
+# Étape 3 — Mission : rendre les chunks interrogeables
 
 <div class="cols">
   <div class="card"><strong>Artefact</strong><br><code>data/index.db</code></div>
@@ -500,7 +537,7 @@ Signal de passage : index créé, count égal au nombre de chunks, dimension 102
 
 ---
 
-<div class="kicker">CP3 · Modèle mental</div>
+<div class="kicker">Étape 3 · Modèle mental</div>
 # Embeddings : coordonnées sémantiques, pas vérité
 
 <div class="cols">
@@ -518,7 +555,7 @@ Question : « Si deux chunks sont proches, qu'est-ce que cela prouve ? » Répon
 
 ---
 
-<div class="kicker">CP3 · Robustesse</div>
+<div class="kicker">Étape 3 · Robustesse</div>
 # Index vectoriel : trois checks vitaux
 
 <div class="cols-3">
@@ -537,8 +574,8 @@ Question : « Si `count < chunks.length`, quelle hypothèse testez-vous d'abord 
 
 ---
 
-<div class="kicker">CP3 · Débrief 5 min</div>
-# CP3 — Les erreurs silencieuses
+<div class="kicker">Étape 3 · Débrief 5 min</div>
+# Étape 3 — Les erreurs silencieuses
 
 <div class="statement">Quel problème aurait pu passer inaperçu sans check structurel ?</div>
 
@@ -559,12 +596,12 @@ Transition : l'index est prêt ; maintenant on va voir ce qu'il remonte quand on
 # Pause — où en est la pipeline ?
 
 <div class="pipeline">
-  <div class="pipebox done"><span class="icon">✅</span><span class="label">CP1</span><div class="caption">baseline</div></div>
-  <div class="pipebox done"><span class="icon">✅</span><span class="label">CP2</span><div class="caption">chunks</div></div>
-  <div class="pipebox done"><span class="icon">✅</span><span class="label">CP3</span><div class="caption">index</div></div>
-  <div class="pipebox active"><span class="icon">🔎</span><span class="label">CP4</span><div class="caption">retrieval</div></div>
-  <div class="pipebox"><span class="icon">💬</span><span class="label">CP5</span><div class="caption">réponse</div></div>
-  <div class="pipebox"><span class="icon">🧪</span><span class="label">CP6</span><div class="caption">éval</div></div>
+  <div class="pipebox done"><span class="icon">✅</span><span class="label">Étape 1</span><div class="caption">baseline</div></div>
+  <div class="pipebox done"><span class="icon">✅</span><span class="label">Étape 2</span><div class="caption">chunks</div></div>
+  <div class="pipebox done"><span class="icon">✅</span><span class="label">Étape 3</span><div class="caption">index</div></div>
+  <div class="pipebox active"><span class="icon">🔎</span><span class="label">Étape 4</span><div class="caption">retrieval</div></div>
+  <div class="pipebox"><span class="icon">💬</span><span class="label">Étape 5</span><div class="caption">réponse</div></div>
+  <div class="pipebox"><span class="icon">🧪</span><span class="label">Étape 6</span><div class="caption">éval</div></div>
 </div>
 
 <div class="card small">Après la pause, on passe de “préparer le corpus” à “interroger le corpus”.</div>
@@ -577,8 +614,8 @@ Signal : groupe prêt pour retrieval.
 
 ---
 
-<div class="kicker">Checkpoint 4 · 25 min</div>
-# CP4 — Mission : retrouver du contexte
+<div class="kicker">Étape 4 · 25 min</div>
+# Étape 4 — Mission : retrouver du contexte
 
 <div class="cols">
   <div class="card"><strong>Artefact</strong><br><code>retrieve(query, k=5)</code></div>
@@ -592,13 +629,13 @@ Signal : groupe prêt pour retrieval.
 
 <!--
 Durée : 1 min d'intro.
-Clarifier : CP4 ne produit pas encore de réponse utilisateur. Il produit du contexte candidat. Le top-5 est un choix pédagogique qui rend visible le compromis signal/bruit.
+Clarifier : Étape 4 ne produit pas encore de réponse utilisateur. Il produit du contexte candidat. Le top-5 est un choix pédagogique qui rend visible le compromis signal/bruit.
 Signal de passage : 3 requêtes test retournent 5 chunks non vides avec métadonnées, Zero Trust apparaît dans le top-5.
 -->
 
 ---
 
-<div class="kicker">CP4 · Modèle mental</div>
+<div class="kicker">Étape 4 · Modèle mental</div>
 # La requête devient un vecteur
 
 <div class="pipeline">
@@ -606,21 +643,21 @@ Signal de passage : 3 requêtes test retournent 5 chunks non vides avec métadon
   <div class="pipebox active"><span class="icon">🧭</span><span class="label">Embedding</span><div class="caption">même modèle</div></div>
   <div class="pipebox active"><span class="icon">📍</span><span class="label">Similarité</span><div class="caption">cosinus</div></div>
   <div class="pipebox active"><span class="icon">🔎</span><span class="label">Top-k</span><div class="caption">5 chunks</div></div>
-  <div class="pipebox"><span class="icon">💬</span><span class="label">Réponse</span><div class="caption">CP5</div></div>
-  <div class="pipebox"><span class="icon">🧪</span><span class="label">Jugement</span><div class="caption">CP6</div></div>
+  <div class="pipebox"><span class="icon">💬</span><span class="label">Réponse</span><div class="caption">Étape 5</div></div>
+  <div class="pipebox"><span class="icon">🧪</span><span class="label">Jugement</span><div class="caption">Étape 6</div></div>
 </div>
 
 <div class="card orange small">Si la question et les chunks n'utilisent pas le même modèle, les résultats deviennent difficiles à interpréter.</div>
 
 <!--
 Durée : 2 min.
-Faire le lien avec CP3 : la même géométrie vectorielle doit s'appliquer aux chunks et à la question. Un mismatch de modèle est un bug conceptuel plus qu'un simple bug de code.
+Faire le lien avec Étape 3 : la même géométrie vectorielle doit s'appliquer aux chunks et à la question. Un mismatch de modèle est un bug conceptuel plus qu'un simple bug de code.
 Question : « Pourquoi embedder aussi la question ? »
 -->
 
 ---
 
-<div class="kicker">CP4 · Limite clé</div>
+<div class="kicker">Étape 4 · Limite clé</div>
 # Top-k : liste de suspects, pas verdict
 
 <div class="cols-3">
@@ -639,8 +676,8 @@ Phrase à faire dire : « score ≠ vérité ».
 
 ---
 
-<div class="kicker">CP4 · Débrief 5 min</div>
-# CP4 — Que valent les scores ?
+<div class="kicker">Étape 4 · Débrief 5 min</div>
+# Étape 4 — Que valent les scores ?
 
 <div class="statement">Que signifie un top-5 sur une question hors corpus ?</div>
 
@@ -657,8 +694,8 @@ Transition : maintenant que le contexte remonte, on va le donner au modèle pour
 
 ---
 
-<div class="kicker">Checkpoint 5 · 30 min</div>
-# CP5 — Mission : répondre avec preuves
+<div class="kicker">Étape 5 · 30 min</div>
+# Étape 5 — Mission : répondre avec preuves
 
 <div class="cols">
   <div class="card"><strong>Artefact</strong><br>Point d'entrée RAG exécutable</div>
@@ -678,7 +715,7 @@ Signal de passage : question Zero Trust répondue en français avec au moins 2 c
 
 ---
 
-<div class="kicker">CP5 · Orchestration</div>
+<div class="kicker">Étape 5 · Orchestration</div>
 # `retrieve -> generate`
 
 <div class="pipeline">
@@ -687,20 +724,20 @@ Signal de passage : question Zero Trust répondue en français avec au moins 2 c
   <div class="pipebox active"><span class="icon">📚</span><span class="label">Contexte</span><div class="caption">chunks</div></div>
   <div class="pipebox active"><span class="icon">💬</span><span class="label">generate</span><div class="caption">LLM</div></div>
   <div class="pipebox active"><span class="icon">🏷️</span><span class="label">Citations</span><div class="caption">source/page</div></div>
-  <div class="pipebox"><span class="icon">🧪</span><span class="label">Audit</span><div class="caption">CP6</div></div>
+  <div class="pipebox"><span class="icon">🧪</span><span class="label">Audit</span><div class="caption">Étape 6</div></div>
 </div>
 
 <div class="card small">La génération hérite directement de la qualité du retrieval.</div>
 
 <!--
 Durée : 1 min.
-Montrer que la génération n'est pas magique : elle dépend de ce que CP4 lui donne. Si les chunks sont hors sujet, le modèle peut être fluide mais mal ancré. C'est le lien central avec l'évaluation.
+Montrer que la génération n'est pas magique : elle dépend de ce que Étape 4 lui donne. Si les chunks sont hors sujet, le modèle peut être fluide mais mal ancré. C'est le lien central avec l'évaluation.
 Question : « Quel est le maillon le plus faible si la réponse est hors sujet ? » Réponse : ça dépend, il faut inspecter retrieval et prompt.
 -->
 
 ---
 
-<div class="kicker">CP5 · Prompt contract</div>
+<div class="kicker">Étape 5 · Prompt contract</div>
 # Le contrat de réponse
 
 - Répondre **uniquement** avec les passages fournis
@@ -708,7 +745,7 @@ Question : « Quel est le maillon le plus faible si la réponse est hors sujet ?
 - Utiliser un format stable : `[source: fichier, pN]`
 - Dire explicitement quand le contexte manque
 
-<div class="card orange small">Un format instable aujourd'hui rend l'évaluation de CP6 beaucoup plus difficile.</div>
+<div class="card orange small">Un format instable aujourd'hui rend l'évaluation de l’Étape 6 beaucoup plus difficile.</div>
 
 <!--
 Durée : 1 min.
@@ -718,7 +755,7 @@ Question : « Quelle consigne du prompt rend la réponse vérifiable ? »
 
 ---
 
-<div class="kicker">CP5 · Qualité</div>
+<div class="kicker">Étape 5 · Qualité</div>
 # Citation probante vs citation décorative
 
 <div class="cols">
@@ -730,14 +767,14 @@ Question : « Quelle consigne du prompt rend la réponse vérifiable ? »
 
 <!--
 Durée : 2 min.
-Faire lire la différence. Une citation décorative satisfait parfois un test regex mais échoue à l'audit humain. C'est une transition directe vers les critères CP6. Éviter les longs exemples : le but est le geste d'audit, pas le contenu ANSSI exact.
+Faire lire la différence. Une citation décorative satisfait parfois un test regex mais échoue à l'audit humain. C'est une transition directe vers les critères Étape 6. Éviter les longs exemples : le but est le geste d'audit, pas le contenu ANSSI exact.
 Question : « Que faut-il comparer pour juger une citation ? » Réponse : affirmation ↔ chunk cité.
 -->
 
 ---
 
-<div class="kicker">CP5 · Débrief 10 min</div>
-# CP5 — Fluide ou fidèle ?
+<div class="kicker">Étape 5 · Débrief 10 min</div>
+# Étape 5 — Fluide ou fidèle ?
 
 <div class="statement">Avez-vous obtenu une belle réponse impossible à vérifier ?</div>
 
@@ -748,14 +785,14 @@ Question : « Que faut-il comparer pour juger une citation ? » Réponse : affir
 
 <!--
 Durée : 8 min.
-Demander explicitement un cas où la réponse était convaincante mais problématique. C'est souvent le moment le plus révélateur. Si la salle ne trouve rien, insister sur la question hors-corpus mots de passe. Clore : CP6 va formaliser ce jugement avec une grille, au lieu de rester dans l'impression. Si le groupe est en retard, réduire ce débrief à 5 minutes et garder la question hors-corpus comme preuve principale.
+Demander explicitement un cas où la réponse était convaincante mais problématique. C'est souvent le moment le plus révélateur. Si la salle ne trouve rien, insister sur la question hors-corpus mots de passe. Clore : Étape 6 va formaliser ce jugement avec une grille, au lieu de rester dans l'impression. Si le groupe est en retard, réduire ce débrief à 5 minutes et garder la question hors-corpus comme preuve principale.
 Signal : le groupe distingue fluidité, fidélité et traçabilité.
 -->
 
 ---
 
-<div class="kicker">Checkpoint 6 · 20 min</div>
-# CP6 — Mission : stresser la pipeline
+<div class="kicker">Étape 6 · 20 min</div>
+# Étape 6 — Mission : stresser la pipeline
 
 <div class="cols">
   <div class="card"><strong>Artefacts</strong><br><code>data/eval-results.json</code><br><code>eval-findings.md</code></div>
@@ -769,13 +806,13 @@ Signal : le groupe distingue fluidité, fidélité et traçabilité.
 
 <!--
 Durée : 30 sec d'intro.
-Le changement de posture est crucial : on arrête de construire pour juger. Répéter que CP6 n'est pas une phase d'optimisation. Les participants doivent produire des preuves écrites qui serviront de point de départ au Module 4.
+Le changement de posture est crucial : on arrête de construire pour juger. Répéter que Étape 6 n'est pas une phase d'optimisation. Les participants doivent produire des preuves écrites qui serviront de point de départ au Module 4.
 Signal de passage : `eval-findings.md` contient 5 résultats et 3 failles structurées avant la clôture de 02:50.
 -->
 
 ---
 
-<div class="kicker">CP6 · Règle</div>
+<div class="kicker">Étape 6 · Règle</div>
 # On n'optimise pas : on observe
 
 <div class="statement">Une preuve avant une solution.</div>
@@ -795,26 +832,27 @@ Question : « Quelle preuve écrite aurez-vous à la fin de cette étape ? »
 
 ---
 
-<div class="kicker">CP6 · Grille</div>
-# La grille : fidélité / complétude / traçabilité
+<div class="kicker">Étape 6 · Grille</div>
+# La grille : contexte / fidélité / complétude / citation
 
-<div class="matrix">
-  <div class="card"><h3>Fidélité</h3><p>La réponse s'appuie-t-elle vraiment sur les chunks fournis ?</p></div>
+<div class="cols-4">
+  <div class="card"><h3>Contexte</h3><p>Les chunks récupérés sont-ils utiles pour la question ?</p></div>
+  <div class="card"><h3>Fidélité</h3><p>Chaque affirmation vient-elle vraiment des chunks fournis ?</p></div>
   <div class="card"><h3>Complétude</h3><p>La réponse couvre-t-elle les informations attendues du corpus ?</p></div>
-  <div class="card"><h3>Traçabilité</h3><p>Les citations permettent-elles de vérifier source et page ?</p></div>
+  <div class="card"><h3>Citation</h3><p>La source citée soutient-elle l'affirmation exacte ?</p></div>
 </div>
 
-<div class="card small">Une réponse peut être fidèle mais incomplète, complète mais mal citée, ou fluide mais non fidèle.</div>
+<div class="card small">Une réponse peut utiliser le bon corpus, rester incomplète, ou citer une page sans que la citation soit probante.</div>
 
 <!--
 Durée : 1 min.
-Définir les trois critères avec des mots simples. La distinction aide à éviter les jugements vagues du type “ça marche moyen”. Donner un exemple oral : une réponse courte peut être fidèle mais incomplète ; une longue réponse peut être complète mais impossible à tracer.
-Signal : les participants utilisent ces trois mots dans `eval-findings.md`.
+Définir les quatre critères avec des mots simples. La recherche RAG distingue retrieval/context relevance, faithfulness, answer relevance/completeness et citation quality. Ne pas introduire les métriques RAGAS/RAGChecker ici : le but est d'abord de construire le jugement humain. Exemple oral : une citation décorative donne une page, mais cette page ne soutient pas l'affirmation exacte.
+Signal : les participants nomment au moins un critère précis dans `eval-findings.md`.
 -->
 
 ---
 
-<div class="kicker">CP6 · Écriture des failles</div>
+<div class="kicker">Étape 6 · Écriture des failles</div>
 # Nommer une faille correctement
 
 <div class="example">
@@ -836,8 +874,8 @@ Question : « Cette faille permet-elle de décider quoi tester en Module 4 ? »
 
 ---
 
-<div class="kicker">CP6 · Débrief 5 min</div>
-# CP6 — Quelles failles reviennent ?
+<div class="kicker">Étape 6 · Débrief 5 min</div>
+# Étape 6 — Quelles failles reviennent ?
 
 <div class="statement">Quelle faille devient votre première hypothèse Module 4 ?</div>
 
