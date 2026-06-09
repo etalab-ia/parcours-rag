@@ -207,7 +207,7 @@ Signal : les participants peuvent nommer les 5 familles de livrables.
 <!--
 Durée : 1 min.
 Utiliser cette slide comme carte de navigation. À chaque transition, revenir mentalement à cette chaîne. Important : la génération n'arrive qu'après retrieval ; l'évaluation ne vient qu'une fois un système complet construit.
-Question : « À quelle étape commence-t-on vraiment à pouvoir juger la qualité ? » Réponse attendue : pas avant l’Étapes 5/6, même si des signaux apparaissent avant.
+Question : « À quelle étape commence-t-on vraiment à pouvoir juger la qualité ? » Réponse attendue : pas avant les Étapes 5/6, même si des signaux apparaissent avant.
 -->
 
 ---
@@ -351,7 +351,7 @@ Signal : les prompts posent des questions de compréhension, pas seulement des d
 
 <!--
 Durée : 1 min d'intro, puis lancement Étape 1.
-Dire : « Pour l'instant, on ne cherche pas à lire l'ANSSI. On vérifie que la chaîne locale parle au modèle. » C'est une étape de confiance : si Étape 1 est instable, tout le reste sera impossible à diagnostiquer.
+Dire : « Pour l'instant, on ne cherche pas à lire l'ANSSI. On vérifie que la chaîne locale parle au modèle. » C'est une étape de confiance : si l'Étape 1 est instable, tout le reste sera impossible à diagnostiquer.
 Signal de passage : plus de 80% avec Mastra Studio accessible et chat-agent fonctionnel.
 -->
 
@@ -806,7 +806,7 @@ Signal : le groupe distingue fluidité, fidélité et traçabilité.
 
 <!--
 Durée : 30 sec d'intro.
-Le changement de posture est crucial : on arrête de construire pour juger. Répéter que Étape 6 n'est pas une phase d'optimisation. Les participants doivent produire des preuves écrites qui serviront de point de départ au Module 4.
+Le changement de posture est crucial : on arrête de construire pour juger. Répéter que l'Étape 6 n'est pas une phase d'optimisation. Les participants doivent produire des preuves écrites qui serviront de point de départ au Module 4.
 Signal de passage : `eval-findings.md` contient 5 résultats et 3 failles structurées avant la clôture de 02:50.
 -->
 

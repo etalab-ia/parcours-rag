@@ -44,4 +44,6 @@ Sorties HTML statiques :
 - `slides/dist/module-3/`
 - `slides/dist/module-3-facilitator/`
 
+Note : les scripts utilisent `--out dist/...`, mais Slidev résout ce chemin relativement au deck d'entrée situé dans `slides/`, d'où les sorties effectives ci-dessus.
+
 Les decks appliquent une contrainte visuelle DSFR en mode clair directement dans la source markdown.

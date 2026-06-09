@@ -188,7 +188,7 @@ Ton : clair, institutionnel, pas marketing.
 
 ---
 
-## 4.2 Étape 1 — Étape 1 Setup projet + chat baseline
+## 4.2 Étape 1 — Setup projet + chat baseline
 
 ### Rôle dans le module
 
@@ -266,7 +266,7 @@ Ton : rassurant, pratique, sans jargon inutile.
 
 ---
 
-## 4.3 Étape 2 — Étape 2 Ingestion & chunking
+## 4.3 Étape 2 — Ingestion & chunking
 
 ### Rôle dans le module
 
@@ -334,7 +334,7 @@ Public : développeurs / data practitioners.
 
 ---
 
-## 4.4 Étape 3 — Étape 3 Embeddings & index vectoriel
+## 4.4 Étape 3 — Embeddings & index vectoriel
 
 ### Rôle dans le module
 
@@ -402,7 +402,7 @@ Inclure une question d'auto-évaluation pour chaque cause.
 
 ---
 
-## 4.5 Étape 4 — Étape 4 Retrieval
+## 4.5 Étape 4 — Retrieval
 
 ### Rôle dans le module
 
@@ -470,7 +470,7 @@ Le but est de comprendre le compromis top-k sans introduire reranking.
 
 ---
 
-## 4.6 Étape 5 — Étape 5 Génération avec contexte + citations
+## 4.6 Étape 5 — Génération avec contexte + citations
 
 ### Rôle dans le module
 
@@ -538,7 +538,7 @@ Inclure une grille simple à cocher.
 
 ---
 
-## 4.7 Étape 6 — Étape 6 Évaluation + analyse de failles
+## 4.7 Étape 6 — Évaluation + analyse de failles
 
 ### Rôle dans le module
 
