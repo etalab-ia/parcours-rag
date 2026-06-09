@@ -3,9 +3,9 @@
 > Public : formateurs (Noellie + Luis).
 > 
 > Ce document est le playbook d'animation en présentiel (3h, 20 participants techniques).
-> Le détail technique de chaque checkpoint est dans `skills/parcours-rag-module3/references/cp*.md`.
+> Le détail technique de chaque étape est dans `skills/parcours-rag-module3/references/cp*.md`.
 >
-> Note de structure : dans cette version du repo, les contenus checkpoint sont maintenus dans `references/cp*.md` (et non dans `steps/`).
+> Note de structure : dans cette version du repo, les contenus étape sont maintenus dans `references/cp*.md` (et non dans `steps/`).
 
 ---
 
@@ -15,8 +15,8 @@ Ce guide sert à piloter **la salle** (rythme, débriefs, blocages, homogénéit
 
 À la fin du module, chaque participant doit avoir :
 
-- un pipeline RAG local complet (CP1→CP5),
-- un `eval-findings.md` avec au moins 3 failles observées (CP6),
+- un pipeline RAG local complet (Étape 1→Étape 5),
+- un `eval-findings.md` avec au moins 3 failles observées (Étape 6),
 - une compréhension claire de pourquoi ces failles deviennent l'agenda du Module 4.
 
 ---
@@ -28,13 +28,13 @@ Ce guide sert à piloter **la salle** (rythme, débriefs, blocages, homogénéit
 - Cadencer la progression collective.
 - Couper les débats à temps.
 - Débloquer les cas systémiques (problème commun à la salle).
-- Animer les débriefs entre checkpoints.
+- Animer les débriefs entre étapes.
 - Garantir que l'on reste sur les objectifs pédagogiques (pas d'optimisation prématurée).
 
 ### Agent participant
 
 - Guider pas-à-pas sur le poste individuel.
-- Vérifier les exit criteria observables de chaque CP.
+- Vérifier les exit criteria observables de chaque étape.
 - Donner un hint socratique puis une solution complète si besoin.
 
 **Règle pratique** :
@@ -63,19 +63,19 @@ Checklist :
 
 ---
 
-## 1. CP1 Setup (00:10–00:30)
+## 1. Étape 1 Setup (00:10–00:30)
 
 - 00:10–00:25 : travail individuel
-- 00:25–00:30 : débrief plénier CP1
+- 00:25–00:30 : débrief plénier Étape 1
 
 **Signal de passage** : >80% de la salle a `pnpm dev` + `chat-agent` fonctionnel.
 
-### Débrief CP1 (5 min) — questions
+### Débrief Étape 1 (5 min) — questions
 
 1. « Qu'est-ce qui vous a bloqués en premier : dépendances, `.env`, port, réseau ? »
 2. « Quelle vérification vous a permis d'isoler le problème le plus vite ? »
 
-### Signaux d'alerte CP1
+### Signaux d'alerte Étape 1
 
 - Beaucoup de 401/403 → vérifier clé Albert en plénière.
 - Plusieurs ports 4111 occupés → rappeler comment identifier/changer proprement.
@@ -83,39 +83,39 @@ Checklist :
 
 ---
 
-## 2. CP2 Ingestion & chunking (00:30–01:00)
+## 2. Étape 2 Ingestion & chunking (00:30–01:00)
 
 - 00:30–00:50 : travail individuel
-- 00:50–01:00 : débrief plénier CP2
+- 00:50–01:00 : débrief plénier Étape 2
 
 **Signal de passage** : >80% de la salle avec `data/chunks.json` valide (>=40 chunks, couverture 17 PDFs).
 
-### Débrief CP2 (10 min) — questions
+### Débrief Étape 2 (10 min) — questions
 
 1. « Qu'est-ce que le comptage global cache, que la vérification par manifest révèle ? »
 2. « Quels artefacts du chunking naïf avez-vous observés (bruit, coupures, répétitions) ? »
 3. « Pourquoi on accepte ce chunking imparfait à ce stade ? »
 
-### Signaux d'alerte CP2
+### Signaux d'alerte Étape 2
 
 - Participants qui "optimisent" déjà (semantic chunking, nettoyage agressif) → recadrer : "note-le pour Module 4".
 - Couverture incomplète du manifest (souvent oubli d'un PDF) → rappeler vérif systématique.
 
 ---
 
-## 3. CP3 Embeddings & index (01:00–01:25)
+## 3. Étape 3 Embeddings & index (01:00–01:25)
 
 - 01:00–01:20 : travail individuel
-- 01:20–01:25 : débrief plénier CP3
+- 01:20–01:25 : débrief plénier Étape 3
 
 **Signal de passage** : >80% de la salle avec index créé, `count == chunks.length`, dimension 1024, et métadonnées `chunk_index` présentes dans les résultats de smoke test.
 
-### Débrief CP3 (5 min) — questions
+### Débrief Étape 3 (5 min) — questions
 
 1. « Quel batch size a été le plus stable chez vous ? »
 2. « Qui a rencontré des collisions d'IDs ou des counts incohérents ? »
 
-### Signaux d'alerte CP3
+### Signaux d'alerte Étape 3
 
 - `count < chunks.length` récurrent → rappeler la cause fréquente : IDs non uniques.
 - erreurs API massives → réduire batch size recommandé en plénière (ex: 32 → 16).
@@ -128,62 +128,62 @@ Couper franchement. Afficher heure de reprise explicite.
 
 ---
 
-## 5. CP4 Retrieval (01:35–02:00)
+## 5. Étape 4 Retrieval (01:35–02:00)
 
 - 01:35–01:55 : travail individuel
-- 01:55–02:00 : débrief plénier CP4
+- 01:55–02:00 : débrief plénier Étape 4
 
 **Signal de passage** : >80% de la salle avec `retrieve(query,k=5)` stable, scores décroissants, et hit Zero Trust.
 
-### Débrief CP4 (5 min) — questions
+### Débrief Étape 4 (5 min) — questions
 
 1. « Qu'est-ce que top-5 apporte par rapport à top-1 ? »
 2. « Qu'avez-vous observé sur une requête hors domaine ? »
 
-### Signaux d'alerte CP4
+### Signaux d'alerte Étape 4
 
 - résultats hors sujet partout → mismatch modèle embedding ou indexName.
 - confusion score = vérité → recadrer : score est un signal, pas une preuve.
 
 ---
 
-## 6. CP5 Génération + citations (02:00–02:30)
+## 6. Étape 5 Génération + citations (02:00–02:30)
 
 - 02:00–02:20 : travail individuel
-- 02:20–02:30 : débrief plénier CP5
+- 02:20–02:30 : débrief plénier Étape 5
 
 **Signal de passage** : >80% de la salle avec réponse Zero Trust bien citée + comportement maîtrisé sur question hors corpus.
 
-### Débrief CP5 (10 min) — questions
+### Débrief Étape 5 (10 min) — questions
 
 1. « Avez-vous obtenu une réponse fluide mais mal traçable ? »
 2. « Sur la question hors corpus, qu'a fait le modèle ? »
 3. « Quelles formulations de prompt ont réduit l'hallucination ? »
 
-### Signaux d'alerte CP5
+### Signaux d'alerte Étape 5
 
 - citations décoratives (format ok, fond faux) → insister sur vérification manuelle citation↔chunk.
 - participants qui ne testent qu'un cas in-corpus → imposer le test hors-corpus aussi.
 
 ---
 
-## 7. CP6 Éval + analyse de failles (02:30–02:50)
+## 7. Étape 6 Éval + analyse de failles (02:30–02:50)
 
 - 02:30–02:45 : travail individuel
 - 02:45–02:50 : mini debrief salle + préparation clôture
 
 **Signal de passage** : >80% de la salle avec `eval-findings.md` existant, 5 questions traitées, 3 failles nommées avec causes.
 
-### Débrief CP6 (5 min) — questions
+### Débrief Étape 6 (5 min) — questions
 
 1. « Quelle faille vous paraît la plus critique en production ? »
 2. « Quelle faille est la plus facile à corriger au Module 4 ? »
 3. « Quelle hypothèse de cause vous semble la mieux étayée par vos résultats ? »
 
-### Signaux d'alerte CP6
+### Signaux d'alerte Étape 6
 
 - comptes-rendus vagues (sans exemple concret) → exiger trace issue de `eval-results.json`.
-- tentation de corriger au lieu d'analyser → rappeler l'objectif du CP.
+- tentation de corriger au lieu d'analyser → rappeler l'objectif de l'étape.
 
 ---
 
@@ -218,12 +218,12 @@ Clôture (7 min) :
 
 ### Cas 3 — retard important d'un petit groupe
 
-- Objectif minimal : les remettre sur le rail au checkpoint suivant, pas perfectionner le CP courant.
+- Objectif minimal : les remettre sur le rail à l'étape suivante, pas perfectionner l'étape courante.
 - Autoriser "good-enough" si exit criteria essentiels sont validés.
 
 ## B. Participants en avance
 
-- Leur donner la **side quest du CP courant uniquement**.
+- Leur donner la **side quest de l'étape courante uniquement**.
 - Interdire les optimisations Module 4 (sinon divergence de groupe).
 - Leur demander de noter une observation utile pour le debrief.
 
@@ -251,9 +251,9 @@ Avant session :
 
 Pendant session :
 
-- [ ] checkpoint de la salle visible en continu
+- [ ] étape de la salle visible en continu
 - [ ] débrief lancé à l'heure prévue
-- [ ] aucun CP ne déborde de >5 min
+- [ ] aucune étape ne déborde de >5 min
 
 Fin session :
 
@@ -266,6 +266,6 @@ Fin session :
 ## 7) Liens de travail
 
 - Source de vérité design : `design/module-3-design.md`
-- Références CP détaillées : `skills/parcours-rag-module3/references/cp1-setup.md` à `cp6-eval.md`
+- Références détaillées des étapes : `skills/parcours-rag-module3/references/cp1-setup.md` à `cp6-eval.md`
 - Observations pipeline de référence : `reference/observed-behavior.md`
 - Questions d'éval : `data/eval-questions.json`

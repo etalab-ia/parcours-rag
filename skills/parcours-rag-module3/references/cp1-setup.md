@@ -1,4 +1,4 @@
-# Étape 1 (CP1) — Setup projet + chat baseline
+# Étape 1 — Setup projet + chat baseline
 
 ## Objectif
 
@@ -158,7 +158,7 @@ Exécuter ces checks dans l'ordre.
 
 Pour les participants en avance :
 
-- modifier `src/mastra/agents/chat-agent.ts` pour changer légèrement le style (ex: finir chaque réponse par `✅ Baseline CP1`),
+- modifier `src/mastra/agents/chat-agent.ts` pour changer légèrement le style (ex: finir chaque réponse par `✅ Baseline Étape 1`),
 - relancer `npm run dev`,
 - vérifier dans Studio que le changement d'instructions est bien pris en compte.
 

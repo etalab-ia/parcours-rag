@@ -42,7 +42,7 @@ Ensuite, dans votre agent :
 Selon l'agent, il peut aussi apparaître sous la forme `/parcours-rag-module3`.
 
 Le skill lance d'abord un bootstrap workspace basé sur `npm create mastra@latest`
-puis déroule les checkpoints CP1 → CP6. Si le skill `mastra` n'est pas installé,
+puis déroule les étapes Étapes 1 → 6. Si le skill `mastra` n'est pas installé,
 il l'installe automatiquement au début du bootstrap.
 
 ### Smoke tests (clean-room)
@@ -64,7 +64,7 @@ node scripts/smoke/benchmark-corpus-sources.mjs
 
 Si vous travaillez directement dans ce repo, utilisez le flux historique ci-dessous.
 
-## Démarrage (checkpoint 1)
+## Démarrage (étape 1)
 
 ```bash
 pnpm install
@@ -104,8 +104,8 @@ Si votre agent ne propose pas ce nom exact, essayez aussi :
 /parcours-rag-module3
 ```
 
-Votre agent vous guidera checkpoint par checkpoint. Le facilitateur orchestre la
-discussion collective entre chaque checkpoint.
+Votre agent vous guidera étape par étape. Le facilitateur orchestre la
+discussion collective entre chaque étape.
 
 ## Structure
 
@@ -123,7 +123,7 @@ parcours-rag/
 
 ## Feuille de route Module 3
 
-| # | Checkpoint | Durée |
+| # | Étape | Durée |
 |---|---|---|
 | 1 | Setup + chat baseline | 20 min |
 | 2 | Ingestion & chunking | 30 min |

@@ -1,4 +1,4 @@
-# Étape 6 (CP6) — Éval + analyse de failles
+# Étape 6 — Éval + analyse de failles
 
 ## Objectif
 
@@ -37,7 +37,7 @@ Conduire en micro-étapes : préparer les entrées, lancer, lire les résultats,
 1. **Micro-étape 6.1 — Vérifier les entrées d'éval** :
 
    - `data/eval-questions.json` existe (5 questions),
-   - pipeline CP4/CP5 exécutable (`retrieve` + `answer`).
+   - pipeline Étape 4/Étape 5 exécutable (`retrieve` + `answer`).
 
 2. **Micro-étape 6.2 — Créer un runner d'évaluation**, par exemple `src/mastra/rag/run-eval.ts`, qui pour chaque question :
 
@@ -151,7 +151,7 @@ Exécuter les checks suivants :
 
    Appuie-toi sur `data/eval-results.json` (pas sur mémoire/intuition), puis lance les checks automatiques. »
 
-## Pièges pédagogiques (ici : c'est *tout* le CP)
+## Pièges pédagogiques (ici : c'est *toute* l'étape)
 
 - Corriger le code trop tôt au lieu d'observer.
 - Écrire des conclusions vagues (« ça marche moyen ») sans exemple vérifiable.

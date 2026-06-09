@@ -1,4 +1,4 @@
-# Étape 3 (CP3) — Embeddings & index vectoriel
+# Étape 3 — Embeddings & index vectoriel
 
 ## Objectif
 
@@ -127,7 +127,7 @@ Exécuter les checks suivants :
 - **Batch trop gros** (ex: 200+) : latence élevée, erreurs API, debugging pénible.
 - **IDs non uniques** : vecteurs écrasés silencieusement à l'upsert.
 - **Index non réinitialisé** entre deux runs : données obsolètes conservées.
-- **Mauvaise dimension** (modèle embedding différent) : incohérence durable pour CP4.
+- **Mauvaise dimension** (modèle embedding différent) : incohérence durable pour Étape 4.
 - **Env API non chargé** : l'erreur ressemble à un bug code alors que c'est juste la clé.
 
 ## Side quest
