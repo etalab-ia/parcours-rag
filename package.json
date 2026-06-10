@@ -27,7 +27,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@ai-sdk/openai-compatible": "^2.0.46",
+    "@ai-sdk/openai-compatible": "^2.0.48",
     "@ai-sdk/provider": "^3.0.10",
     "@mastra/core": "latest",
     "@mastra/libsql": "latest",
