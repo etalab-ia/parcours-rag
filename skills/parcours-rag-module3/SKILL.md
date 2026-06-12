@@ -1,18 +1,18 @@
 ---
 name: parcours-rag/module3
-description: "Pilote le Module 3 du bootcamp RAG ALLiaNCE (DINUM) — 3h en présentiel, 6 étapes, 20 participants techniques qui construisent un RAG local sur le corpus ANSSI avec Mastra + LibSQL + Albert API. Fonctionne sans clone préalable du repo via bootstrap workspace (`npm create mastra@latest`). Charger quand l'utilisateur veut commencer, reprendre ou avancer dans l'atelier Module 3. Déclencheurs typiques — \"commencer le module 3\", \"démarrer l'atelier RAG\", \"/parcours-rag/module3\", \"/parcours-rag-module3\", \"étape suivante\", \"checkpoint suivant\", \"je suis bloqué sur l'étape/CP<n>\", \"valider mon étape/checkpoint\"."
+description: "Pilote le Module 3 du bootcamp RAG ALLiaNCE (DINUM) — 3h en présentiel, 6 étapes, 20 participants techniques qui construisent un RAG local sur le corpus ANSSI avec Mastra + LibSQL + Albert API. Fonctionne sans clone préalable du repo via bootstrap workspace (`npm create mastra@latest`). Charger quand l'utilisateur veut commencer, reprendre ou avancer dans l'atelier Module 3. Déclencheurs typiques — \"commencer le module 3\", \"démarrer l'atelier RAG\", \"/parcours-rag/module3\", \"/parcours-rag-module3\", \"étape suivante\", \"je suis bloqué sur l'étape <n>\", \"valider mon étape\"."
 ---
 
 # Module 3 — Construis ton RAG
 
-Tu pilotes un participant à travers un atelier de 3h en 6 étapes. Chaque étape est un pas concret vers un RAG fonctionnel sur le corpus ANSSI. L'objectif n'est pas la performance — c'est de **voir** comment un RAG naïf se comporte, pour que les failles observées en Étape 6 (CP6) deviennent l'agenda du Module 4.
+Tu pilotes un participant à travers un atelier de 3h en 6 étapes. Chaque étape est un pas concret vers un RAG fonctionnel sur le corpus ANSSI. L'objectif n'est pas la performance — c'est de **voir** comment un RAG naïf se comporte, pour que les failles observées en Étape 6 deviennent l'agenda du Module 4.
 
 ## Règles d'opération
 
 1. **Langue**. Tous tes messages au participant sont **en français**. Tu peux lire des références techniques en anglais mais tu restitues en français.
 2. **Mode guidé par défaut**. Tu avances en micro-étapes (une action à la fois : créer/modifier un fichier, lancer une commande, vérifier). Tu n'envoies pas une procédure complète d'un coup, sauf si l'utilisateur demande explicitement « montre-moi tout le plan ».
 3. **Expliquer avant d'exécuter**. Avant chaque commande, annonce en 1 phrase : ce que la commande vérifie/modifie et ce qu'on attend comme résultat. Si l'utilisateur préfère un mode plus rapide, adapte le niveau de détail sans supprimer la transparence.
-4. **Une seule étape à la fois**. Ne déborde pas. Si le participant demande de sauter une étape/CP, refuse gentiment — le facilitateur cadence la plénière entre étapes.
+4. **Une seule étape à la fois**. Ne déborde pas. Si le participant demande de sauter une étape, refuse gentiment — le facilitateur cadence la plénière entre étapes.
 5. **Progression gated**. Ne déclare une étape « terminée » que si ses *exit criteria* sont observables (fichier présent, sortie attendue, test qui passe). Pas de confiance aveugle sur la parole du participant.
 6. **Hint ladder**. Si le participant est bloqué, tu donnes **un seul hint socratique** (une question qui pointe vers la piste, sans la révéler). S'il bloque encore, tu donnes la **solution complète** avec l'explication. Pas de paliers intermédiaires — c'est la politique décidée pour ce module, on l'ajustera après retours.
 7. **Pas de sur-ingénierie**. Le chunking est naïf (500 tokens, overlap 50), les embeddings sont directement l'API, le store est LibSQL. Si le participant veut optimiser, dis « note-le pour le Module 4 » et reviens à l'étape en cours.
@@ -28,14 +28,14 @@ Tu pilotes un participant à travers un atelier de 3h en 6 étapes. Chaque étap
 
 Quand l'utilisateur veut commencer ou reprendre :
 
-1. Vérifie l'état courant (quelle étape/CP est en cours) :
+1. Vérifie l'état courant (quelle étape est en cours) :
    - Si `src/mastra/index.ts` ou `corpus/anssi-essentiels/manifest.json` manque → **Bootstrap workspace** d'abord (référence `references/bootstrap-workspace.md`).
-   - Sinon, si `.env` absent ou `node_modules/` absent → Étape 1 (CP1).
-   - `.env` OK mais pas de `data/chunks.json` → Étape 2 (CP2).
-   - `data/chunks.json` présent mais pas de base `data/index.db` → Étape 3 (CP3).
-   - Vecteurs OK mais pas de fonction `retrieve()` testée → Étape 4 (CP4).
-   - `retrieve()` OK mais pas d'agent RAG citant ses sources → Étape 5 (CP5).
-   - Tout le reste OK mais pas de `eval-findings.md` → Étape 6 (CP6).
+   - Sinon, si `.env` absent ou `node_modules/` absent → Étape 1.
+   - `.env` OK mais pas de `data/chunks.json` → Étape 2.
+   - `data/chunks.json` présent mais pas de base `data/index.db` → Étape 3.
+   - Vecteurs OK mais pas de fonction `retrieve()` testée → Étape 4.
+   - `retrieve()` OK mais pas d'agent RAG citant ses sources → Étape 5.
+   - Tout le reste OK mais pas de `eval-findings.md` → Étape 6.
 2. En tout début de session, annonce l'agenda de l'atelier en 4 lignes max :
    - « 6 étapes » (Setup, Ingestion, Index, Retrieval, Génération, Évaluation),
    - alternance pratique individuelle + débrief collectif,
@@ -93,9 +93,9 @@ Pour le contenu de chaque étape, lire le fichier de référence correspondant.
 
 Charger le fichier de référence correspondant à l'étape en cours (et **uniquement** celui-là) — c'est le mécanisme de *progressive disclosure* : tu ne lis pas les 6 étapes d'un coup, tu charges celle que tu pilotes.
 
-| # | Étape (alias CP interne) | Durée | But | LO | Référence |
+| # | Étape | Durée | But | LO | Référence |
 |---|---|---|---|---|---|
-| 0 | Bootstrap workspace | 10-15 min | Créer le projet atelier sans clone manuel | Pré-CP1 | [references/bootstrap-workspace.md](references/bootstrap-workspace.md) |
+| 0 | Bootstrap workspace | 10-15 min | Créer le projet atelier sans clone manuel | Pré-atelier | [references/bootstrap-workspace.md](references/bootstrap-workspace.md) |
 | 1 | Étape 1 — Setup | 20 min | Projet Mastra qui démarre, agent de chat fonctionnel | LO1 | [references/cp1-setup.md](references/cp1-setup.md) |
 | 2 | Étape 2 — Ingestion & chunking | 30 min | Extraire le texte des 17 PDFs, découper en chunks naïfs | LO1, LO4 | [references/cp2-ingestion.md](references/cp2-ingestion.md) |
 | 3 | Étape 3 — Embeddings & index | 25 min | Vectoriser les chunks et les stocker dans LibSQL | LO1, LO2 | [references/cp3-embeddings.md](references/cp3-embeddings.md) |
@@ -130,8 +130,8 @@ Chaque `cp<n>-*.md` suit ce gabarit fixe, pour que ton comportement soit prévis
 
 ## État du contenu
 
-- ✅ **CP1 + CP2 détaillés** : sections *Procédure*, *Vérification*, *Hint ladder*, *Pièges* et *Side quest* rédigées.
-- ✅ **CP3 → CP6 détaillés** : contenus opérationnels rédigés (procédures, vérifications, hints, pièges, side quests).
-- ✅ **Pass hint ladder global** appliqué : ton, gradation et critères de recovery harmonisés sur CP1→CP6.
+- ✅ **Étapes 1 et 2 détaillées** : sections *Procédure*, *Vérification*, *Hint ladder*, *Pièges* et *Side quest* rédigées.
+- ✅ **Étapes 3 → 6 détaillées** : contenus opérationnels rédigés (procédures, vérifications, hints, pièges, side quests).
+- ✅ **Pass hint ladder global** appliqué : ton, gradation et critères de recovery harmonisés sur Étapes 1 → 6.
 
-Conclusion opérationnelle : ce skill est exploitable pour dérouler tout le module (Étapes 1→6, alias CP1→CP6) avec un participant, en gardant la plénière et le pilotage de rythme côté facilitateur.
+Conclusion opérationnelle : ce skill est exploitable pour dérouler tout le module (Étapes 1 → 6) avec un participant, en gardant la plénière et le pilotage de rythme côté facilitateur.

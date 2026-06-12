@@ -1,4 +1,4 @@
-# Étape 5 (CP5) — Génération avec contexte + citations
+# Étape 5 — Génération avec contexte + citations
 
 ## Objectif
 
@@ -51,7 +51,7 @@ Piloter cette étape en séquence courte :
 
 3. **Micro-étape 5.3 — Créer une orchestration RAG**, par exemple `src/mastra/rag/answer.ts`, qui enchaîne :
 
-   - `retrieve(question, 5)` (CP4),
+   - `retrieve(question, 5)` (Étape 4),
    - `generate(question, retrievedChunks)`.
 
    Validation locale : `answer.ts` retourne une réponse sur une question simple.
@@ -133,7 +133,7 @@ Exécuter les checks suivants :
 - **Réponse fluide mais non traçable** : texte convaincant sans citations.
 - **Citations décoratives** : source citée qui ne soutient pas vraiment l'affirmation.
 - **Hallucination sur hors-corpus** : le modèle complète les trous avec des "bonnes pratiques" génériques.
-- **Format de citation instable** : impossible à vérifier automatiquement en CP6.
+- **Format de citation instable** : impossible à vérifier automatiquement en Étape 6.
 
 ## Side quest
 

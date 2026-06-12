@@ -730,7 +730,7 @@ Ton : clair, direct, pas promotionnel.
 
 Format : 1 page imprimable ou markdown.
 
-Colonnes : CP, artefact produit, exit criterion principal, piège à observer, question de débrief.
+Colonnes : étape, artefact produit, exit criterion principal, piège à observer, question de débrief.
 
 Prompt :
 
@@ -828,7 +828,7 @@ Structure du deck : produire 39 slides.
 39. Clôture
 
 Détails de contenu par slide :
-- Chaque slide CP mission doit inclure : objectif de l'étape, artefact produit, piège à observer.
+- Chaque slide de mission d'étape doit inclure : objectif de l'étape, artefact produit, piège à observer.
 - Chaque slide signal de sortie doit inclure : critère observable, commande ou artefact attendu, erreur fréquente.
 - Chaque slide de débrief doit inclure : une question principale, deux relances possibles, message clé à faire émerger.
 - Les slides conceptuelles doivent utiliser des diagrammes simples : pipeline, transformation PDF→chunks, top-k, citation audit, failles→hypothèses.
@@ -1285,7 +1285,7 @@ Objectif : donner aux participants un support autonome léger, sans remplacer le
 
 Sections attendues :
 1. Avant l'atelier — ce que vous allez construire et pourquoi le RAG est volontairement naïf.
-2. Carte des étapes — CP, artefact, exit criterion, piège à observer.
+2. Carte des étapes — numéro, artefact, exit criterion, piège à observer.
 3. Glossaire minimal — chunk, embedding, index, retrieval, top-k, citation, fidélité.
 4. Grille d'évaluation — fidélité, complétude, traçabilité.
 5. Template `eval-findings.md`.
@@ -1344,7 +1344,7 @@ Livrables :
 
 Objectif : vérifier le timing et la charge cognitive.
 
-Méthode : dérouler le deck sans coder, en simulant les transitions CP.
+Méthode : dérouler le deck sans coder, en simulant les transitions d'étape.
 
 À mesurer :
 

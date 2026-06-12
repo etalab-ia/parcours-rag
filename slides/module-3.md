@@ -88,19 +88,19 @@ style: |
 # Agenda (180 min)
 
 - 00:00–00:10 — Accueil + cadrage
-- 00:10–00:30 — CP1 Setup + débrief
-- 00:30–01:00 — CP2 Ingestion + débrief
-- 01:00–01:25 — CP3 Embeddings + débrief
+- 00:10–00:30 — Étape 1 Setup + débrief
+- 00:30–01:00 — Étape 2 Ingestion + débrief
+- 01:00–01:25 — Étape 3 Embeddings + débrief
 - 01:25–01:35 — Pause
-- 01:35–02:00 — CP4 Retrieval + débrief
-- 02:00–02:30 — CP5 Génération + débrief
-- 02:30–02:50 — CP6 Éval + mini debrief
+- 01:35–02:00 — Étape 4 Retrieval + débrief
+- 02:00–02:30 — Étape 5 Génération + débrief
+- 02:30–02:50 — Étape 6 Éval + mini debrief
 - 02:50–03:00 — Clôture + pont Module 4
 
 ---
 
-<div class="kicker">Checkpoint 1 · 20 min</div>
-# CP1 — Setup (intro)
+<div class="kicker">Étape 1 · 20 min</div>
+# Étape 1 — Setup (intro)
 
 ## Ce que les participants font maintenant
 
@@ -113,8 +113,8 @@ style: |
 
 ---
 
-<div class="kicker">Checkpoint 1 · Debrief 5 min</div>
-# CP1 — Debrief collectif
+<div class="kicker">Étape 1 · Debrief 5 min</div>
+# Étape 1 — Debrief collectif
 
 ## Questions à poser
 
@@ -125,8 +125,8 @@ style: |
 
 ---
 
-<div class="kicker">Checkpoint 2 · 30 min</div>
-# CP2 — Ingestion & chunking (intro)
+<div class="kicker">Étape 2 · 30 min</div>
+# Étape 2 — Ingestion & chunking (intro)
 
 ## Ce que les participants font maintenant
 
@@ -139,8 +139,8 @@ style: |
 
 ---
 
-<div class="kicker">Checkpoint 2 · Debrief 10 min</div>
-# CP2 — Debrief collectif
+<div class="kicker">Étape 2 · Debrief 10 min</div>
+# Étape 2 — Debrief collectif
 
 ## Questions à poser
 
@@ -148,12 +148,12 @@ style: |
 2. Quels défauts du chunking naïf avez-vous observés ?
 3. Pourquoi on garde ce niveau de naïveté ici ?
 
-<div class="card">Message clé : on accepte l'imparfait en CP2 pour le rendre observable en CP6.</div>
+<div class="card">Message clé : on accepte l'imparfait en Étape 2 pour le rendre observable en Étape 6.</div>
 
 ---
 
-<div class="kicker">Checkpoint 3 · 25 min</div>
-# CP3 — Embeddings & index (intro)
+<div class="kicker">Étape 3 · 25 min</div>
+# Étape 3 — Embeddings & index (intro)
 
 ## Ce que les participants font maintenant
 
@@ -165,8 +165,8 @@ style: |
 
 ---
 
-<div class="kicker">Checkpoint 3 · Debrief 5 min</div>
-# CP3 — Debrief collectif
+<div class="kicker">Étape 3 · Debrief 5 min</div>
+# Étape 3 — Debrief collectif
 
 ## Questions à poser
 
@@ -181,14 +181,14 @@ style: |
 # Pause (10 min)
 
 - Reprise stricte à l'heure affichée
-- Vérifier rapidement l'état de la salle avant CP4
+- Vérifier rapidement l'état de la salle avant Étape 4
 
 <div class="card small">Objectif facilitateur : repartir avec un groupe recadré, pas fragmenté.</div>
 
 ---
 
-<div class="kicker">Checkpoint 4 · 25 min</div>
-# CP4 — Retrieval (intro)
+<div class="kicker">Étape 4 · 25 min</div>
+# Étape 4 — Retrieval (intro)
 
 ## Ce que les participants font maintenant
 
@@ -200,8 +200,8 @@ style: |
 
 ---
 
-<div class="kicker">Checkpoint 4 · Debrief 5 min</div>
-# CP4 — Debrief collectif
+<div class="kicker">Étape 4 · Debrief 5 min</div>
+# Étape 4 — Debrief collectif
 
 ## Questions à poser
 
@@ -212,8 +212,8 @@ style: |
 
 ---
 
-<div class="kicker">Checkpoint 5 · 30 min</div>
-# CP5 — Génération + citations (intro)
+<div class="kicker">Étape 5 · 30 min</div>
+# Étape 5 — Génération + citations (intro)
 
 ## Ce que les participants font maintenant
 
@@ -225,8 +225,8 @@ style: |
 
 ---
 
-<div class="kicker">Checkpoint 5 · Debrief 10 min</div>
-# CP5 — Debrief collectif
+<div class="kicker">Étape 5 · Debrief 10 min</div>
+# Étape 5 — Debrief collectif
 
 ## Questions à poser
 
@@ -238,8 +238,8 @@ style: |
 
 ---
 
-<div class="kicker">Checkpoint 6 · 20 min</div>
-# CP6 — Éval & analyse (intro)
+<div class="kicker">Étape 6 · 20 min</div>
+# Étape 6 — Éval & analyse (intro)
 
 ## Ce que les participants font maintenant
 
@@ -251,8 +251,8 @@ style: |
 
 ---
 
-<div class="kicker">Checkpoint 6 · Debrief 5 min</div>
-# CP6 — Debrief collectif
+<div class="kicker">Étape 6 · Debrief 5 min</div>
+# Étape 6 — Debrief collectif
 
 ## Questions à poser
 
@@ -260,7 +260,7 @@ style: |
 2. La plus simple à corriger en Module 4 ?
 3. Quelle cause est la mieux étayée par vos traces ?
 
-<div class="card">Message clé : CP6 produit le backlog d'amélioration du Module 4.</div>
+<div class="card">Message clé : Étape 6 produit le backlog d'amélioration du Module 4.</div>
 
 ---
 
@@ -273,7 +273,7 @@ style: |
 - Une base commune pour comparer les améliorations
 
 <div class="card">
-Module 4 = transformer les failles CP6 en gains mesurables :
+Module 4 = transformer les failles Étape 6 en gains mesurables :
 chunking, reranking, seuils de confiance, faithfulness.
 </div>
 
@@ -293,7 +293,7 @@ chunking, reranking, seuils de confiance, faithfulness.
 <div class="card">
 <strong>Si la salle va trop vite</strong>
 <ul>
-<li>Donner side quest du CP courant</li>
+<li>Donner side quest de l'étape courante</li>
 <li>Interdire optimisations Module 4</li>
 <li>Capturer observations pour debrief</li>
 </ul>

@@ -90,7 +90,7 @@ async function chunkPage(text: string): Promise<string[]> {
 // NOTE: we call the Albert embeddings endpoint directly via fetch instead of
 // going through Mastra's `embedMany` + gateway. The scaffold pins `ai@6` with
 // `@ai-sdk/openai-compatible@^1` (v1 model spec), which is fine for the chat
-// path used in CP1 but incompatible with `embedMany`'s v2 spec check. A direct
+// path used in Étape 1 but incompatible with `embedMany`'s v2 spec check. A direct
 // fetch is what participants end up writing anyway — keeps this reference
 // transparent.
 async function embedBatch(texts: string[]): Promise<number[][]> {

@@ -138,7 +138,7 @@ Il faut éviter deux excès :
 3. Ajouter un geste récurrent : “Avant de continuer, quelle preuve avez-vous ?”.
 4. Ajouter au moins un teach-back pair-à-pair après l'Étape 2 ou 3.
 5. En Étape 6, passer de trois à quatre critères : pertinence contexte, fidélité, complétude, citation.
-6. Remplacer le vocabulaire visible `CPx` par `Étape x`.
+6. Remplacer l’ancien vocabulaire visible par `Étape x`.
 
 ### Dans le guide facilitateur
 

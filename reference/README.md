@@ -4,11 +4,11 @@
 
 ## Pourquoi ce dossier existe
 
-Avant de rédiger les checkpoints en détail, nous avons construit nous-mêmes une pipeline RAG de référence sur le corpus ANSSI. Le but :
+Avant de rédiger les étapes en détail, nous avons construit nous-mêmes une pipeline RAG de référence sur le corpus ANSSI. Le but :
 
 1. **Observer** le comportement réel (qualité du chunking, précision du retrieval, hallucinations, citations) — pas anticipé, mesuré.
-2. **Formuler les 5 questions d'éval** (CP6) en face de ce que la pipeline produit *vraiment*, pas ce qu'on *croit* qu'elle produit.
-3. **Donner aux futurs auteurs CP1–CP6** une référence de travail à laquelle comparer la sortie attendue à chaque étape.
+2. **Formuler les 5 questions d'éval** (Étape 6) en face de ce que la pipeline produit *vraiment*, pas ce qu'on *croit* qu'elle produit.
+3. **Donner aux futurs auteurs des Étapes 1–6** une référence de travail à laquelle comparer la sortie attendue à chaque étape.
 
 La pipeline de référence **est fidèle aux décisions pédagogiques du design doc** (chunking naïf 500 tokens / overlap 50, Albert API pour embeddings + chat, LibSQL). Pas d'astuces cachées : elle n'est pas meilleure qu'une implémentation que ferait un participant au bout des 3h.
 
@@ -52,7 +52,7 @@ Les scripts sont idempotents : re-lancer écrase proprement `data/chunks.json` e
 
 ## Ce qui est volontairement naïf
 
-Comme indiqué dans `design/module-3-design.md`, plusieurs décisions sont volontairement sous-optimales. Elles **doivent** rester telles quelles ici aussi, pour que les failles observées en CP6 soient fidèles à ce que les participants verront.
+Comme indiqué dans `design/module-3-design.md`, plusieurs décisions sont volontairement sous-optimales. Elles **doivent** rester telles quelles ici aussi, pour que les failles observées en Étape 6 soient fidèles à ce que les participants verront.
 
 | Décision naïve | Conséquence attendue |
 |---|---|
@@ -62,4 +62,4 @@ Comme indiqué dans `design/module-3-design.md`, plusieurs décisions sont volon
 | Pas de seuil de score | Questions hors-corpus retournent quand même 5 chunks |
 | Prompt système minimal | Pas de garde-fou « dis que tu ne sais pas si le contexte est insuffisant » |
 
-Ne pas « corriger » ces points dans cette pipeline de référence. Ces failles sont le **matériau de CP6** et l'agenda du Module 4.
+Ne pas « corriger » ces points dans cette pipeline de référence. Ces failles sont le **matériau de l'Étape 6** et l'agenda du Module 4.

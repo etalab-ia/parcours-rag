@@ -1,4 +1,4 @@
-# Étape 2 (CP2) — Ingestion & chunking
+# Étape 2 — Ingestion & chunking
 
 ## Objectif
 
@@ -14,7 +14,7 @@ Extraire le texte des 17 PDFs ANSSI et le découper en chunks exploitables, avec
 
 ## Brief participant
 
-« On va lire les 17 PDFs, découper chaque document en morceaux de taille fixe, et tout stocker dans un fichier JSON. Chunking naïf exprès : 500 tokens avec overlap de 50. En Étape 6 (CP6), on reviendra regarder ce que ce choix nous coûte. »
+« On va lire les 17 PDFs, découper chaque document en morceaux de taille fixe, et tout stocker dans un fichier JSON. Chunking naïf exprès : 500 tokens avec overlap de 50. En Étape 6, on reviendra regarder ce que ce choix nous coûte. »
 
 ## Conduite guidée (obligatoire)
 
