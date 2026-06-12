@@ -2674,10 +2674,6 @@ packages:
     resolution: {integrity: sha512-kJezFj9YFAMLeORyi7aCLxLbD5/qWMQnoMVlVPyHIll7lgRJCc3JVln9Vgl9nwQi0YkMnhdGTMNn7CkRRAptMg==}
     engines: {node: '>=18.0.0'}
 
-  eventsource-parser@3.1.0:
-    resolution: {integrity: sha512-kJezFj9YFAMLeORyi7aCLxLbD5/qWMQnoMVlVPyHIll7lgRJCc3JVln9Vgl9nwQi0YkMnhdGTMNn7CkRRAptMg==}
-    engines: {node: '>=18.0.0'}
-
   eventsource@3.0.7:
     resolution: {integrity: sha512-CRT1WTyuQoD771GW56XEZFQ/ZoSfWid1alKGDYMmkt2yl8UXrVR4pspqWNEcqKvVIzg6PAltWjxcSSPrboA4iA==}
     engines: {node: '>=18.0.0'}
@@ -6855,7 +6851,7 @@ snapshots:
     dependencies:
       '@vue/compiler-ssr': 3.5.33
       '@vue/shared': 3.5.33
-      vue: 3.5.33(typescript@6.0.3)
+      vue: 3.5.33(typescript@5.9.3)
 
   '@vue/shared@3.5.33': {}
 
@@ -7787,8 +7783,6 @@ snapshots:
       - bare-abort-controller
 
   events@3.3.0: {}
-
-  eventsource-parser@3.1.0: {}
 
   eventsource-parser@3.1.0: {}
 
