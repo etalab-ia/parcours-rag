@@ -106,7 +106,7 @@ Exécuter les checks suivants :
 
 1. **Hint socratique**
 
-   « Si tes résultats semblent hors sujet, as-tu vérifié que la requête est embeddée avec le même modèle que les chunks de Étape 3 ? »
+   « Si tes résultats semblent hors sujet, as-tu vérifié que la requête est embeddée avec le même modèle que les chunks de l'Étape 3 ? »
 
 2. **Solution complète**
 
@@ -120,13 +120,13 @@ Exécuter les checks suivants :
    - scores décroissants
    - au moins un hit `zero_trust` pour la question Zero Trust.
 
-   Si ça échoue, compare d'abord modèle/indexName avec Étape 3. »
+   Si ça échoue, compare d'abord modèle/indexName avec l'Étape 3. »
 
 ## Pièges pédagogiques
 
-- **Mauvais modèle d'embedding pour la requête** : retrieval dégradé même si Étape 3 semblait "ok".
+- **Mauvais modèle d'embedding pour la requête** : retrieval dégradé même si l'Étape 3 semblait "ok".
 - **IndexName incohérent** entre Étape 3 et Étape 4 (`anssi_essentiels` vs autre).
-- **Oubli de métadonnées** dans l'upsert Étape 3 : impossible de citer proprement en Étape 5.
+- **Oubli de métadonnées** dans l'upsert de l'Étape 3 : impossible de citer proprement à l'Étape 5.
 - **Lecture naïve des scores** : même une question hors-corpus renvoie un top-5 (pas de seuil).
 
 ## Side quest

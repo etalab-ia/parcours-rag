@@ -2,14 +2,14 @@
 
 **Run de référence** : pipeline construite dans `reference/`, exécutée sur le corpus `corpus/anssi-essentiels/` (17 PDFs, 55 chunks), embeddings `openweight-embeddings` (BAAI/bge-m3, 1024d) + chat `openweight-large` (gpt-oss-120b) via Albert API.
 
-Ces observations alimentent directement : (1) la rédaction des hints et vérifications Étapes 2–6, (2) les débriefs collectifs, et (3) le pont vers Module 4.
+Ces observations alimentent directement : (1) la rédaction des hints et vérifications des Étapes 2–6, (2) les débriefs collectifs, et (3) le pont vers Module 4.
 
 ## 1. Profil du corpus — trouvailles inattendues
 
 | Attendu (design doc §Étape 2) | Observé | Conséquence |
 |---|---|---|
 | ≥500 chunks | **55 chunks** (chunking page-par-page, token 500 / overlap 50) | L'exit criterion Étape 2 doit être revu à la baisse. Proposer « ≥40 chunks » (plancher sûr) ou plutôt « chaque PDF produit ≥1 chunk avec `text`/`source`/`page` ». |
-| Guide « Mots de passe ANSSI » présent | **Absent** | La question canonique du design doc (« Quelles sont les règles d'hygiène des mots de passe selon l'ANSSI ? ») est en réalité **hors corpus**. Parfaite matière pour le profil « piège » de Étape 6 — voir Q3 ci-dessous. |
+| Guide « Mots de passe ANSSI » présent | **Absent** | La question canonique du design doc (« Quelles sont les règles d'hygiène des mots de passe selon l'ANSSI ? ») est en réalité **hors corpus**. Parfaite matière pour le profil « piège » de l'Étape 6 — voir Q3 ci-dessous. |
 
 Les guides « Les Essentiels » sont des fiches format poster de 1 à 2 pages, à puces denses. C'est un corpus *court* et *hétérogène*, pas un corpus narratif.
 
@@ -86,7 +86,7 @@ L'exit criterion Étape 6 (« ≥3 failles observées avec exemples concrets »)
 
 ## 6. Implications pour les PR de détail (Étapes 1–6)
 
-- **PR #5 (Étape 1+Étape 2)** : revoir l'exit criterion Étape 2 (≥40 chunks, pas ≥500). Mentionner explicitement le piège « chunks quasi-dupliqués par page » et la pollution d'en-tête/pied.
-- **PR #6 (Étape 3–Étape 5)** : Étape 3 stats attendues ~55 chunks / 55 vecteurs en dimension 1024. Étape 4 : utiliser Q1 et Q2 comme questions de smoke test. Étape 5 : la question canonique « mots de passe ANSSI » fonctionne MAL — à remplacer par Q1 Zero Trust pour la démo en Étape 5.
+- **PR #5 (Étape 1+Étape 2)** : revoir l'exit criterion de l'Étape 2 (≥40 chunks, pas ≥500). Mentionner explicitement le piège « chunks quasi-dupliqués par page » et la pollution d'en-tête/pied.
+- **PR #6 (Étape 3–Étape 5)** : stats attendues pour l'Étape 3 ~55 chunks / 55 vecteurs en dimension 1024. Étape 4 : utiliser Q1 et Q2 comme questions de smoke test. Étape 5 : la question canonique « mots de passe ANSSI » fonctionne MAL — à remplacer par Q1 Zero Trust pour la démo de l'Étape 5.
 - **PR #7 (hint ladder)** : pas d'impact direct ; les hints restent du même format.
 - Le **design doc** (§Étape 2 « Exit » et §Étape 5 « Exit ») a deux erreurs factuelles à corriger en douceur — mais ce n'est pas dans la portée de cette PR.

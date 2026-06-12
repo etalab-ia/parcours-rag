@@ -42,7 +42,7 @@ Ensuite, dans votre agent :
 Selon l'agent, il peut aussi apparaître sous la forme `/parcours-rag-module3`.
 
 Le skill lance d'abord un bootstrap workspace basé sur `npm create mastra@latest`
-puis déroule les étapes Étapes 1 → 6. Si le skill `mastra` n'est pas installé,
+puis déroule les étapes 1 → 6. Si le skill `mastra` n'est pas installé,
 il l'installe automatiquement au début du bootstrap.
 
 ### Smoke tests (clean-room)
