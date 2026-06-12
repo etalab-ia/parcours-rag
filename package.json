@@ -1,6 +1,6 @@
 {
   "name": "parcours-rag",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
   "description": "Parcours RAG — atelier ALLiaNCE. Starter Mastra + Albert API pour construire un RAG sur le corpus ANSSI « Les Essentiels ».",

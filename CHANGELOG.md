@@ -1,0 +1,55 @@
+# Changelog
+
+## 1.0.0 (2026-06-12)
+
+
+### Features
+
+* add ANSSI Essentiels corpus (17 PDFs, 2.7 MB) + manifest ([3b6edc7](https://github.com/etalab-ia/parcours-rag/commit/3b6edc7d8ebce5c40f0f8212594a1831edc4c673))
+* add Google Slides and shared GWS skill documentation ([0e65081](https://github.com/etalab-ia/parcours-rag/commit/0e65081a553c51e7cadf0caa992a14291131b4b4))
+* add Google Slides and shared GWS skill documentation files ([aa80333](https://github.com/etalab-ia/parcours-rag/commit/aa80333c6efa9831d340ba82d80a0f1d85b5c961))
+* bootstrap module-3 skill via npm without repo clone ([5287df7](https://github.com/etalab-ia/parcours-rag/commit/5287df7729970b79eb2602c1b27d2895e399e7b9))
+* harden module 3 RAG runtime and add CP6 eval tooling ([50f8387](https://github.com/etalab-ia/parcours-rag/commit/50f838772e6d39c8d07bc24f149625525e6ee7cc))
+* make module-3 skill bootstrap standalone via npm ([93b7627](https://github.com/etalab-ia/parcours-rag/commit/93b7627ae8f1c6b8dc944b3c51dddcb9f115e1c9))
+* **module-3:** add facilitator playbook for 3h workshop ([4b21b97](https://github.com/etalab-ia/parcours-rag/commit/4b21b9782f64cbac31bbcd8679383e40d7662594))
+* **module-3:** add facilitator slides deck (DSFR light) ([d362733](https://github.com/etalab-ia/parcours-rag/commit/d3627331fa1c5394d284b301a06794a37144d8cf))
+* **module-3:** ajouter le deck slides (DSFR light) ([76cf189](https://github.com/etalab-ia/parcours-rag/commit/76cf1899e9cb1347a348dc5e5a6bcfb3957f2bb9))
+* **module-3:** ajouter le guide facilitateur ([95dbf2b](https://github.com/etalab-ia/parcours-rag/commit/95dbf2bbfd7ea2cdb5c3de3d48ffcef16942e5de))
+* **module-3:** detail CP1+CP2 checkpoint guidance ([60a53e7](https://github.com/etalab-ia/parcours-rag/commit/60a53e78edbce155c524b1dce77a1645ae9a3dc7))
+* **module-3:** detail CP3→CP6 operational guidance ([44b6f1b](https://github.com/etalab-ia/parcours-rag/commit/44b6f1bf66322f0f0e9aac6225706e6db63b39fa))
+* **module-3:** détailler CP1 + CP2 (guidage opérable) ([7ecee4b](https://github.com/etalab-ia/parcours-rag/commit/7ecee4b127e8dc65d78a7945c87b7a9754c6b1a0))
+* **module-3:** détailler CP3→CP6 (guidage opérable) ([0032ab0](https://github.com/etalab-ia/parcours-rag/commit/0032ab09cfedfbfcb02afba863a799df80013c54))
+* **module-3:** foundation — design, Mastra starter, ANSSI corpus ([3fc70c5](https://github.com/etalab-ia/parcours-rag/commit/3fc70c573459a62857d914cb68aee39c3331f6ea))
+* **module-3:** reference RAG pipeline + 5 eval questions ([8f3b3a7](https://github.com/etalab-ia/parcours-rag/commit/8f3b3a729bb8b4431345ba1aab06911d307bbc50))
+* **module-3:** reference RAG pipeline + 5 eval questions ([8a6a0a7](https://github.com/etalab-ia/parcours-rag/commit/8a6a0a7fe8a13da8c6b01328ca5ddfb87f3976f8))
+* **module-3:** skill skeleton — SKILL.md + 6 checkpoint stubs ([ad8e9a0](https://github.com/etalab-ia/parcours-rag/commit/ad8e9a0320bb97b523e4d023336d2e31f8b66628))
+* **module-3:** skill skeleton — SKILL.md + 6 checkpoint stubs ([11dd3e7](https://github.com/etalab-ia/parcours-rag/commit/11dd3e741a539647bbc835a5fd9a8c2ca0715f54))
+* register module-3-rag skill in lock file and update documentation metadata ([8e12ac0](https://github.com/etalab-ia/parcours-rag/commit/8e12ac04b9183e90292ffdab499e3445bdc40394))
+* scaffold Mastra starter with Albert gateway (CP1 baseline) ([6c21bf4](https://github.com/etalab-ia/parcours-rag/commit/6c21bf49ee194629f647b7cf713557e50dc9299f))
+* **slides:** add Slidev static rendering workflow ([b1638b5](https://github.com/etalab-ia/parcours-rag/commit/b1638b5662837d36de7cd08afb672c4b192e3aca))
+* stabilize module 3 RAG runtime and add CP6 eval tooling ([9eabc8b](https://github.com/etalab-ia/parcours-rag/commit/9eabc8b9d4e55fff9a14f0cc6fe49fc44fdc8fae))
+
+
+### Bug Fixes
+
+* add trailing newline to manifest.json ([402bf8b](https://github.com/etalab-ia/parcours-rag/commit/402bf8b76445db5b4919901fc9c19201f24e0b62))
+* address review feedback — restore explicit types, improve biome ignores ([6afd102](https://github.com/etalab-ia/parcours-rag/commit/6afd102f5aa0e79834634cc1af48e0a59c90a8f4))
+* **ci:** remove redundant pnpm version from action config ([4b46098](https://github.com/etalab-ia/parcours-rag/commit/4b460989bdd063172e8d50db1fed4c02470d8292))
+* dedupe eventsource-parser in pnpm-lock.yaml ([97db1d2](https://github.com/etalab-ia/parcours-rag/commit/97db1d22be4fc0f1a410dcd3eb847667e7afef65))
+* deduplicate eventsource-parser entry in pnpm-lock.yaml ([0b18aaf](https://github.com/etalab-ia/parcours-rag/commit/0b18aafd24a7dd4c42b8c79fd54434816a62d2ab))
+* **deps:** align gateway and toolchain with updated packages ([d53fa0b](https://github.com/etalab-ia/parcours-rag/commit/d53fa0b47694711c9486ae48d9697c4056667778))
+* enforce explicit citation format in eval prompt ([36bf614](https://github.com/etalab-ia/parcours-rag/commit/36bf614d6b50068a9a439cc447c4451eacdd2f05))
+* enforce npm-only commands in standalone module-3 skill ([5e86725](https://github.com/etalab-ia/parcours-rag/commit/5e8672524bec5875af4b6bddf1286cb35f5567fe))
+* harden smoke scripts for CI portability ([6e4db8b](https://github.com/etalab-ia/parcours-rag/commit/6e4db8be0f271b5bcaa49045847772cfecb8c9ca))
+* **module-3-rag:** address PR [#3](https://github.com/etalab-ia/parcours-rag/issues/3) review ([501ef0a](https://github.com/etalab-ia/parcours-rag/commit/501ef0ae0b9e1c8e17c09623cca1918576526c26))
+* **module-3-rag:** use markdown links in CP index for progressive disclosure ([07b5158](https://github.com/etalab-ia/parcours-rag/commit/07b5158403703d6baaddfb316f1d0dae43d4ff18))
+* **module-3:** address PR [#13](https://github.com/etalab-ia/parcours-rag/issues/13) review comments ([cf292a8](https://github.com/etalab-ia/parcours-rag/commit/cf292a8e473ac0df201091aac7ff8f9a29969755))
+* **module-3:** address PR [#14](https://github.com/etalab-ia/parcours-rag/issues/14) review comments on CP1/CP2 docs ([937a3da](https://github.com/etalab-ia/parcours-rag/commit/937a3da28cd0201c4186f5323d73195f7a6456b7))
+* **module-3:** align CP3/CP6 docs with automated verification ([6f65f7d](https://github.com/etalab-ia/parcours-rag/commit/6f65f7defae8e18f5b3c9b5e6412ee50947785b4))
+* **module-3:** align CP6 fail-type instruction with validation format ([4651657](https://github.com/etalab-ia/parcours-rag/commit/4651657d475d1995c8fe7f490d035a54db92a22a))
+* **module-3:** align facilitator guide signals and path conventions ([691943d](https://github.com/etalab-ia/parcours-rag/commit/691943d2703e82f9c7555f92e2ad9ed582e8de3a))
+* **module-3:** clarify queryVector in CP4 hint ladder ([09118eb](https://github.com/etalab-ia/parcours-rag/commit/09118ebec32f7c701b3e3fe6692d83a4a2c6515e))
+* parse citation page numbers with optional dot ([556b623](https://github.com/etalab-ia/parcours-rag/commit/556b623a41c6f09f58a7a1fdaf561bc2a912043f))
+* preserve per-page metadata in RAG chunk/index pipeline ([139a7de](https://github.com/etalab-ia/parcours-rag/commit/139a7de7b3adc7f9b05575a11f8a1c02547276af))
+* reuse LibSQLVector instance across retrieval calls ([659f563](https://github.com/etalab-ia/parcours-rag/commit/659f5633ee3945e9a01eab3ac00371ebc8aed32a))
+* **slides:** clarify CP2/CP3 metadata pass signals ([0055236](https://github.com/etalab-ia/parcours-rag/commit/00552360581a08ef5fe0598572882fc3c15c4d5b))
